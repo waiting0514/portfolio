@@ -35,8 +35,8 @@
 
 ## 4. Projects
 
-- [ ] 4.1 實作 `ProjectsView`：h1、說明、`ProjectGrid` 顯示全部專案（資料只來自 `src/data/projects.ts`）；驗證：375 / 768 / 1440px 分別為 1 / 2 / 3 欄，兩語系皆正常
-- [ ] 4.2 Phase 檢查：lint、type-check、test、build 通過；首頁與 Projects 頁使用同一個 `ProjectCard`
+- [x] 4.1 實作 `ProjectsView`：h1、說明、`ProjectGrid` 顯示全部專案（資料只來自 `src/data/projects.ts`）；驗證：375 / 768 / 1440px 分別為 1 / 2 / 3 欄，兩語系皆正常
+- [x] 4.2 Phase 檢查：lint、type-check、test、build 通過；首頁與 Projects 頁使用同一個 `ProjectCard`
 
 ## 5. Case Study
 

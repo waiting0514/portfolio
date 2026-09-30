@@ -37,6 +37,7 @@ export interface Messages {
   }
   pages: {
     projectsTitle: string
+    projectsDescription: string
     aboutTitle: string
   }
   notFound: {
@@ -82,6 +83,7 @@ const zhTW = {
   },
   pages: {
     projectsTitle: '作品',
+    projectsDescription: '實際參與開發的專案。每個專案都整理了背景、我的角色、架構與技術挑戰。',
     aboutTitle: '關於我',
   },
   notFound: {
@@ -127,6 +129,8 @@ const en = {
   },
   pages: {
     projectsTitle: 'Projects',
+    projectsDescription:
+      'Projects I have worked on, each with its background, my role, the architecture and the technical challenges.',
     aboutTitle: 'About',
   },
   notFound: {
