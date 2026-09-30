@@ -46,11 +46,11 @@
 
 ## 6. About / 404 / SEO
 
-- [ ] 6.1 實作 `AboutView`：h1、簡介、經歷列表（TODO placeholder）、專長重點、聯絡方式、View Projects CTA；驗證：依 `about-page` spec scenarios 在兩語系確認
-- [ ] 6.2 建立 `src/utils/seo.ts`（純函式：title、description、OG、canonical、hreflang alternates、`getStaticRoutes()`；Node 相容）與 `usePageMeta` composable（更新 title、`html[lang]`、meta、link）；`index.html` 設預設 `lang="zh-Hant-TW"`、預設 meta/OG/link tags、favicon；單元測試 `seo.ts` 全部函式與 `usePageMeta`；驗證：測試通過
-- [ ] 6.3 在全部 view 套用 `usePageMeta`（Case Study 用專案 title/summary/cover；無效 slug 與 404 用 Not Found）；驗證：瀏覽器中切換頁面與語系時分頁標題、`html[lang]`、meta 同步更新
-- [ ] 6.4 建立 `public/og-default.png`（1200×630，站名＋職稱）；驗證：檔案存在且尺寸正確
-- [ ] 6.5 Phase 檢查：lint、type-check、test、build 通過
+- [x] 6.1 實作 `AboutView`：h1、簡介、經歷列表（TODO placeholder）、專長重點、聯絡方式、View Projects CTA；驗證：依 `about-page` spec scenarios 在兩語系確認
+- [x] 6.2 建立 `src/utils/seo.ts`（純函式：title、description、OG、canonical、hreflang alternates、`getStaticRoutes()`；Node 相容）與 `usePageMeta` composable（更新 title、`html[lang]`、meta、link）；`index.html` 設預設 `lang="zh-Hant-TW"`、預設 meta/OG/link tags、favicon；單元測試 `seo.ts` 全部函式與 `usePageMeta`；驗證：測試通過
+- [x] 6.3 在全部 view 套用 `usePageMeta`（Case Study 用專案 title/summary/cover；無效 slug 與 404 用 Not Found）；驗證：瀏覽器中切換頁面與語系時分頁標題、`html[lang]`、meta 同步更新
+- [x] 6.4 建立 `public/og-default.png`（1200×630，站名＋職稱）；驗證：檔案存在且尺寸正確
+- [x] 6.5 Phase 檢查：lint、type-check、test、build 通過
 
 ## 7. RWD / accessibility
 

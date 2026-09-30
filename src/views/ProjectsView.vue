@@ -2,9 +2,13 @@
 import BaseContainer from '@/components/common/BaseContainer.vue'
 import ProjectGrid from '@/components/project/ProjectGrid.vue'
 import { useLocale } from '@/composables/useLocale'
+import { usePageMeta } from '@/composables/usePageMeta'
+import { describePage } from '@/utils/seo'
 import { projects } from '@/data/projects'
 
-const { messages } = useLocale()
+const { locale, messages } = useLocale()
+
+usePageMeta(() => describePage({ page: 'projects' }, locale.value))
 </script>
 
 <template>

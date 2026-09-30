@@ -2,12 +2,30 @@
 <html lang="zh-Hant-TW">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frontend Engineer Portfolio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#ffffff" />
+    <!--
+      Defaults for the first paint. At runtime `usePageMeta` keeps these in sync with the page;
+      at build time every known route gets its own HTML with page-specific values.
+    -->
+    <title>前端工程師作品集</title>
+    <meta
+      name="description"
+      content="前端工程師作品集：Vue、Angular、TypeScript 與 RxJS 的實務專案與 Case Study。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="前端工程師作品集" />
+    <meta
+      property="og:description"
+      content="前端工程師作品集：Vue、Angular、TypeScript 與 RxJS 的實務專案與 Case Study。"
+    />
+    <meta property="og:locale" content="zh_TW" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="app"></div>
+    <noscript>This site needs JavaScript to run. 本網站需要啟用 JavaScript。</noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

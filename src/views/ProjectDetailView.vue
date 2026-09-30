@@ -7,6 +7,8 @@ import TechTagList from '@/components/common/TechTagList.vue'
 import CaseStudySection from '@/components/project/CaseStudySection.vue'
 import ProjectPager from '@/components/project/ProjectPager.vue'
 import { useLocale } from '@/composables/useLocale'
+import { usePageMeta } from '@/composables/usePageMeta'
+import { describePage } from '@/utils/seo'
 import { getProjectBySlug } from '@/data/projects'
 import { assetUrl } from '@/utils/asset'
 import { hasContent } from '@/utils/content'
@@ -19,6 +21,8 @@ const project = computed(() => getProjectBySlug(props.slug))
 const content = computed(() => project.value?.content[locale.value])
 const caseStudy = computed(() => content.value?.caseStudy)
 const sectionTitles = computed(() => messages.value.caseStudy.sections)
+
+usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.value))
 </script>
 
 <template>

@@ -60,6 +60,14 @@ export interface Messages {
     projectsDescription: string
     aboutTitle: string
   }
+  about: {
+    description: string
+    experienceTitle: string
+    strengthsTitle: string
+    contactTitle: string
+    contactDescription: string
+    email: string
+  }
   notFound: {
     title: string
     description: string
@@ -125,6 +133,14 @@ const zhTW = {
     projectsTitle: '作品',
     projectsDescription: '實際參與開發的專案。每個專案都整理了背景、我的角色、架構與技術挑戰。',
     aboutTitle: '關於我',
+  },
+  about: {
+    description: '工作背景、經歷與專長。',
+    experienceTitle: '工作經歷',
+    strengthsTitle: '專長',
+    contactTitle: '聯絡方式',
+    contactDescription: '歡迎透過 GitHub 了解更多我的程式碼。',
+    email: 'Email',
   },
   notFound: {
     title: '找不到頁面',
@@ -192,6 +208,14 @@ const en = {
     projectsDescription:
       'Projects I have worked on, each with its background, my role, the architecture and the technical challenges.',
     aboutTitle: 'About',
+  },
+  about: {
+    description: 'Background, experience and strengths.',
+    experienceTitle: 'Experience',
+    strengthsTitle: 'Strengths',
+    contactTitle: 'Contact',
+    contactDescription: 'See more of my code on GitHub.',
+    email: 'Email',
   },
   notFound: {
     title: 'Page not found',

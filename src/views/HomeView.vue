@@ -6,12 +6,16 @@ import SectionHeading from '@/components/common/SectionHeading.vue'
 import TechTagList from '@/components/common/TechTagList.vue'
 import ProjectGrid from '@/components/project/ProjectGrid.vue'
 import { useLocale } from '@/composables/useLocale'
+import { usePageMeta } from '@/composables/usePageMeta'
+import { describePage } from '@/utils/seo'
 import { profile } from '@/data/profile'
 import { featuredProjects } from '@/data/projects'
 import { skillCategories } from '@/data/skills'
 
 const { locale, messages, localePath } = useLocale()
 const content = computed(() => profile.content[locale.value])
+
+usePageMeta(() => describePage({ page: 'home' }, locale.value))
 </script>
 
 <template>
