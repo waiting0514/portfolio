@@ -15,14 +15,14 @@
 
 ## 2. Design system / layout / i18n foundation
 
-- [ ] 2.1 在 `main.css` 以 `@theme` 定義 design.md D3 的 color / font / container token，並加入全域 base：focus-visible ring、`prefers-reduced-motion`、Case Study 內文排版；字體堆疊需涵蓋繁體中文系統字體；驗證：`ink-muted`、`accent` 在 `canvas`/`surface` 上對比 ≥ 4.5:1（計算值記錄於 CSS 註解）
-- [ ] 2.2 建立 `src/i18n/locales.ts`（`Locale`、`DEFAULT_LOCALE='zh-TW'`、`htmlLang`、`ogLocale`、路徑前綴解析與互換純函式）與 `src/i18n/messages.ts`（`interface Messages`，`zh-TW`/`en` 各自 `satisfies Messages`）；單元測試前綴解析與互換；驗證：刪除某個英文 key 時 type-check 失敗
-- [ ] 2.3 建立 router（`/:locale(en)?` 選擇性前綴、5 種頁面、catch-all、`createWebHistory(BASE_URL)`、非首頁 lazy load、`scrollBehavior`）與 `useLocale` composable（由 route 推導 locale、`messages`、`localePath`、`switchLocalePath`）；單元測試路由解析（`/`、`/en`、`/en/projects/x`、`/foo`、`/en/foo`）與 `useLocale`；驗證：測試通過
-- [ ] 2.4 建立型別 `src/types/profile.ts` 與資料 `src/data/profile.ts`（`Localized<>` 文字；未知內容用 `TODO:`），`src/utils/asset.ts`、`src/utils/content.ts`；單元測試 `assetUrl`、`hasContent` 與 profile 兩語系完整性；驗證：測試通過，資料中無虛構公司或數字
-- [ ] 2.5 建立共用元件 `BaseContainer`、`BaseButton`、`SectionHeading`、`TechTag`、`TechTagList`；`BaseButton` 單元測試（`to` → RouterLink、`href` → `<a target rel>` 與新分頁提示）；驗證：測試通過
-- [ ] 2.6 建立 `SkipLink`、`SiteHeader`（導覽文字依語系、active 與 `aria-current`、`/projects/:slug` 時 Projects active、GitHub 外部連結、語言切換連結、<768px `<button>` 選單含 `aria-expanded`/`aria-controls`，Escape 關閉並還原焦點、點擊連結或路由變更時關閉）、`SiteFooter`；`SiteHeader` 單元測試涵蓋上述互動；驗證：測試通過
-- [ ] 2.7 `App.vue` layout（SkipLink → Header → `<main id="main-content" tabindex="-1">` → Footer，換頁後焦點移至 main）、各 view 先放標題 placeholder、`NotFoundContent` 與 `NotFoundView`；驗證：瀏覽器中兩語系五種路由皆可切換，`/en/does-not-exist` 顯示英文 Not Found
-- [ ] 2.8 Phase 檢查：lint、type-check、test、build 通過
+- [x] 2.1 在 `main.css` 以 `@theme` 定義 design.md D3 的 color / font / container token，並加入全域 base：focus-visible ring、`prefers-reduced-motion`、Case Study 內文排版；字體堆疊需涵蓋繁體中文系統字體；驗證：`ink-muted`、`accent` 在 `canvas`/`surface` 上對比 ≥ 4.5:1（計算值記錄於 CSS 註解）
+- [x] 2.2 建立 `src/i18n/locales.ts`（`Locale`、`DEFAULT_LOCALE='zh-TW'`、`htmlLang`、`ogLocale`、路徑前綴解析與互換純函式）與 `src/i18n/messages.ts`（`interface Messages`，`zh-TW`/`en` 各自 `satisfies Messages`）；單元測試前綴解析與互換；驗證：刪除某個英文 key 時 type-check 失敗
+- [x] 2.3 建立 router（`/:locale(en)?` 選擇性前綴、5 種頁面、catch-all、`createWebHistory(BASE_URL)`、非首頁 lazy load、`scrollBehavior`）與 `useLocale` composable（由 route 推導 locale、`messages`、`localePath`、`switchLocalePath`）；單元測試路由解析（`/`、`/en`、`/en/projects/x`、`/foo`、`/en/foo`）與 `useLocale`；驗證：測試通過
+- [x] 2.4 建立型別 `src/types/profile.ts` 與資料 `src/data/profile.ts`（`Localized<>` 文字；未知內容用 `TODO:`），`src/utils/asset.ts`、`src/utils/content.ts`；單元測試 `assetUrl`、`hasContent` 與 profile 兩語系完整性；驗證：測試通過，資料中無虛構公司或數字
+- [x] 2.5 建立共用元件 `BaseContainer`、`BaseButton`、`SectionHeading`、`TechTag`、`TechTagList`；`BaseButton` 單元測試（`to` → RouterLink、`href` → `<a target rel>` 與新分頁提示）；驗證：測試通過
+- [x] 2.6 建立 `SkipLink`、`SiteHeader`（導覽文字依語系、active 與 `aria-current`、`/projects/:slug` 時 Projects active、GitHub 外部連結、語言切換連結、<768px `<button>` 選單含 `aria-expanded`/`aria-controls`，Escape 關閉並還原焦點、點擊連結或路由變更時關閉）、`SiteFooter`；`SiteHeader` 單元測試涵蓋上述互動；驗證：測試通過
+- [x] 2.7 `App.vue` layout（SkipLink → Header → `<main id="main-content" tabindex="-1">` → Footer，換頁後焦點移至 main）、各 view 先放標題 placeholder、`NotFoundContent` 與 `NotFoundView`；驗證：瀏覽器中兩語系五種路由皆可切換，`/en/does-not-exist` 顯示英文 Not Found
+- [x] 2.8 Phase 檢查：lint、type-check、test、build 通過
 
 ## 3. Home
 

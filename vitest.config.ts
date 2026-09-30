@@ -8,6 +8,7 @@ export default mergeConfig(
     test: {
       environment: 'jsdom',
       include: ['src/**/*.spec.ts', 'build/**/*.spec.ts'],
+      setupFiles: ['src/test-utils/setup.ts'],
       root: fileURLToPath(new URL('./', import.meta.url)),
     },
   }),

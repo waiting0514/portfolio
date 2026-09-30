@@ -3,7 +3,7 @@
 
   // Unit tests live next to the code they cover as `*.spec.ts`.
   // Application code imported by tests is included via module resolution.
-  "include": ["src/**/*.spec.ts", "env.d.ts"],
+  "include": ["src/**/*.spec.ts", "src/test-utils/**/*.ts", "env.d.ts"],
   "exclude": [],
 
   "compilerOptions": {
