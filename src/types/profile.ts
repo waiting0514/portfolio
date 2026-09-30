@@ -21,6 +21,12 @@ export interface ProfileContent {
   experience: ExperienceEntry[]
 }
 
+/** A group of skills; the category name is translated, skill names are not. */
+export interface SkillCategory {
+  name: Localized<string>
+  items: readonly string[]
+}
+
 export interface Profile {
   githubUrl: string
   email?: string

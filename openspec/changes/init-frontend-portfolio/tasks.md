@@ -26,12 +26,12 @@
 
 ## 3. Home
 
-- [ ] 3.1 建立 `src/types/project.ts`（design.md D5）與 `src/data/projects.ts`：3 個 placeholder 專案（兩語系內容；spec `project-catalog` 列出的技術與特色；未知成效一律 `TODO:`）、`featuredProjects`、`getProjectBySlug`、`getAdjacentProjects`；檔頭註明 Node 相容限制；單元測試 slug 唯一與格式、兩語系必要文字非空、featured ≤ 3、查詢 helper；驗證：測試通過
-- [ ] 3.2 在 `public/images/projects/` 建立 3 張 SVG placeholder 封面（16:9），資料中填入 width/height 與兩語系 alt；驗證：dev 中圖片可載入
-- [ ] 3.3 建立 `src/data/skills.ts`（5 個分類，分類名稱雙語）並加入完整性測試；驗證：測試通過
-- [ ] 3.4 建立 `ProjectCard`（lazy 圖片 + width/height、標題、描述、`TechTagList`、單一 stretched link 且可讀名稱含專案標題、連結保持語系）與 `ProjectGrid`（1/2/3 欄）；`ProjectCard` 單元測試：只有一個連結、href 依語系正確；驗證：測試通過
-- [ ] 3.5 實作 `HomeView`：Hero（唯一 h1、簡介、focus 技術、兩個 CTA）、Featured Projects（+ View all）、Skills（分類 `<h3>` + `<ul>`）、About Preview；驗證：瀏覽器中 `/` 與 `/en/` 依 `home-page` spec scenarios 確認，heading 無跳級
-- [ ] 3.6 Phase 檢查：lint、type-check、test、build 通過；Navbar、語言切換與 404 仍正常
+- [x] 3.1 建立 `src/types/project.ts`（design.md D5）與 `src/data/projects.ts`：3 個 placeholder 專案（兩語系內容；spec `project-catalog` 列出的技術與特色；未知成效一律 `TODO:`）、`featuredProjects`、`getProjectBySlug`、`getAdjacentProjects`；檔頭註明 Node 相容限制；單元測試 slug 唯一與格式、兩語系必要文字非空、featured ≤ 3、查詢 helper；驗證：測試通過
+- [x] 3.2 在 `public/images/projects/` 建立 3 張 SVG placeholder 封面（16:9），資料中填入 width/height 與兩語系 alt；驗證：dev 中圖片可載入
+- [x] 3.3 建立 `src/data/skills.ts`（5 個分類，分類名稱雙語）並加入完整性測試；驗證：測試通過
+- [x] 3.4 建立 `ProjectCard`（lazy 圖片 + width/height、標題、描述、`TechTagList`、單一 stretched link 且可讀名稱含專案標題、連結保持語系）與 `ProjectGrid`（1/2/3 欄）；`ProjectCard` 單元測試：只有一個連結、href 依語系正確；驗證：測試通過
+- [x] 3.5 實作 `HomeView`：Hero（唯一 h1、簡介、focus 技術、兩個 CTA）、Featured Projects（+ View all）、Skills（分類 `<h3>` + `<ul>`）、About Preview；驗證：瀏覽器中 `/` 與 `/en/` 依 `home-page` spec scenarios 確認，heading 無跳級
+- [x] 3.6 Phase 檢查：lint、type-check、test、build 通過；Navbar、語言切換與 404 仍正常
 
 ## 4. Projects
 

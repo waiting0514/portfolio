@@ -18,6 +18,22 @@ export interface Messages {
     skipToContent: string
     opensInNewTab: string
     viewProjects: string
+    /** Punctuation between a label and its value, e.g. "View Case Study: Title". */
+    labelSeparator: string
+  }
+  home: {
+    focusLabel: string
+    featuredTitle: string
+    featuredDescription: string
+    viewAllProjects: string
+    skillsTitle: string
+    skillsDescription: string
+    aboutTitle: string
+    viewAbout: string
+  }
+  project: {
+    viewCaseStudy: string
+    techStack: string
   }
   pages: {
     projectsTitle: string
@@ -48,6 +64,21 @@ const zhTW = {
     skipToContent: '跳至主要內容',
     opensInNewTab: '另開新分頁',
     viewProjects: '查看作品',
+    labelSeparator: '：',
+  },
+  home: {
+    focusLabel: '技術重點',
+    featuredTitle: '精選作品',
+    featuredDescription: '實際開發過的專案，每個都附有完整的 Case Study。',
+    viewAllProjects: '查看全部作品',
+    skillsTitle: '技能',
+    skillsDescription: '依領域整理的主要技術。',
+    aboutTitle: '關於我',
+    viewAbout: '了解更多',
+  },
+  project: {
+    viewCaseStudy: '查看案例',
+    techStack: '使用技術',
   },
   pages: {
     projectsTitle: '作品',
@@ -78,6 +109,21 @@ const en = {
     skipToContent: 'Skip to content',
     opensInNewTab: 'opens in a new tab',
     viewProjects: 'View Projects',
+    labelSeparator: ': ',
+  },
+  home: {
+    focusLabel: 'Focus areas',
+    featuredTitle: 'Featured Projects',
+    featuredDescription: 'Projects I have built, each with a full case study.',
+    viewAllProjects: 'View all projects',
+    skillsTitle: 'Skills',
+    skillsDescription: 'Main technologies, grouped by area.',
+    aboutTitle: 'About',
+    viewAbout: 'View About',
+  },
+  project: {
+    viewCaseStudy: 'View Case Study',
+    techStack: 'Tech stack',
   },
   pages: {
     projectsTitle: 'Projects',
