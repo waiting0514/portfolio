@@ -35,9 +35,15 @@ describe('describePage', () => {
     expect(page.path).toBe(`/en/projects/${project.slug}`)
   })
 
+  it('uses a raster cover as the social image', () => {
+    const raster = projects.find((p) => !p.cover.src.endsWith('.svg'))!
+    const page = describePage({ page: 'project', slug: raster.slug }, 'en')
+    expect(page.image).toBe(raster.cover.src)
+  })
+
   it('falls back to the default social image for SVG covers', () => {
-    const page = describePage({ page: 'project', slug: project.slug }, 'en')
-    expect(project.cover.src.endsWith('.svg')).toBe(true)
+    const vector = projects.find((p) => p.cover.src.endsWith('.svg'))!
+    const page = describePage({ page: 'project', slug: vector.slug }, 'en')
     expect(page.image).toBe(DEFAULT_OG_IMAGE)
   })
 

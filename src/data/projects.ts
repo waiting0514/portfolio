@@ -14,7 +14,7 @@ import type { Project } from '@/types/project'
 export const projects: readonly Project[] = [
   {
     slug: 'large-file-upload-system',
-    cover: { src: 'images/projects/large-file-upload-system.svg', width: 1600, height: 900 },
+    cover: { src: 'images/projects/file-management-cover.jpg', width: 1600, height: 900 },
     technologies: ['Vue', 'AWS S3', 'WebGL', 'Resumable.js'],
     featured: true,
     content: {
@@ -23,7 +23,7 @@ export const projects: readonly Project[] = [
         subtitle: '單檔 5 GB、單次 100 檔的背景批次上傳，以及列表 hover 即可預覽的 CAD 檢視',
         summary:
           '檔案管理系統的上傳與 CAD 檢視：以分級分片、雙層併發排程與重試續傳支援單檔 5 GB 直傳 S3；CAD 檢視以單例 WebGL 與縮圖快取，讓列表 hover 預覽不再耗盡資源。',
-        coverAlt: '檔案管理系統的介面示意圖（placeholder）',
+        coverAlt: '檔案管理系統的文件管理頁面，開啟中的「上傳檔案」對話框',
         highlights: [
           '單檔 5 GB・單次 100 檔',
           '依檔案大小分級分片（10／16／32 MB）',
@@ -112,7 +112,8 @@ export const projects: readonly Project[] = [
           'Background batch uploads of up to 100 files and 5 GB per file, plus CAD previews on hover',
         summary:
           'Uploads and CAD viewing for a file-management system: tiered chunking, a two-level concurrency scheduler and resumable retries support 5 GB files uploaded straight to S3; a singleton WebGL viewer with a thumbnail cache keeps hover previews from exhausting resources.',
-        coverAlt: 'Illustration of the file management system interface (placeholder)',
+        coverAlt:
+          'The document management page of the file management system with the “Upload files” dialog open',
         highlights: [
           '5 GB per file, 100 files per batch',
           'Chunk size tiered by file size (10 / 16 / 32 MB)',
@@ -204,7 +205,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: 'multi-stream-video-system',
-    cover: { src: 'images/projects/multi-stream-video-system.svg', width: 1600, height: 900 },
+    cover: { src: 'images/projects/surveillance-cover.jpg', width: 1600, height: 900 },
     technologies: ['Vue', 'WebRTC', 'WebSocket', 'MSE'],
     featured: true,
     content: {
@@ -213,7 +214,7 @@ export const projects: readonly Project[] = [
         subtitle: '以 WebRTC 同時監看 12 支攝影機，以自建的 MSE 播放引擎同步回放 4 路歷史影像',
         summary:
           '監控系統的前端：以 WebSocket 信令建立 WebRTC 連線顯示 12 路即時影像；歷史回放以 MSE 自建播放引擎，處理錄影空檔、倍速緩衝與 4 路同步播放。',
-        coverAlt: '監控系統的畫面示意圖（placeholder）',
+        coverAlt: '監控系統的歷史回放頁面：四個播放器與時間軸，監控影像已模糊處理',
         highlights: [
           '12 路 WebRTC 即時監看',
           'WebSocket 信令與自動重連',
@@ -299,7 +300,8 @@ export const projects: readonly Project[] = [
           'Live monitoring of 12 cameras over WebRTC and synchronized playback of 4 recordings with a custom MSE player',
         summary:
           'Frontend of a surveillance system: WebRTC connections negotiated over WebSocket show 12 live feeds, and a custom MSE playback engine handles recording gaps, speed-dependent buffering and synchronized playback of 4 cameras.',
-        coverAlt: 'Illustration of the surveillance system (placeholder)',
+        coverAlt:
+          'The history playback page of the surveillance system: four players with timelines, camera footage blurred',
         highlights: [
           '12 live feeds over WebRTC',
           'WebSocket signaling with auto-reconnect',
