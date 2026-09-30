@@ -35,6 +35,26 @@ export interface Messages {
     viewCaseStudy: string
     techStack: string
   }
+  caseStudy: {
+    allProjects: string
+    highlights: string
+    challenge: string
+    solution: string
+    pagerLabel: string
+    previous: string
+    next: string
+    sections: {
+      overview: string
+      role: string
+      problem: string
+      architecture: string
+      solution: string
+      challenges: string
+      techStack: string
+      results: string
+      learnings: string
+    }
+  }
   pages: {
     projectsTitle: string
     projectsDescription: string
@@ -81,6 +101,26 @@ const zhTW = {
     viewCaseStudy: '查看案例',
     techStack: '使用技術',
   },
+  caseStudy: {
+    allProjects: '所有作品',
+    highlights: '重點功能',
+    challenge: '挑戰',
+    solution: '解法',
+    pagerLabel: '更多作品',
+    previous: '上一個作品',
+    next: '下一個作品',
+    sections: {
+      overview: '專案概述',
+      role: '我的角色',
+      problem: '問題',
+      architecture: '架構與流程',
+      solution: '解決方案',
+      challenges: '技術挑戰',
+      techStack: '技術棧',
+      results: '成果',
+      learnings: '學到的事',
+    },
+  },
   pages: {
     projectsTitle: '作品',
     projectsDescription: '實際參與開發的專案。每個專案都整理了背景、我的角色、架構與技術挑戰。',
@@ -126,6 +166,26 @@ const en = {
   project: {
     viewCaseStudy: 'View Case Study',
     techStack: 'Tech stack',
+  },
+  caseStudy: {
+    allProjects: 'All projects',
+    highlights: 'Key features',
+    challenge: 'Challenge',
+    solution: 'Solution',
+    pagerLabel: 'More projects',
+    previous: 'Previous project',
+    next: 'Next project',
+    sections: {
+      overview: 'Overview',
+      role: 'My Role',
+      problem: 'Problem',
+      architecture: 'Architecture / Flow',
+      solution: 'Solution',
+      challenges: 'Technical Challenges',
+      techStack: 'Tech Stack',
+      results: 'Result',
+      learnings: 'What I Learned',
+    },
   },
   pages: {
     projectsTitle: 'Projects',

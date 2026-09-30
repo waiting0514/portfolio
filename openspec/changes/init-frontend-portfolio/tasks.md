@@ -40,9 +40,9 @@
 
 ## 5. Case Study
 
-- [ ] 5.1 建立 `CaseStudySection`（`<section aria-labelledby>` + `<h2>` + slot）與 `ProjectPager`（Previous / Next，邊界時不顯示）；`ProjectPager` 單元測試邊界；驗證：測試通過
-- [ ] 5.2 實作 `ProjectDetailView`（`slug` 由 props 傳入）：Hero 與依 spec 順序、各自 `v-if="hasContent(...)"` 的十個 section，內文 `max-w-[70ch]`；無效 slug 時在原路徑渲染 `NotFoundContent`；單元測試：缺少 section 不渲染標題、挑戰與解法成對、無效 slug 顯示 Not Found；驗證：測試通過
-- [ ] 5.3 Phase 檢查：lint、type-check、test、build 通過；在 375px 閱讀兩語系三個 Case Study 無水平捲動
+- [x] 5.1 建立 `CaseStudySection`（`<section aria-labelledby>` + `<h2>` + slot）與 `ProjectPager`（Previous / Next，邊界時不顯示）；`ProjectPager` 單元測試邊界；驗證：測試通過
+- [x] 5.2 實作 `ProjectDetailView`（`slug` 由 props 傳入）：Hero 與依 spec 順序、各自 `v-if="hasContent(...)"` 的十個 section，內文 `max-w-[70ch]`；無效 slug 時在原路徑渲染 `NotFoundContent`；單元測試：缺少 section 不渲染標題、挑戰與解法成對、無效 slug 顯示 Not Found；驗證：測試通過
+- [x] 5.3 Phase 檢查：lint、type-check、test、build 通過；在 375px 閱讀兩語系三個 Case Study 無水平捲動
 
 ## 6. About / 404 / SEO
 
