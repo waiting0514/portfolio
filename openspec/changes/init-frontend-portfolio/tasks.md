@@ -54,10 +54,10 @@
 
 ## 7. RWD / accessibility
 
-- [ ] 7.1 以瀏覽器在 375 / 768 / 1024 / 1440px 檢查兩語系所有頁面：無水平捲軸、文字不截斷（特別注意中英文長度差異）、Navbar 行為符合 spec、Container 在 1440px 置中；修正發現的問題
-- [ ] 7.2 鍵盤全流程檢查：Skip link、Navbar（含 mobile 選單 Escape、語言切換）、卡片、CTA、Pager 皆可操作且 focus 可見；每頁僅一個 h1 且無跳級；所有 CTA 為 `<a>`、選單切換為 `<button>`；修正發現的問題並補對應單元測試
-- [ ] 7.3 模擬 `prefers-reduced-motion: reduce` 確認無 transition 與 smooth scroll；確認所有 `<img>` 有 alt；以 Lighthouse Accessibility 檢查兩語系首頁與 Case Study，無嚴重錯誤；修正發現的問題
-- [ ] 7.4 Phase 檢查：lint、type-check、test、build 通過
+- [x] 7.1 以瀏覽器在 375 / 768 / 1024 / 1440px 檢查兩語系所有頁面：無水平捲軸、文字不截斷（特別注意中英文長度差異）、Navbar 行為符合 spec、Container 在 1440px 置中；修正發現的問題
+- [x] 7.2 鍵盤全流程檢查：Skip link、Navbar（含 mobile 選單 Escape、語言切換）、卡片、CTA、Pager 皆可操作且 focus 可見；每頁僅一個 h1 且無跳級；所有 CTA 為 `<a>`、選單切換為 `<button>`；修正發現的問題並補對應單元測試
+- [x] 7.3 模擬 `prefers-reduced-motion: reduce` 確認無 transition 與 smooth scroll；確認所有 `<img>` 有 alt；以 Lighthouse Accessibility 檢查兩語系首頁與 Case Study，無嚴重錯誤；修正發現的問題
+- [x] 7.4 Phase 檢查：lint、type-check、test、build 通過
 
 ## 8. GitHub Actions / GitHub Pages
 

@@ -25,7 +25,8 @@ describe('BaseButton', () => {
     expect(link.attributes('href')).toBe('https://github.com/example')
     expect(link.attributes('target')).toBe('_blank')
     expect(link.attributes('rel')).toBe('noopener noreferrer')
-    expect(link.text()).toContain('opens in a new tab')
+    // The hint is separated from the label, so it is announced as "GitHub (opens in a new tab)".
+    expect(link.text()).toMatch(/^GitHub\s+\(opens in a new tab\)$/)
     expect(link.classes()).toContain('border-line')
   })
 

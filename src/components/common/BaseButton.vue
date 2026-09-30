@@ -43,6 +43,6 @@ const variantClass = computed(() =>
     :class="variantClass"
   >
     <slot />
-    <span class="sr-only">({{ messages.common.opensInNewTab }})</span>
+    <span class="sr-only">&nbsp;({{ messages.common.opensInNewTab }})</span>
   </a>
 </template>
