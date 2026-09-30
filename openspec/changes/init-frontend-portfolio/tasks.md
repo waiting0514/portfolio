@@ -68,6 +68,6 @@
 
 ## 9. README / QA
 
-- [ ] 9.1 撰寫 `README.md`（繁體中文為主）：Project Introduction、Tech Stack、Features、Project Structure、Local Development、Build、Lint、Type Check、Test、Format、Deployment、GitHub Pages（Settings 設定步驟）、Architecture Decisions（Vue 3、TypeScript、static TS data、不用 Pinia、不用 vue-i18n 與 URL 語系策略、不用 SEO 套件、Router strategy 與替代方案比較、圖片放 public 的取捨、測試策略）、如何新增一個專案（含兩語系內容）、待替換的 TODO 內容清單；驗證：依 README 指令在乾淨 clone 照做成功
-- [ ] 9.2 最終整合檢查：乾淨安裝後 `npm ci && npm run lint && npm run type-check && npm run test && npm run build` 全部通過；全文搜尋確認無 `any`、`@ts-ignore`、`eslint-disable`；抽查所有 spec scenarios（兩語系導覽、語言切換、首頁、grid、Case Study optional section、無效 slug、meta/hreflang、深層連結、RWD 四個寬度）皆符合
-- [ ] 9.3 執行 `openspec validate init-frontend-portfolio --strict` 通過
+- [x] 9.1 撰寫 `README.md`（繁體中文為主）：Project Introduction、Tech Stack、Features、Project Structure、Local Development、Build、Lint、Type Check、Test、Format、Deployment、GitHub Pages（Settings 設定步驟）、Architecture Decisions（Vue 3、TypeScript、static TS data、不用 Pinia、不用 vue-i18n 與 URL 語系策略、不用 SEO 套件、Router strategy 與替代方案比較、圖片放 public 的取捨、測試策略）、如何新增一個專案（含兩語系內容）、待替換的 TODO 內容清單；驗證：依 README 指令在乾淨 clone 照做成功
+- [x] 9.2 最終整合檢查：乾淨安裝後 `npm ci && npm run lint && npm run type-check && npm run test && npm run build` 全部通過；全文搜尋確認無 `any`、`@ts-ignore`、`eslint-disable`；抽查所有 spec scenarios（兩語系導覽、語言切換、首頁、grid、Case Study optional section、無效 slug、meta/hreflang、深層連結、RWD 四個寬度）皆符合
+- [x] 9.3 執行 `openspec validate init-frontend-portfolio --strict` 通過
