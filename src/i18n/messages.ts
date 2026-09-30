@@ -1,4 +1,4 @@
-import type { Localized } from './locales'
+import type { Localized } from './locales.ts'
 
 /**
  * UI copy. Every locale must satisfy this interface, so a missing or misspelled key

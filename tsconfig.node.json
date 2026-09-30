@@ -10,6 +10,11 @@
     // Include Node.js types and avoid accidentally including other `@types/*` packages.
     "types": ["node"],
 
+    // Build helpers import app modules (data, SEO) that use the `@` alias for type imports.
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     // Type-checking only.
     "noEmit": true,
 

@@ -167,8 +167,8 @@ export interface Project {
 - 觸發：`push` 到 `main`、`workflow_dispatch`；另對 `pull_request` 只跑檢查（不部署），讓 PR 也有品質關卡。
 - `build` job：`actions/checkout` → `actions/setup-node`（`node-version-file: .nvmrc`，`cache: npm`）→ `actions/configure-pages`（取得 base path / URL）→ `npm ci` → `npm run lint` → `npm run type-check` → `npm run test` → `npm run build`（帶 `BASE_PATH`、`SITE_URL`）→ `actions/upload-pages-artifact`（`dist`）。
 - `deploy` job：`needs: build`，僅在 `main` 執行，`environment: github-pages`，使用 `actions/deploy-pages`。
-- `permissions`: `contents: read`、`pages: write`、`id-token: write`；`concurrency: { group: pages, cancel-in-progress: false }`。
-- Actions 版本在實作時以各 action 官方 repo 的最新 major 為準（確認非 deprecated，例如 `upload-pages-artifact` 需 v3 以上以配合 `upload-artifact@v4`）。
+- `permissions` 依 job 最小化：workflow 預設 `contents: read`；build job 加 `pages: read`（configure-pages 讀取 Pages 設定）；只有 deploy job 有 `pages: write`、`id-token: write`。`concurrency` 以 workflow + ref 分組：main 的部署排隊不取消，PR 的舊執行會被取消。PR 不執行 configure-pages 與 upload，只跑品質關卡。
+- Actions 版本以實作當下（2026-09）各官方 repo 的最新 major 為準：`checkout@v7`、`setup-node@v7`、`configure-pages@v6`、`upload-pages-artifact@v5`、`deploy-pages@v5`，並以 actionlint 驗證 workflow。
 - `.nvmrc` 設為 `24`；`package.json` `engines.node` 設為 Vite 支援的最低版本以上（`>=22.12`）。
 
 ### D14. i18n：網址前綴決定語系、型別化字典、不引入 vue-i18n

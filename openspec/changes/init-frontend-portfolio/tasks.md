@@ -61,10 +61,10 @@
 
 ## 8. GitHub Actions / GitHub Pages
 
-- [ ] 8.1 實作 `build/static-routes.ts`：`generateBundle` 呼叫 `getStaticRoutes()`、驗證 slug（違反時 build 失敗）、以產出 `index.html` 為模板產生兩語系全部路由的 `index.html`（寫入 `lang`、title、description、OG、canonical、hreflang）與 `404.html`（`noindex`）；更新 `tsconfig.node.json` include；驗證：build 後 `dist/` 出現上述檔案且 `dist/en/projects/<slug>/index.html` 的 `<title>` 為英文專案標題、`<html lang="en">`
-- [ ] 8.2 本機驗證子路徑部署：`BASE_PATH=/portfolio/` build 後以靜態伺服器將 `dist` 掛在 `/portfolio/` 下，直接開啟並重新整理 `/portfolio/projects/<slug>`、`/portfolio/en/about`（正確頁面與語系）與 `/portfolio/foo/bar`（網站 Not Found），Network 面板無 404 資源
-- [ ] 8.3 建立 `.github/workflows/deploy.yml`（push main / workflow_dispatch / pull_request；build job：checkout → setup-node（`.nvmrc`、npm cache）→ configure-pages → npm ci → lint → type-check → test → build（`BASE_PATH`、`SITE_URL` 取自 configure-pages）→ upload-pages-artifact；deploy job 僅限 main：deploy-pages；最小 permissions 與 concurrency）；實作前確認各官方 action 最新非 deprecated major；驗證：YAML 語法檢查通過，步驟順序符合 `pages-deployment` spec
-- [ ] 8.4 Phase 檢查：lint、type-check、test、build 通過（推送與實際部署需使用者確認後執行，並需先在 repo Settings → Pages 將 Source 設為 GitHub Actions）
+- [x] 8.1 實作 `build/static-routes.ts`：`generateBundle` 呼叫 `getStaticRoutes()`、驗證 slug（違反時 build 失敗）、以產出 `index.html` 為模板產生兩語系全部路由的 `index.html`（寫入 `lang`、title、description、OG、canonical、hreflang）與 `404.html`（`noindex`）；更新 `tsconfig.node.json` include；驗證：build 後 `dist/` 出現上述檔案且 `dist/en/projects/<slug>/index.html` 的 `<title>` 為英文專案標題、`<html lang="en">`
+- [x] 8.2 本機驗證子路徑部署：`BASE_PATH=/portfolio/` build 後以靜態伺服器將 `dist` 掛在 `/portfolio/` 下，直接開啟並重新整理 `/portfolio/projects/<slug>`、`/portfolio/en/about`（正確頁面與語系）與 `/portfolio/foo/bar`（網站 Not Found），Network 面板無 404 資源
+- [x] 8.3 建立 `.github/workflows/deploy.yml`（push main / workflow_dispatch / pull_request；build job：checkout → setup-node（`.nvmrc`、npm cache）→ configure-pages → npm ci → lint → type-check → test → build（`BASE_PATH`、`SITE_URL` 取自 configure-pages）→ upload-pages-artifact；deploy job 僅限 main：deploy-pages；最小 permissions 與 concurrency）；實作前確認各官方 action 最新非 deprecated major；驗證：YAML 語法檢查通過，步驟順序符合 `pages-deployment` spec
+- [x] 8.4 Phase 檢查：lint、type-check、test、build 通過（推送與實際部署需使用者確認後執行，並需先在 repo Settings → Pages 將 Source 設為 GitHub Actions）
 
 ## 9. README / QA
 

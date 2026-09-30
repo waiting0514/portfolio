@@ -5,16 +5,16 @@
  * so this module (and everything it imports) must stay Node-compatible: relative imports only,
  * no `import.meta.env`, no DOM.
  */
-import { getProjectBySlug, projects } from '../data/projects'
-import { profile } from '../data/profile'
+import { getProjectBySlug, projects } from '../data/projects.ts'
+import { profile } from '../data/profile.ts'
 import {
   LOCALES,
   LOCALE_CONFIG,
   stripLocalePrefix,
   withLocalePrefix,
   type Locale,
-} from '../i18n/locales'
-import { MESSAGES } from '../i18n/messages'
+} from '../i18n/locales.ts'
+import { MESSAGES } from '../i18n/messages.ts'
 
 /** Social preview image. SVG covers are not accepted by most social networks. */
 export const DEFAULT_OG_IMAGE = 'og-default.png'
