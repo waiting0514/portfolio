@@ -61,7 +61,8 @@ function formatTitle(pageTitle: string, locale: Locale): string {
   return `${pageTitle} | ${profile.content[locale].name}`
 }
 
-function socialImage(src: string): string {
+/** SVG covers are not accepted as social previews, so they fall back to the default image. */
+export function socialImage(src: string): string {
   return src.endsWith('.svg') ? DEFAULT_OG_IMAGE : src
 }
 

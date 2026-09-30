@@ -2,9 +2,12 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import BaseContainer from '@/components/common/BaseContainer.vue'
+import FlowDiagram from '@/components/common/FlowDiagram.vue'
 import NotFoundContent from '@/components/common/NotFoundContent.vue'
 import TechTagList from '@/components/common/TechTagList.vue'
+import CaseStudyCard from '@/components/project/CaseStudyCard.vue'
 import CaseStudySection from '@/components/project/CaseStudySection.vue'
+import ProjectMeta from '@/components/project/ProjectMeta.vue'
 import ProjectPager from '@/components/project/ProjectPager.vue'
 import { useLocale } from '@/composables/useLocale'
 import { usePageMeta } from '@/composables/usePageMeta'
@@ -38,9 +41,10 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
         >
           <span aria-hidden="true">←</span> {{ messages.caseStudy.allProjects }}
         </RouterLink>
+        <ProjectMeta class="mt-6" :labels="project.labels" :status="project.status" />
         <h1
           id="case-study-title"
-          class="mt-4 max-w-4xl text-3xl font-bold tracking-tight md:text-5xl"
+          class="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-balance md:text-5xl"
         >
           {{ content.title }}
         </h1>
@@ -78,19 +82,87 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
         </template>
       </CaseStudySection>
 
-      <CaseStudySection v-if="hasContent(caseStudy.role)" id="role" :title="sectionTitles.role">
-        <p class="font-semibold">{{ caseStudy.role.title }}</p>
-        <ul v-if="hasContent(caseStudy.role.responsibilities)">
-          <li v-for="item in caseStudy.role.responsibilities" :key="item">{{ item }}</li>
-        </ul>
+      <!-- Sections that contain a flow keep it outside the prose container, so it is not styled as a numbered list. -->
+      <CaseStudySection
+        v-if="hasContent(caseStudy.background)"
+        id="background"
+        :title="sectionTitles.background"
+        :prose="false"
+      >
+        <div class="prose-content">
+          <p v-for="paragraph in caseStudy.background.paragraphs" :key="paragraph">
+            {{ paragraph }}
+          </p>
+        </div>
+        <FlowDiagram
+          v-if="hasContent(caseStudy.background.flow)"
+          class="mt-6"
+          :steps="caseStudy.background.flow"
+          :label="sectionTitles.background"
+        />
       </CaseStudySection>
 
       <CaseStudySection
-        v-if="hasContent(caseStudy.problem)"
+        v-if="hasContent(caseStudy.role)"
+        id="role"
+        :title="sectionTitles.role"
+        :prose="false"
+      >
+        <div class="prose-content">
+          <p class="font-semibold">{{ caseStudy.role.title }}</p>
+          <ul v-if="hasContent(caseStudy.role.responsibilities)">
+            <li v-for="item in caseStudy.role.responsibilities" :key="item">{{ item }}</li>
+          </ul>
+        </div>
+        <FlowDiagram
+          v-if="hasContent(caseStudy.role.flow)"
+          class="mt-6"
+          :steps="caseStudy.role.flow"
+          :label="sectionTitles.role"
+        />
+      </CaseStudySection>
+
+      <CaseStudySection
+        v-if="hasContent(caseStudy.problem) || hasContent(caseStudy.problemExample)"
         id="problem"
         :title="sectionTitles.problem"
+        :prose="false"
       >
-        <p v-for="paragraph in caseStudy.problem" :key="paragraph">{{ paragraph }}</p>
+        <div class="prose-content">
+          <p v-for="paragraph in caseStudy.problem" :key="paragraph">{{ paragraph }}</p>
+        </div>
+        <div v-if="hasContent(caseStudy.problemExample)" class="mt-8">
+          <h3 v-if="caseStudy.problemExample.heading" class="text-lg font-semibold">
+            {{ caseStudy.problemExample.heading }}
+          </h3>
+          <p class="mt-3 max-w-prose">
+            <strong>{{ messages.caseStudy.requirement }}{{ messages.common.labelSeparator }}</strong
+            >{{ caseStudy.problemExample.requirement }}
+          </p>
+          <p class="mt-6 text-sm font-semibold">{{ messages.caseStudy.requiredFlow }}</p>
+          <FlowDiagram
+            class="mt-3"
+            :steps="caseStudy.problemExample.flow"
+            :label="messages.caseStudy.requiredFlow"
+          />
+          <template v-if="hasContent(caseStudy.problemExample.states)">
+            <p class="mt-6 text-sm font-semibold">{{ messages.caseStudy.requiredStates }}</p>
+            <TechTagList
+              class="mt-3"
+              :items="caseStudy.problemExample.states"
+              :label="messages.caseStudy.requiredStates"
+            />
+          </template>
+        </div>
+      </CaseStudySection>
+
+      <CaseStudySection
+        v-if="hasContent(caseStudy.workflow)"
+        id="workflow"
+        :title="sectionTitles.workflow"
+        :prose="false"
+      >
+        <FlowDiagram :steps="caseStudy.workflow" :label="sectionTitles.workflow" />
       </CaseStudySection>
 
       <CaseStudySection
@@ -122,24 +194,50 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
       </CaseStudySection>
 
       <CaseStudySection
+        v-if="hasContent(caseStudy.responsibilities)"
+        id="responsibilities"
+        :title="sectionTitles.responsibilities"
+        :prose="false"
+      >
+        <div class="grid gap-4 md:grid-cols-2">
+          <CaseStudyCard v-for="item in caseStudy.responsibilities" :key="item.title">
+            <template #title>{{ item.title }}</template>
+            <p class="mt-2 leading-relaxed text-ink-muted">{{ item.description }}</p>
+          </CaseStudyCard>
+        </div>
+      </CaseStudySection>
+
+      <CaseStudySection
         v-if="hasContent(caseStudy.challenges)"
         id="challenges"
         :title="sectionTitles.challenges"
       >
-        <div
-          v-for="(item, index) in caseStudy.challenges"
-          :key="item.challenge"
-          class="rounded-lg border border-line p-5"
-        >
-          <h3 class="text-base font-semibold">
+        <CaseStudyCard v-for="(item, index) in caseStudy.challenges" :key="item.challenge">
+          <template #title>
             <span class="text-ink-muted">{{ messages.caseStudy.challenge }} {{ index + 1 }}</span>
             <span class="mt-1 block">{{ item.challenge }}</span>
-          </h3>
+          </template>
           <p class="mt-3">
             <strong>{{ messages.caseStudy.solution }}{{ messages.common.labelSeparator }}</strong
             >{{ item.solution }}
           </p>
-        </div>
+        </CaseStudyCard>
+      </CaseStudySection>
+
+      <CaseStudySection
+        v-if="hasContent(caseStudy.aiAssisted)"
+        id="ai-assisted"
+        :title="sectionTitles.aiAssisted"
+      >
+        <p v-for="paragraph in caseStudy.aiAssisted.paragraphs" :key="paragraph">
+          {{ paragraph }}
+        </p>
+        <template v-if="hasContent(caseStudy.aiAssisted.humanTasks)">
+          <p class="font-semibold">{{ messages.caseStudy.humanTasks }}</p>
+          <ul>
+            <li v-for="task in caseStudy.aiAssisted.humanTasks" :key="task">{{ task }}</li>
+          </ul>
+        </template>
       </CaseStudySection>
 
       <CaseStudySection id="tech-stack" :title="sectionTitles.techStack" :prose="false">
@@ -154,6 +252,24 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
         <ul>
           <li v-for="result in caseStudy.results" :key="result">{{ result }}</li>
         </ul>
+      </CaseStudySection>
+
+      <CaseStudySection
+        v-if="hasContent(caseStudy.currentStatus)"
+        id="current-status"
+        :title="sectionTitles.currentStatus"
+        :prose="false"
+      >
+        <dl class="max-w-prose divide-y divide-line border-y border-line">
+          <div
+            v-for="item in caseStudy.currentStatus"
+            :key="item.label"
+            class="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+          >
+            <dt class="font-medium text-ink">{{ item.label }}</dt>
+            <dd class="text-ink-muted sm:text-right">{{ item.value }}</dd>
+          </div>
+        </dl>
       </CaseStudySection>
 
       <CaseStudySection

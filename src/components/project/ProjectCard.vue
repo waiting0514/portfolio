@@ -5,6 +5,7 @@ import TechTagList from '@/components/common/TechTagList.vue'
 import { useLocale } from '@/composables/useLocale'
 import type { Project } from '@/types/project'
 import { assetUrl } from '@/utils/asset'
+import ProjectMeta from './ProjectMeta.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -37,6 +38,7 @@ const content = computed(() => props.project.content[locale.value])
       class="aspect-video w-full border-b border-line bg-surface object-cover"
     />
     <div class="flex flex-1 flex-col p-6">
+      <ProjectMeta class="mb-3" :labels="project.labels" :status="project.status" />
       <component :is="`h${headingLevel}`" class="text-lg font-semibold tracking-tight text-ink">
         {{ content.title }}
       </component>

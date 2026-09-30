@@ -8,6 +8,7 @@ import {
   describePage,
   getStaticPages,
   pageUrl,
+  socialImage,
 } from './seo'
 
 const SITE = 'https://user.github.io/portfolio/'
@@ -35,16 +36,20 @@ describe('describePage', () => {
     expect(page.path).toBe(`/en/projects/${project.slug}`)
   })
 
-  it('uses a raster cover as the social image', () => {
-    const raster = projects.find((p) => !p.cover.src.endsWith('.svg'))!
-    const page = describePage({ page: 'project', slug: raster.slug }, 'en')
-    expect(page.image).toBe(raster.cover.src)
+  it('uses the project cover as the social image when it is not an SVG', () => {
+    const page = describePage({ page: 'project', slug: project.slug }, 'en')
+    expect(page.image).toBe(socialImage(project.cover.src))
+  })
+})
+
+describe('socialImage', () => {
+  it('keeps raster covers', () => {
+    expect(socialImage('images/projects/cover.jpg')).toBe('images/projects/cover.jpg')
+    expect(socialImage('images/projects/cover.webp')).toBe('images/projects/cover.webp')
   })
 
-  it('falls back to the default social image for SVG covers', () => {
-    const vector = projects.find((p) => p.cover.src.endsWith('.svg'))!
-    const page = describePage({ page: 'project', slug: vector.slug }, 'en')
-    expect(page.image).toBe(DEFAULT_OG_IMAGE)
+  it('falls back to the default image for SVG covers', () => {
+    expect(socialImage('images/projects/placeholder.svg')).toBe(DEFAULT_OG_IMAGE)
   })
 
   it('describes an unknown project as a non-indexable not-found page', () => {

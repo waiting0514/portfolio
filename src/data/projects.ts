@@ -13,6 +13,357 @@ import type { Project } from '@/types/project'
  */
 export const projects: readonly Project[] = [
   {
+    slug: 'social-media-platform',
+    cover: { src: 'images/projects/social-media-platform.svg', width: 1600, height: 900 },
+    technologies: [
+      'Vue 3',
+      'Vite',
+      'Vue Router',
+      'vue-i18n',
+      'Arco Design Vue',
+      'ECharts',
+      'Axios',
+    ],
+    featured: false,
+    status: 'in-development',
+    labels: ['Real-world Project', 'Frontend Development'],
+    content: {
+      'zh-TW': {
+        title: '社群管理平台',
+        subtitle: 'Social Media Management Platform',
+        summary:
+          '將 AI 輔助產生的初步需求轉換為可實作的前端架構、操作流程與 UI，負責需求分析、Component Design、State / Data Flow 與前端互動邏輯。',
+        coverAlt: '社群管理平台的封面 placeholder：實際畫面待確認可公開後補上',
+        highlights: [
+          '需求分析與缺漏情境補齊',
+          '使用者流程與狀態設計',
+          'Component Design',
+          'State / Data Flow',
+          'Mock 資料層與 API-ready 設計',
+          '前端商業邏輯',
+        ],
+        caseStudy: {
+          overview: [
+            '公司內部開發中的社群管理平台。專案初期由主管提供 AI 輔助產生的需求草稿，我負責將初步需求轉換為可實作的前端功能、操作流程與頁面架構，並完成前端 UI 與互動邏輯。',
+            '平台把 Facebook、Instagram、LINE、YouTube、Threads、TikTok、LinkedIn 的發文與訊息收在同一個後台，流程分為前置設定、內容產製、客服回覆、導流轉換與成效稽核五個階段。',
+            '這個 Case Study 的重點不是功能清單，而是如何把 AI 產生的模糊需求，轉換成真正可以實作的前端產品。',
+          ],
+          background: {
+            paragraphs: [
+              '專案開始時沒有完整的 UI 設計稿，也沒有完整的系統規格。手上的資料是主管以 AI 輔助產生的需求草稿：它描述系統「應該有什麼功能」，但沒有定義使用者怎麼操作、資料會經過哪些狀態，也沒有處理例外情況。',
+              '因此不能直接開始寫程式：前端必須先把需求整理清楚，才知道要做哪些頁面、元件與狀態。',
+            ],
+            flow: ['AI 產生的需求草稿', '功能描述', '部分使用者流程', '商業需求'],
+          },
+          role: {
+            title: '前端工程師',
+            responsibilities: [
+              '我的角色不只是 UI 實作，而是把不完整的需求轉換成可實作的前端系統：從理解與分析需求開始，一路到頁面架構、元件、狀態、Mock 資料與 UI，並讓程式結構可以直接接上未來的後端 API。',
+            ],
+            flow: [
+              'Requirement Understanding',
+              'Requirement Analysis',
+              'User Flow Design',
+              'Page Structure',
+              'Frontend Architecture',
+              'Component Design',
+              'State / Data Flow',
+              'Mock Data',
+              'UI Implementation',
+              'Interaction Logic',
+              'API-ready Structure',
+            ],
+          },
+          problem: [
+            'AI 產生的需求文件通常只描述「系統應該有什麼功能」，不足以直接轉換成程式。一句需求背後，前端還需要定義完整的操作流程、每個步驟的資料、可能的狀態，以及失敗時畫面該怎麼呈現。',
+            '例如三個平台送出、一個成功兩個失敗時，狀態應該是「部分失敗」而不是「失敗」，而且重試時只能重送失敗的平台。這類規則不會出現在需求草稿裡，卻直接決定了資料結構與畫面。',
+          ],
+          problemExample: {
+            heading: '從 AI 需求到可實作的產品',
+            requirement: '「系統需要支援社群貼文排程管理」',
+            flow: [
+              '建立貼文',
+              '選擇社群平台',
+              '選擇帳號',
+              '輸入內容',
+              '上傳媒體',
+              '立即發布／排程',
+              '選擇日期與時間',
+              '儲存',
+              '發布中',
+              '成功／失敗',
+            ],
+            states: ['草稿', '已排程', '發布中', '已發布', '部分失敗', '失敗'],
+          },
+          workflow: [
+            'AI 需求草稿',
+            '需求分析',
+            '找出缺漏情境',
+            '使用者流程',
+            '頁面與功能定義',
+            'Component Design',
+            'State & Data Flow',
+            'Mock Data',
+            'UI 實作',
+            '前端邏輯',
+            '後端 API 整合（未來）',
+          ],
+          architecture: {
+            steps: [
+              '表現層：layouts 負責導覽、側邊選單、組織（租戶）切換與全域異常提示；views 依業務模組劃分（收件匣、發布與排程、社群帳號、成效分析、行銷活動、主控台）；components 分為通用元件（圖表、平台圖示、面板）與領域元件',
+              '狀態與業務邏輯層：composables 以模組層級的單例響應式狀態讓多個頁面共用資料（未使用 Pinia），並封裝跨平台發布檢核、權限、列表查詢與篩選等邏輯；切換租戶時統一清空，避免資料混用',
+              '服務層：每個業務 API 模組對外提供一致的函式，內部以開關決定呼叫 Mock 或真實後端；HTTP 請求統一處理授權標頭、語系與錯誤格式',
+              'Mock 層：記憶體中的可變資料庫，新增、回覆、審核、發布等操作會直接修改資料；預先建立多租戶與各種邊界狀態（授權過期、部分發布失敗、AI 配額限制），並模擬網路延遲與標準化的錯誤回應',
+              '基礎層：領域常數（錯誤代碼、平台權限、角色）、路由與選單權限、多語系字典與樣式 token',
+            ],
+          },
+          responsibilities: [
+            {
+              title: 'Requirement Analysis',
+              description: '把 AI 產生的初步規格轉換成實際可開發的需求，找出缺漏的情境與例外。',
+            },
+            {
+              title: 'User Flow',
+              description:
+                '補齊不同功能之間的操作流程與狀態，例如發文從草稿、排程、發布中，到部分失敗與重試的完整過程。',
+            },
+            {
+              title: 'UI Implementation',
+              description:
+                '依整理後的需求完成前端頁面，涵蓋社群帳號、發文與排程、收件匣、導流轉換與成效分析等模組。',
+            },
+            {
+              title: 'Component Design',
+              description: '將功能拆分成可維護、可重用的元件：通用元件，以及依業務領域劃分的元件。',
+            },
+            {
+              title: 'State & Data Flow',
+              description:
+                '以 composables 管理跨頁共用的狀態與資料流，並在切換租戶時統一重置，避免資料混用。',
+            },
+            {
+              title: 'Business Logic',
+              description:
+                '處理畫面背後的規則，而不只是切版：部分失敗時只重試失敗的平台；送出前就檢核各平台的字數、附圖與影片長度規則；超過平台回覆時限時停用回覆框並說明原因；平台沒有提供的指標顯示「—」而不是 0。',
+            },
+            {
+              title: 'API-ready Design',
+              description:
+                '後端尚未完整串接，因此每個 API 模組以開關切換 Mock 與真實請求；Mock 層也模擬延遲與標準化錯誤，讓前端的錯誤處理現在就能被驗證，之後接上後端時頁面不需要改寫。',
+            },
+          ],
+          aiAssisted: {
+            paragraphs: [
+              'AI 在這個專案中是需求與開發流程中的輔助工具，而不是自動產生整個系統的工具：需求草稿由 AI 輔助產生，開發時也以 AI 協助產生程式碼草稿。',
+              'AI 可以產生初步規格與程式碼，但工程師仍然需要判斷需求是否合理，並把它轉換成可維護、可實際運作的產品。',
+            ],
+            humanTasks: [
+              '需求驗證',
+              '找出缺漏的情境',
+              '架構決策',
+              '使用者流程',
+              '狀態設計',
+              'Component Design',
+              '商業邏輯',
+              'Code Review',
+              '整合決策',
+            ],
+          },
+          currentStatus: [
+            { label: '專案狀態', value: '開發中（In Development）' },
+            { label: 'Frontend UI／Logic', value: '開發中' },
+            {
+              label: 'Mock Data',
+              value: '記憶體 Mock 資料庫已建立，目前所有業務 API 皆使用 Mock',
+            },
+            { label: 'Backend Integration', value: '待整合（Pending）' },
+            { label: '公開範圍', value: '公司內部專案，不提供原始碼、GitHub 與 Live Demo' },
+          ],
+          learnings: [
+            '如何處理不完整的需求：先補齊情境與例外，再開始寫程式',
+            '如何從產品需求推導出使用者流程與資料狀態',
+            '如何在後端尚未完成時設計前端，讓介面與資料層各自前進',
+            '如何建立可替換的 Mock 資料層，讓之後接上真實 API 時頁面不需要改寫',
+            '如何讓元件與商業邏輯保持分離，維持可維護性',
+            '如何把 AI 當作輔助工具：用它加速，但需求判斷與架構決策仍由工程師負責',
+          ],
+        },
+      },
+      en: {
+        title: 'Social Media Management Platform',
+        subtitle: 'Turning AI-generated requirements into an implementable frontend product',
+        summary:
+          'Turned AI-assisted draft requirements into an implementable frontend architecture, user flows and UI, owning requirement analysis, component design, state and data flow, and frontend interaction logic.',
+        coverAlt:
+          'Placeholder cover for the social media management platform; screenshots will be added once approved',
+        highlights: [
+          'Requirement analysis and missing scenarios',
+          'User flows and state design',
+          'Component design',
+          'State / data flow',
+          'Mock data layer and API-ready design',
+          'Frontend business logic',
+        ],
+        caseStudy: {
+          overview: [
+            'A social media management platform in development at my company. The project started from a requirement draft my manager produced with AI assistance; I turned it into implementable frontend features, user flows and page architecture, and built the frontend UI and interaction logic.',
+            'The platform brings posts and messages from Facebook, Instagram, LINE, YouTube, Threads, TikTok and LinkedIn into one admin, organized in five stages: setup, content production, customer replies, conversion, and performance review.',
+            'This case study is not about the feature list; it is about turning vague, AI-generated requirements into a frontend product that can actually be built.',
+          ],
+          background: {
+            paragraphs: [
+              'The project had no complete UI design and no complete system specification. The input was an AI-assisted requirement draft from my manager: it described what the system should do, but not how people would use it, which states the data goes through, or what happens in edge cases.',
+              'So coding could not start right away: the frontend first had to make the requirements concrete to know which pages, components and states were needed.',
+            ],
+            flow: [
+              'AI-generated requirement draft',
+              'Feature description',
+              'Partial user flow',
+              'Business requirement',
+            ],
+          },
+          role: {
+            title: 'Frontend Engineer',
+            responsibilities: [
+              'My role went beyond UI implementation: I turned incomplete requirements into an implementable frontend system, from understanding and analysing the requirements to page structure, components, state, mock data and UI, structured so it can connect to the future backend API directly.',
+            ],
+            flow: [
+              'Requirement Understanding',
+              'Requirement Analysis',
+              'User Flow Design',
+              'Page Structure',
+              'Frontend Architecture',
+              'Component Design',
+              'State / Data Flow',
+              'Mock Data',
+              'UI Implementation',
+              'Interaction Logic',
+              'API-ready Structure',
+            ],
+          },
+          problem: [
+            'AI-generated requirement documents usually describe what a system should have, which is not enough to write code from. Behind a single requirement, the frontend still has to define the full user flow, the data at each step, the possible states, and what the screen shows when something fails.',
+            'For example, when a post is sent to three platforms and only one succeeds, the status should be “partially failed” rather than “failed”, and a retry must only resend to the failed platforms. Rules like these never appear in the draft, yet they shape both the data structure and the UI.',
+          ],
+          problemExample: {
+            heading: 'From AI-generated requirements to an implementable product',
+            requirement: '“The system needs to support scheduling social media posts.”',
+            flow: [
+              'Create post',
+              'Select social platform',
+              'Select account',
+              'Enter content',
+              'Upload media',
+              'Publish now / Schedule',
+              'Select date and time',
+              'Save',
+              'Publishing',
+              'Success / Failure',
+            ],
+            states: ['Draft', 'Scheduled', 'Publishing', 'Published', 'Partially failed', 'Failed'],
+          },
+          workflow: [
+            'AI requirement draft',
+            'Requirement analysis',
+            'Identify missing scenarios',
+            'User flow',
+            'Page / feature definition',
+            'Component design',
+            'State & data flow',
+            'Mock data',
+            'UI implementation',
+            'Frontend logic',
+            'Backend API integration (future)',
+          ],
+          architecture: {
+            steps: [
+              'Presentation layer: layouts provide navigation, the side menu, organization (tenant) switching and global error banners; views are organized by business module (inbox, publishing and scheduling, social accounts, analytics, campaigns, dashboard); components are split into shared components (charts, platform icons, panels) and domain components',
+              'State and business logic layer: composables share state across pages through module-level singleton reactive state (no Pinia) and encapsulate logic such as cross-platform publish validation, permissions and list queries; switching tenants clears all tenant-scoped state so data never mixes',
+              'Service layer: each business API module exposes the same functions and uses a switch to call either the mock or the real backend; HTTP requests share one place for authorization headers, language and error normalization',
+              'Mock layer: an in-memory, mutable database where creating, replying, approving and publishing change the data directly; it ships with multiple tenants and edge cases (expired authorization, partially failed publishing, AI quota limits) and simulates network delay and standardized error responses',
+              'Infrastructure layer: domain constants (error codes, platform permissions, roles), routes and menu permissions, localization dictionaries and style tokens',
+            ],
+          },
+          responsibilities: [
+            {
+              title: 'Requirement Analysis',
+              description:
+                'Turned the AI-generated draft into requirements that can actually be built, and identified missing scenarios and edge cases.',
+            },
+            {
+              title: 'User Flow',
+              description:
+                'Filled in the flows and states between features, such as a post’s full lifecycle from draft, scheduled and publishing to partial failure and retry.',
+            },
+            {
+              title: 'UI Implementation',
+              description:
+                'Built the frontend pages from the refined requirements, covering social accounts, publishing and scheduling, the inbox, conversion and analytics.',
+            },
+            {
+              title: 'Component Design',
+              description:
+                'Split features into maintainable, reusable components: shared components and components organized by business domain.',
+            },
+            {
+              title: 'State & Data Flow',
+              description:
+                'Managed state and data flow shared across pages with composables, resetting everything when the tenant changes so data never mixes.',
+            },
+            {
+              title: 'Business Logic',
+              description:
+                'Handled the rules behind the UI, not just the layout: retry only the platforms that failed; validate each platform’s length, image and video rules before submitting; disable the reply box with an explanation once a platform’s reply window has passed; show “—” instead of 0 for metrics a platform does not provide.',
+            },
+            {
+              title: 'API-ready Design',
+              description:
+                'With the backend not yet fully integrated, each API module switches between mock and real requests, and the mock layer simulates delays and standardized errors, so frontend error handling can be verified now and pages will not need rewriting once the backend is connected.',
+            },
+          ],
+          aiAssisted: {
+            paragraphs: [
+              'In this project AI is an assistant within the requirements and development workflow, not a tool that generates the whole system: the requirement draft was produced with AI assistance, and AI also helps draft code during development.',
+              'AI can produce early specifications and code, but an engineer still has to judge whether the requirements make sense and turn them into a product that is maintainable and actually works.',
+            ],
+            humanTasks: [
+              'Requirement validation',
+              'Identifying missing scenarios',
+              'Architecture decisions',
+              'User flows',
+              'State design',
+              'Component design',
+              'Business logic',
+              'Code review',
+              'Integration decisions',
+            ],
+          },
+          currentStatus: [
+            { label: 'Project status', value: 'In Development' },
+            { label: 'Frontend UI / Logic', value: 'In progress' },
+            {
+              label: 'Mock Data',
+              value: 'In-memory mock database in place; all business APIs currently use mocks',
+            },
+            { label: 'Backend Integration', value: 'Pending' },
+            {
+              label: 'Visibility',
+              value: 'Internal company project: no source code, GitHub or live demo',
+            },
+          ],
+          learnings: [
+            'Handling incomplete requirements: fill in scenarios and edge cases before writing code',
+            'Deriving user flows and data states from product requirements',
+            'Designing the frontend while the backend is unfinished, so UI and data layers can progress independently',
+            'Building a replaceable mock data layer so pages do not need rewriting when the real API arrives',
+            'Keeping components and business logic separate for maintainability',
+            'Using AI as an assistant: it speeds things up, but requirement judgement and architecture decisions stay with the engineer',
+          ],
+        },
+      },
+    },
+  },
+  {
     slug: 'large-file-upload-system',
     cover: { src: 'images/projects/file-management-cover.jpg', width: 1600, height: 900 },
     technologies: ['Vue', 'AWS S3', 'WebGL', 'Resumable.js'],
@@ -388,122 +739,206 @@ export const projects: readonly Project[] = [
   },
   {
     slug: 'b2b-corporate-website',
-    cover: { src: 'images/projects/b2b-corporate-website.svg', width: 1600, height: 900 },
-    technologies: ['Laravel', 'Vue', 'GitHub Actions', 'Linode', 'GA4', 'Cloudflare'],
+    cover: { src: 'images/projects/cms-cover.jpg', width: 1600, height: 900 },
+    technologies: [
+      'Laravel',
+      'Vue 3',
+      'Pinia',
+      'Element Plus',
+      'Alpine.js',
+      'Tailwind CSS',
+      'MySQL',
+      'OpenAI API',
+      'GitHub Actions',
+      'Linode',
+    ],
     featured: true,
     content: {
       'zh-TW': {
-        title: 'B2B 企業官網',
-        subtitle: '個人接案：Laravel 前台兼顧 SEO、Vue 後台管理產品與詢價',
+        title: 'B2B 企業官網：多專案 CMS 與 AI 內容工具',
+        subtitle: '個人接案：Laravel 前台兼顧 SEO，Vue 3 後台整合具預算控管的 AI 內容工具',
         summary:
-          '個人接案的 B2B 企業官網：前台以 Laravel 開發以兼顧 SEO，後台以 Vue + API 管理產品與規格，並透過 GitHub Actions 部署到 Linode。',
-        coverAlt: 'B2B 企業官網的頁面示意圖（placeholder）',
+          '個人接案的多專案 CMS：Laravel 前台由伺服器輸出頁面以兼顧 SEO，Vue 3 後台管理產品與中英雙語內容，並整合 AI 翻譯、文案與圖片辨識，以專案年度預算控管 AI 用量。',
+        coverAlt: '後台產品管理頁面，開啟中的「AI 辨識建立產品」對話框',
         highlights: [
-          'Product Management',
-          'Product Specification',
-          'Inquiry',
-          'SEO',
-          'GA4',
-          'Email',
-          'Cloudflare',
+          'Laravel Blade 前台（SEO）',
+          'Vue 3 後台 SPA',
+          '中英雙語內容與網址',
+          '角色權限（選單／路由／API）',
+          'AI 翻譯與文案助手',
+          'AI 圖片辨識建立產品',
+          'AI 用量預算控管',
+          '聯絡表單驗證碼與 Email 通知',
+          'GitHub Actions 部署到 Linode',
         ],
         caseStudy: {
           overview: [
-            '個人接案開發的 B2B 企業官網，包含產品管理、產品規格展示、線上詢價與 Email 通知，並處理 SEO 與 GA4 追蹤。',
-            'TODO: 補充客戶產業、網站目的與目標客群（避免透露客戶的機密資訊）。',
+            '個人接案開發的多專案 CMS，用來建置 B2B 企業官網。前台讓訪客瀏覽產品、分類、最新消息與知識庫，送出聯絡表單，也能註冊會員；後台讓管理者維護產品、輪播、消息、知識庫、詢價訂單、使用者與系統設定，並提供 AI 內容工具。',
+            '單一 Laravel 12 應用同時提供三種介面：伺服器渲染的前台網站、Vue 3 後台 SPA，以及後台使用的 REST API；前台與後台讀寫同一組資料模型。',
           ],
           role: {
             title: '接案開發者（個人承接）',
             responsibilities: [
-              '以 Laravel 開發前台網站',
-              '以 Vue + API 開發後台管理',
+              '以 Laravel Blade、Alpine.js 與 Tailwind CSS 開發前台網站',
+              '以 Vue 3、Pinia 與 Element Plus 開發後台 SPA',
+              '設計 REST API、角色權限、多語系與 AI 預算控管',
               '以 GitHub Actions 建立部署流程，部署到 Linode 主機',
             ],
           },
           problem: [
-            '企業官網需要被搜尋引擎收錄，前台頁面必須對 SEO 友善；同時客戶需要一個後台來管理產品與規格。',
+            '企業官網的產品與內容頁必須能被搜尋引擎收錄；同時客戶需要一個好用的後台，管理產品、分類與中英雙語內容。',
+            '後台要協助管理者建立雙語的產品內容：一鍵翻譯、AI 文案，以及上傳產品圖片後由 AI 辨識建立產品。',
+            'AI 功能每次呼叫都會產生外部費用，需要依專案控制用量與預算。',
+            '後台有多種角色，權限需要一致地套用在選單、路由與 API。',
           ],
           architecture: {
             steps: [
-              '後台以 Vue 開發，透過 API 管理產品與產品規格',
-              '前台以 Laravel 開發，考量 SEO 由伺服器輸出頁面內容',
-              '訪客可在前台瀏覽產品規格並送出詢價',
+              '前台：Laravel Blade 由伺服器輸出頁面，搭配 Alpine.js 與 Tailwind CSS；每條路由同時提供預設語系與加上語系前綴的版本',
+              '後台：Vue 3 + Pinia + Element Plus 的 SPA，以 token 驗證呼叫 REST API',
+              '權限分三層：選單依權限過濾、前端路由守衛、API 端授權',
+              '內容以 JSON 欄位儲存多語系，網址用的 slug 在儲存時自動產生',
+              'AI 功能經過預算控管服務：先確認專案剩餘預算，再呼叫 OpenAI 等外部服務並記錄用量',
+              '前台表單經驗證碼（Cloudflare Turnstile 或 reCAPTCHA）驗證，並以各專案自己的 SMTP 寄出通知',
               '透過 GitHub Actions 部署到 Linode 主機',
-              'TODO: 補充 Email 通知、GA4 與 Cloudflare 在架構中的位置',
             ],
           },
           solution: [
-            '將前台與後台分開：前台考量 SEO 使用 Laravel，後台使用 Vue + API，並以 GitHub Actions 自動部署到 Linode。',
-            'TODO: 補充 SEO、GA4 與 Email 通知的實作細節。',
+            '前台考量 SEO，使用 Laravel Blade 由伺服器輸出頁面，並產生 sitemap 與 robots.txt；後台則是 Vue 3 SPA，兩者放在同一個 Laravel 應用裡共用資料模型。',
+            'API 的成功與錯誤回應格式統一，例外集中轉換；前端依錯誤代碼顯示對應訊息，token 失效時自動導回登入頁。',
+            '每個 AI 功能以固定單價從專案年度預算扣款，同時記錄實際的外部成本以便對帳；預算不足時不會呼叫外部服務，呼叫失敗的紀錄也不扣款，年度用量每年自動歸零。',
           ],
           challenges: [
             {
-              challenge: '企業官網的前台頁面需要對搜尋引擎友善',
-              solution: '前台改用 Laravel 開發，由伺服器輸出頁面內容。',
+              challenge: '前台要對搜尋引擎友善，後台又需要豐富的互動',
+              solution:
+                '在同一個 Laravel 應用裡分開兩種介面：前台用 Blade 由伺服器輸出頁面，後台用 Vue 3 SPA 呼叫 REST API，兩者讀寫同一組資料模型。',
+            },
+            {
+              challenge: 'AI 功能依呼叫次數產生外部費用，不能無上限地使用',
+              solution:
+                '所有 AI 呼叫都先經過預算控管服務：確認專案剩餘預算足夠才呼叫外部 API，成功後扣款並記錄實際成本；失敗時記錄但不扣款。',
+            },
+            {
+              challenge: '產品名稱多為中文，自動產生的網址 slug 會變成空字串',
+              solution:
+                '先嘗試一般的 slug 轉換，結果為空時改用拼音轉換，仍為空再使用雜湊值；同一專案內重複時自動加上流水號。',
+            },
+            {
+              challenge: '產品分類是無限層級的樹狀結構，錯誤的父層設定會造成循環',
+              solution:
+                '更新時拒絕把分類自己或其子孫設為父層；系統預設分類不可刪除，刪除一般分類時自動把底下的產品移到預設分類。',
+            },
+            {
+              challenge: '中英雙語的網址需要一致，又不能產生重複內容',
+              solution:
+                '每條前台路由同時註冊無前綴（預設語系）與語系前綴的版本；網址帶預設語系前綴時 301 轉址到無前綴網址，無效的語系前綴回 404。',
             },
           ],
           results: [
-            '網站透過 GitHub Actions 部署到 Linode',
-            'TODO: 成果（請勿填入未經確認的流量或詢價數字）',
+            '前台頁面由伺服器輸出，並提供 sitemap 與 robots.txt',
+            '前台與後台皆支援中英雙語',
+            '後台可管理產品、分類、輪播、最新消息、知識庫、詢價訂單、使用者與系統設定',
+            'AI 翻譯、文案、圖片辨識建立產品、去背與情境圖，並依專案年度預算控管用量',
+            '上傳的產品圖自動補白成正方形並產生三種尺寸',
+            '透過 GitHub Actions 部署到 Linode',
+            'TODO: 上線後的成效（請勿填入未經確認的流量或詢價數字）',
           ],
           learnings: ['TODO: 學到的事'],
         },
       },
       en: {
-        title: 'B2B Corporate Website',
+        title: 'B2B Corporate Website: Multi-project CMS with AI Tools',
         subtitle:
-          'Freelance project: SEO-friendly Laravel site with a Vue admin for products and inquiries',
+          'Freelance project: an SEO-friendly Laravel site and a Vue 3 admin with budget-controlled AI content tools',
         summary:
-          'A freelance B2B corporate website: the public site is built with Laravel for SEO, the admin uses Vue with an API to manage products and specifications, and GitHub Actions deploys it to Linode.',
-        coverAlt: 'Illustration of the B2B corporate website (placeholder)',
+          'A freelance multi-project CMS: the Laravel public site renders on the server for SEO, the Vue 3 admin manages products and bilingual content, and AI translation, copywriting and image recognition are metered against each project’s yearly budget.',
+        coverAlt:
+          'The admin product management page with the “Create product with AI recognition” dialog open',
         highlights: [
-          'Product Management',
-          'Product Specification',
-          'Inquiry',
-          'SEO',
-          'GA4',
-          'Email',
-          'Cloudflare',
+          'Laravel Blade public site (SEO)',
+          'Vue 3 admin SPA',
+          'Bilingual content and URLs',
+          'Role permissions (menu / route / API)',
+          'AI translation and copywriting',
+          'Create products from images with AI',
+          'AI usage budget control',
+          'Contact form captcha and email notifications',
+          'Deployed to Linode with GitHub Actions',
         ],
         caseStudy: {
           overview: [
-            'A B2B corporate website I built as a freelance project, with product management, product specifications, online inquiries and email notifications, plus SEO and GA4 tracking.',
-            "TODO: Describe the client's industry, the site's purpose and its audience (without confidential details).",
+            'A multi-project CMS I built as a freelance project for B2B corporate websites. Visitors browse products, categories, news and a knowledge base, send contact forms and can register as members; administrators manage products, banners, news, the knowledge base, inquiry orders, users and settings, with AI content tools built in.',
+            'A single Laravel 12 application serves three interfaces: a server-rendered public site, a Vue 3 admin SPA and the REST API the admin uses. The public site and the admin read and write the same data models.',
           ],
           role: {
             title: 'Freelance developer',
             responsibilities: [
-              'Built the public website with Laravel',
-              'Built the admin with Vue and an API',
+              'Built the public site with Laravel Blade, Alpine.js and Tailwind CSS',
+              'Built the admin SPA with Vue 3, Pinia and Element Plus',
+              'Designed the REST API, role permissions, localization and AI budget control',
               'Set up deployment to a Linode server with GitHub Actions',
             ],
           },
           problem: [
-            'A corporate website has to be indexed by search engines, so the public pages must be SEO-friendly; the client also needed an admin to manage products and specifications.',
+            'Product and content pages of a corporate website must be indexed by search engines, while the client also needs an easy admin for products, categories and bilingual content.',
+            'The admin should help create bilingual product content: one-click translation, AI copywriting, and creating products by letting AI recognize uploaded product images.',
+            'Every AI call costs money with an external provider, so usage and budget have to be controlled per project.',
+            'The admin has several roles, and permissions must apply consistently to menus, routes and the API.',
           ],
           architecture: {
             steps: [
-              'The admin, built with Vue, manages products and specifications through an API',
-              'The public site, built with Laravel, renders pages on the server for SEO',
-              'Visitors browse product specifications and send inquiries on the public site',
-              'GitHub Actions deploys the site to a Linode server',
-              'TODO: Describe where email notifications, GA4 and Cloudflare fit in',
+              'Public site: Laravel Blade renders pages on the server, with Alpine.js and Tailwind CSS; every route exists both without a prefix (default language) and with a language prefix',
+              'Admin: a Vue 3 + Pinia + Element Plus SPA calling the REST API with token authentication',
+              'Permissions work in three layers: menu filtering, frontend route guards and API authorization',
+              'Content is stored as JSON fields per language, and URL slugs are generated automatically on save',
+              'AI features go through a budget control service: check the project’s remaining budget, then call OpenAI or other providers and record the usage',
+              'Public forms are verified with a captcha (Cloudflare Turnstile or reCAPTCHA) and send notifications through each project’s own SMTP settings',
+              'GitHub Actions deploys the application to a Linode server',
             ],
           },
           solution: [
-            'Separated the public site from the admin: Laravel for the public site because of SEO, Vue with an API for the admin, and automatic deployment to Linode with GitHub Actions.',
-            'TODO: Describe how SEO, GA4 and email notifications were implemented.',
+            'For SEO, the public site renders on the server with Laravel Blade and provides a sitemap and robots.txt; the admin is a Vue 3 SPA, and both live in the same Laravel application sharing the data models.',
+            'API success and error responses share one format, with exceptions converted in one place; the admin shows messages by error code and returns to the login page when the token expires.',
+            'Each AI feature is charged at a fixed price against the project’s yearly budget while the real provider cost is logged for reconciliation. Calls are refused before reaching the provider when the budget is insufficient, failed calls are logged but not charged, and yearly usage resets automatically.',
           ],
           challenges: [
             {
               challenge:
-                'The public pages of a corporate website need to be search-engine friendly',
-              solution: 'Built the public site with Laravel so pages are rendered on the server.',
+                'The public site has to be search-engine friendly while the admin needs rich interaction',
+              solution:
+                'Split the two interfaces within one Laravel application: Blade renders the public site on the server, and a Vue 3 SPA calls the REST API for the admin, both using the same data models.',
+            },
+            {
+              challenge: 'AI features cost money per call and cannot be used without limits',
+              solution:
+                'Every AI call goes through a budget control service: the provider is only called if the project has enough budget left, successful calls are charged and their real cost recorded, and failures are logged without charge.',
+            },
+            {
+              challenge:
+                'Most product names are Chinese, so automatically generated URL slugs came out empty',
+              solution:
+                'Try a normal slug first, fall back to a pinyin transliteration when it is empty, then to a hash; duplicates within a project get a numeric suffix.',
+            },
+            {
+              challenge:
+                'Product categories form a tree of unlimited depth, and a wrong parent could create a loop',
+              solution:
+                'Updates reject a category or any of its descendants as its own parent; the system default category cannot be deleted, and deleting another category moves its products to the default one.',
+            },
+            {
+              challenge: 'Bilingual URLs must stay consistent without creating duplicate content',
+              solution:
+                'Every public route is registered both without a prefix (default language) and with a language prefix; a URL carrying the default language prefix redirects with 301 to the unprefixed one, and an invalid prefix returns 404.',
             },
           ],
           results: [
-            'The site is deployed to Linode through GitHub Actions',
-            'TODO: Results (do not add unverified traffic or inquiry numbers)',
+            'Public pages render on the server, with a sitemap and robots.txt',
+            'Both the public site and the admin are bilingual',
+            'The admin manages products, categories, banners, news, the knowledge base, inquiry orders, users and settings',
+            'AI translation, copywriting, product creation from images, background removal and scene generation, metered against each project’s yearly budget',
+            'Uploaded product images are padded to squares and generated in three sizes',
+            'Deployed to Linode through GitHub Actions',
+            'TODO: Results after launch (do not add unverified traffic or inquiry numbers)',
           ],
           learnings: ['TODO: What you learned'],
         },

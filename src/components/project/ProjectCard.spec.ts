@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { projects } from '@/data/projects'
+import { minimalProject } from '@/test-utils/fixtures'
 import { mountAtPath } from '@/test-utils/router'
+import type { Project } from '@/types/project'
 import ProjectCard from './ProjectCard.vue'
 
 const project = projects[0]!
@@ -43,6 +45,32 @@ describe('ProjectCard', () => {
     })
 
     expect(wrapper.find('h2').exists()).toBe(true)
-    expect(wrapper.findAll('li').map((item) => item.text())).toEqual([...project.technologies])
+    const techList = wrapper.get('ul[aria-label="使用技術"]')
+    expect(techList.findAll('li').map((item) => item.text())).toEqual([...project.technologies])
+  })
+})
+
+describe('ProjectCard labels and status', () => {
+  const labelled: Project = {
+    ...minimalProject,
+    labels: ['Real-world Project', 'Frontend Development'],
+    status: 'in-development',
+  }
+
+  it('shows project labels and the status badge while keeping a single link', async () => {
+    const { wrapper } = await mountAtPath(ProjectCard, '/', { props: { project: labelled } })
+
+    const labels = wrapper.get('ul[aria-label="專案類型"]')
+    expect(labels.text()).toContain('Real-world Project')
+    expect(labels.text()).toContain('Frontend Development')
+    expect(wrapper.text()).toContain('開發中')
+    expect(wrapper.findAll('a')).toHaveLength(1)
+  })
+
+  it('renders no label row or badge for projects without them', async () => {
+    const { wrapper } = await mountAtPath(ProjectCard, '/', { props: { project: minimalProject } })
+
+    expect(wrapper.find('ul[aria-label="專案類型"]').exists()).toBe(false)
+    expect(wrapper.text()).not.toContain('開發中')
   })
 })

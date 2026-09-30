@@ -13,19 +13,52 @@ export interface TechnicalChallenge {
   solution: string
 }
 
+/** Development status. Projects without a status are presented as finished work. */
+export type ProjectStatus = 'in-development'
+
+/** A card with a title and a short description, e.g. a key responsibility. */
+export interface TitledItem {
+  title: string
+  description: string
+}
+
+/** A label paired with a value, e.g. "Backend Integration → Pending". */
+export interface StatusItem {
+  label: string
+  value: string
+}
+
 /**
  * Case study sections. Every section is optional: a section without content is not rendered,
  * so a project only documents what is actually known about it.
+ *
+ * A `flow` is an ordered list of steps, rendered as a flow diagram.
  */
 export interface CaseStudy {
   /** Paragraphs. */
   overview?: string[]
+  background?: {
+    paragraphs: string[]
+    flow?: string[]
+  }
   role?: {
     title: string
     responsibilities: string[]
+    flow?: string[]
   }
   /** Paragraphs. */
   problem?: string[]
+  /** A concrete example that follows the problem paragraphs. */
+  problemExample?: {
+    /** Sub-heading rendered as an h3. */
+    heading?: string
+    /** The original, high-level requirement. */
+    requirement: string
+    flow: string[]
+    states?: string[]
+  }
+  /** Ordered steps from requirement to implementation. */
+  workflow?: string[]
   architecture?: {
     /** Ordered steps of the main flow. */
     steps: string[]
@@ -34,8 +67,15 @@ export interface CaseStudy {
   }
   /** Paragraphs. */
   solution?: string[]
+  responsibilities?: TitledItem[]
   challenges?: TechnicalChallenge[]
+  aiAssisted?: {
+    paragraphs: string[]
+    /** Work that still needs an engineer's judgement. */
+    humanTasks: string[]
+  }
   results?: string[]
+  currentStatus?: StatusItem[]
   learnings?: string[]
 }
 
@@ -58,5 +98,8 @@ export interface Project {
   /** Technology names are not translated. */
   technologies: readonly string[]
   featured: boolean
+  status?: ProjectStatus
+  /** Project type labels, not translated (e.g. "Real-world Project"). */
+  labels?: readonly string[]
   content: Localized<ProjectContent>
 }

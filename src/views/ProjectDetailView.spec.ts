@@ -5,8 +5,8 @@ import ProjectDetailView from './ProjectDetailView.vue'
 
 // Fixture data keeps these tests independent of the real portfolio content.
 vi.mock('@/data/projects', async () => {
-  const { fullProject, minimalProject } = await import('@/test-utils/fixtures')
-  const list = [fullProject, minimalProject]
+  const { fullProject, legacyProject, minimalProject } = await import('@/test-utils/fixtures')
+  const list = [fullProject, minimalProject, legacyProject]
   return {
     projects: list,
     getProjectBySlug: (slug: string) => list.find((project) => project.slug === slug),
@@ -33,6 +33,27 @@ describe('ProjectDetailView', () => {
     expect(wrapper.get('h1').text()).toBe('Full (en)')
     expect(sectionTitles(wrapper)).toEqual([
       'Overview',
+      'Project Background',
+      'My Role',
+      'Problem',
+      'Requirement to Frontend Workflow',
+      'Architecture / Flow',
+      'Solution',
+      'Key Responsibilities',
+      'Technical Challenges',
+      'AI-assisted Development',
+      'Tech Stack',
+      'Result',
+      'Current Status',
+      'What I Learned',
+    ])
+  })
+
+  it('keeps the original sections and no badge for projects without the new fields', async () => {
+    const { wrapper } = await mountDetail('legacy-project')
+
+    expect(sectionTitles(wrapper)).toEqual([
+      'Overview',
       'My Role',
       'Problem',
       'Architecture / Flow',
@@ -42,6 +63,71 @@ describe('ProjectDetailView', () => {
       'Result',
       'What I Learned',
     ])
+    expect(wrapper.text()).not.toContain('In Development')
+    expect(wrapper.find('ul[aria-label="Project type"]').exists()).toBe(false)
+  })
+
+  it('shows project labels and the development status in the hero', async () => {
+    const { wrapper } = await mountDetail('full-project')
+    const header = wrapper.get('header')
+
+    expect(header.get('ul[aria-label="Project type"]').text()).toContain('Real-world Project')
+    expect(header.text()).toContain('In Development')
+  })
+
+  it('renders flows as ordered lists outside the prose styles', async () => {
+    const { wrapper } = await mountDetail('full-project')
+
+    const workflow = wrapper.get('section[aria-labelledby="workflow"] ol')
+    expect(workflow.findAll('li').map((step) => step.find('span').text())).toEqual([
+      'Draft',
+      'Analysis',
+      'Implementation',
+    ])
+    expect(workflow.element.closest('.prose-content')).toBeNull()
+
+    const background = wrapper.get('section[aria-labelledby="background"]')
+    expect(background.findAll('ol > li')).toHaveLength(2)
+    expect(wrapper.findAll('section[aria-labelledby="role"] ol > li')).toHaveLength(3)
+  })
+
+  it('shows the problem example with its requirement, flow and states', async () => {
+    const { wrapper } = await mountDetail('full-project')
+    const section = wrapper.get('section[aria-labelledby="problem"]')
+
+    expect(section.get('h3').text()).toBe('Example (en)')
+    expect(section.text()).toContain('Original requirement: Requirement (en)')
+    expect(section.findAll('ol > li')).toHaveLength(3)
+    expect(
+      section
+        .get('ul[aria-label="States to handle"]')
+        .findAll('li')
+        .map((state) => state.text()),
+    ).toEqual(['Draft', 'Published', 'Failed'])
+  })
+
+  it('renders key responsibilities as cards and the current status as a list', async () => {
+    const { wrapper } = await mountDetail('full-project')
+
+    const cards = wrapper.findAll('section[aria-labelledby="responsibilities"] h3')
+    expect(cards.map((card) => card.text())).toEqual([
+      'Responsibility A (en)',
+      'Responsibility B (en)',
+    ])
+
+    const rows = wrapper.findAll('section[aria-labelledby="current-status"] dl > div')
+    expect(rows.map((row) => [row.get('dt').text(), row.get('dd').text()])).toEqual([
+      ['Frontend', 'In progress (en)'],
+      ['Backend', 'Pending (en)'],
+    ])
+  })
+
+  it('lists the work that still needs an engineer in the AI section', async () => {
+    const { wrapper } = await mountDetail('full-project')
+    const section = wrapper.get('section[aria-labelledby="ai-assisted"]')
+
+    expect(section.text()).toContain('AI paragraph (en)')
+    expect(section.findAll('li').map((item) => item.text())).toEqual(['Human task (en)'])
   })
 
   it('omits sections without content, including their headings', async () => {

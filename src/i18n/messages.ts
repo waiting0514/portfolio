@@ -34,6 +34,10 @@ export interface Messages {
   project: {
     viewCaseStudy: string
     techStack: string
+    labels: string
+    status: {
+      'in-development': string
+    }
   }
   caseStudy: {
     allProjects: string
@@ -43,15 +47,24 @@ export interface Messages {
     pagerLabel: string
     previous: string
     next: string
+    requirement: string
+    requiredFlow: string
+    requiredStates: string
+    humanTasks: string
     sections: {
       overview: string
+      background: string
       role: string
       problem: string
+      workflow: string
       architecture: string
       solution: string
+      responsibilities: string
       challenges: string
+      aiAssisted: string
       techStack: string
       results: string
+      currentStatus: string
       learnings: string
     }
   }
@@ -108,6 +121,10 @@ const zhTW = {
   project: {
     viewCaseStudy: '查看案例',
     techStack: '使用技術',
+    labels: '專案類型',
+    status: {
+      'in-development': '開發中',
+    },
   },
   caseStudy: {
     allProjects: '所有作品',
@@ -117,15 +134,24 @@ const zhTW = {
     pagerLabel: '更多作品',
     previous: '上一個作品',
     next: '下一個作品',
+    requirement: '原始需求',
+    requiredFlow: '實際需要定義的流程',
+    requiredStates: '需要處理的狀態',
+    humanTasks: '仍需由工程師判斷的工作',
     sections: {
       overview: '專案概述',
+      background: '專案背景',
       role: '我的角色',
       problem: '問題',
+      workflow: '需求到前端的工作流程',
       architecture: '架構與流程',
       solution: '解決方案',
+      responsibilities: '主要職責',
       challenges: '技術挑戰',
+      aiAssisted: 'AI 輔助開發',
       techStack: '技術棧',
       results: '成果',
+      currentStatus: '目前狀態',
       learnings: '學到的事',
     },
   },
@@ -182,6 +208,10 @@ const en = {
   project: {
     viewCaseStudy: 'View Case Study',
     techStack: 'Tech stack',
+    labels: 'Project type',
+    status: {
+      'in-development': 'In Development',
+    },
   },
   caseStudy: {
     allProjects: 'All projects',
@@ -191,15 +221,24 @@ const en = {
     pagerLabel: 'More projects',
     previous: 'Previous project',
     next: 'Next project',
+    requirement: 'Original requirement',
+    requiredFlow: 'Flow that actually had to be defined',
+    requiredStates: 'States to handle',
+    humanTasks: 'Work that still needs an engineer’s judgement',
     sections: {
       overview: 'Overview',
+      background: 'Project Background',
       role: 'My Role',
       problem: 'Problem',
+      workflow: 'Requirement to Frontend Workflow',
       architecture: 'Architecture / Flow',
       solution: 'Solution',
+      responsibilities: 'Key Responsibilities',
       challenges: 'Technical Challenges',
+      aiAssisted: 'AI-assisted Development',
       techStack: 'Tech Stack',
       results: 'Result',
+      currentStatus: 'Current Status',
       learnings: 'What I Learned',
     },
   },

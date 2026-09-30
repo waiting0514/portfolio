@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <g stroke="#e2e8f0" stroke-width="2">
+    <path d="M0 150h1600M0 300h1600M0 450h1600M0 600h1600M0 750h1600"/>
+    <path d="M200 0v900M400 0v900M600 0v900M800 0v900M1000 0v900M1200 0v900M1400 0v900"/>
+  </g>
+  <rect x="160" y="200" width="1280" height="500" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="12 10"/>
+  <text x="240" y="400" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="700" fill="#0f172a">Social Media Management Platform</text>
+  <text x="240" y="470" font-family="ui-monospace, Consolas, monospace" font-size="30" fill="#475569">[Project Screenshot] · pending approval</text>
+  <rect x="240" y="540" width="220" height="12" rx="6" fill="#1d4ed8"/>
+  <rect x="480" y="540" width="440" height="12" rx="6" fill="#e2e8f0"/>
+</svg>
