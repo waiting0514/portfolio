@@ -40,3 +40,6 @@ __screenshots__/
 
 # Playwright MCP screenshots / snapshots
 .playwright-mcp/
+
+# Personal source documents (not published)
+自傳.md
