@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.app.json",
+
+  // Unit tests live next to the code they cover as `*.spec.ts`.
+  // Application code imported by tests is included via module resolution.
+  "include": ["src/**/*.spec.ts", "env.d.ts"],
+  "exclude": [],
+
+  "compilerOptions": {
+    "lib": [],
+    "types": ["node", "jsdom"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo"
+  }
+}
