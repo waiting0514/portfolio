@@ -5,24 +5,18 @@ import BaseButton from '@/components/common/BaseButton.vue'
 import BaseContainer from '@/components/common/BaseContainer.vue'
 import SectionHeading from '@/components/common/SectionHeading.vue'
 import TechTagList from '@/components/common/TechTagList.vue'
+import HeroAnimation from '@/components/hero/HeroAnimation.vue'
+import RequirementToProduct from '@/components/hero/sequences/RequirementToProduct.vue'
 import ProjectGrid from '@/components/project/ProjectGrid.vue'
-import StatusBadge from '@/components/project/StatusBadge.vue'
 import { useLocale } from '@/composables/useLocale'
 import { usePageMeta } from '@/composables/usePageMeta'
 import { describePage } from '@/utils/seo'
 import { profile } from '@/data/profile'
-import { featuredProjects, projects } from '@/data/projects'
+import { featuredProjects } from '@/data/projects'
 import { skillCategories } from '@/data/skills'
 
 const { locale, messages, localePath } = useLocale()
 const content = computed(() => profile.content[locale.value])
-
-/** The "Now" panel is derived from existing data: latest job and any project in development. */
-const currentJob = computed(() => content.value.experience[0])
-const inProgress = computed(() => {
-  const project = projects.find((item) => item.status !== undefined)
-  return project && { project, title: project.content[locale.value].title }
-})
 
 usePageMeta(() => describePage({ page: 'home' }, locale.value))
 </script>
@@ -30,61 +24,40 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
 <template>
   <section aria-labelledby="hero-title" class="hero-grid border-b border-line">
     <BaseContainer
-      class="grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:items-end lg:gap-8 lg:py-32"
+      class="grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-8 lg:py-28"
     >
-      <div class="lg:col-span-8">
+      <div class="lg:col-span-7">
         <p class="eyebrow text-accent">{{ content.name }}</p>
         <h1
           id="hero-title"
-          class="mt-4 text-5xl leading-[1.05] font-black tracking-tight md:text-7xl lg:text-[5.5rem]"
+          class="mt-4 text-5xl leading-[1.05] font-black tracking-tight md:text-7xl lg:text-[4.5rem]"
         >
           {{ content.role }}
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
           {{ content.intro }}
         </p>
+        <TechTagList
+          class="mt-6"
+          :items="profile.focusTechnologies"
+          :label="messages.home.focusLabel"
+        />
         <div class="mt-10 flex flex-wrap gap-3">
           <BaseButton :to="localePath('/projects')">
             {{ messages.common.viewProjects }} <span aria-hidden="true">→</span>
           </BaseButton>
-          <BaseButton :href="profile.githubUrl" variant="secondary">
-            {{ messages.nav.github }}
+          <BaseButton :to="localePath('/about')" variant="secondary">
+            {{ messages.home.aboutMe }}
           </BaseButton>
         </div>
       </div>
 
-      <section
-        :aria-label="messages.home.now"
-        class="flex flex-col gap-5 rounded-xl border border-line bg-surface p-6 md:p-7 lg:col-span-4"
+      <HeroAnimation
+        :label="messages.home.heroAnimationLabel"
+        class="mx-auto w-full max-w-[32.5rem] lg:col-span-5"
       >
-        <div v-if="currentJob">
-          <p class="eyebrow text-xs text-ink-muted">{{ messages.home.now }}</p>
-          <p class="mt-2 font-bold">{{ currentJob.company }}</p>
-          <p class="mt-1 text-sm text-ink-muted">
-            {{ currentJob.title }} · {{ currentJob.period }}
-          </p>
-        </div>
-        <div class="border-t border-line pt-5">
-          <p class="eyebrow text-xs text-ink-muted">{{ messages.home.focusLabel }}</p>
-          <TechTagList
-            class="mt-3"
-            :items="profile.focusTechnologies"
-            :label="messages.home.focusLabel"
-          />
-        </div>
-        <div v-if="inProgress" class="border-t border-line pt-5">
-          <p class="eyebrow text-xs text-ink-muted">{{ messages.home.inProgress }}</p>
-          <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
-            <RouterLink
-              :to="localePath(`/projects/${inProgress.project.slug}`)"
-              class="font-bold text-ink hover:text-accent"
-            >
-              {{ inProgress.title }}
-            </RouterLink>
-            <StatusBadge v-if="inProgress.project.status" :status="inProgress.project.status" />
-          </div>
-        </div>
-      </section>
+        <RequirementToProduct />
+      </HeroAnimation>
     </BaseContainer>
   </section>
 

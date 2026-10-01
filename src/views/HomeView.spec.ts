@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { profile } from '@/data/profile'
-import { featuredProjects, projects } from '@/data/projects'
+import { featuredProjects } from '@/data/projects'
 import { skillCategories } from '@/data/skills'
 import { hasNoSkippedLevels, headingLevels } from '@/test-utils/headings'
 import { mountAtPath } from '@/test-utils/router'
@@ -19,10 +19,13 @@ describe('HomeView', () => {
   it('shows the role and calls to action in Chinese by default', async () => {
     const { wrapper } = await mountAtPath(HomeView, '/')
 
+    const hero = wrapper.get('section[aria-labelledby="hero-title"]')
+
     expect(wrapper.get('h1').text()).toBe('前端工程師')
-    expect(wrapper.find('a[href="/projects"]').exists()).toBe(true)
-    expect(wrapper.find('a[href="https://github.com/waiting0514"]').exists()).toBe(true)
-    expect(wrapper.find('a[href="/about"]').exists()).toBe(true)
+    expect(hero.findAll('a').map((link) => [link.text(), link.attributes('href')])).toEqual([
+      ['查看作品 →', '/projects'],
+      ['關於我', '/about'],
+    ])
   })
 
   it('shows the English hero and keeps links in English', async () => {
@@ -54,16 +57,18 @@ describe('HomeView', () => {
     )
   })
 
-  it('shows the latest job and the in-development project in the Now panel', async () => {
+  it('shows the focus technologies and the hero animation instead of a Now panel', async () => {
     const { wrapper } = await mountAtPath(HomeView, '/')
-    const panel = wrapper.get('section[aria-label="目前"]')
-    const latest = profile.content['zh-TW'].experience[0]!
-    const inProgress = projects.find((project) => project.status === 'in-development')!
+    const hero = wrapper.get('section[aria-labelledby="hero-title"]')
 
-    expect(panel.text()).toContain(latest.company)
-    expect(panel.text()).toContain(latest.period)
-    expect(panel.find(`a[href="/projects/${inProgress.slug}"]`).exists()).toBe(true)
-    expect(panel.text()).toContain('開發中')
+    expect(
+      hero
+        .get('ul[aria-label="技術重點"]')
+        .findAll('li')
+        .map((item) => item.text()),
+    ).toEqual(profile.focusTechnologies)
+    expect(hero.get('[role="img"]').attributes('aria-label')).toContain('需求')
+    expect(wrapper.find('section[aria-label="目前"]').exists()).toBe(false)
   })
 
   it('lists every job, newest first, in the About preview', async () => {

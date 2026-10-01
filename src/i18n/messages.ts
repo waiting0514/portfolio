@@ -33,8 +33,9 @@ export interface Messages {
     featuredEyebrow: string
     skillsEyebrow: string
     aboutEyebrow: string
-    now: string
-    inProgress: string
+    aboutMe: string
+    /** Accessible name for the decorative hero animation. */
+    heroAnimationLabel: string
     experience: string
   }
   project: {
@@ -136,8 +137,8 @@ const zhTW = {
     featuredEyebrow: 'Selected Work',
     skillsEyebrow: 'Skills',
     aboutEyebrow: 'About',
-    now: '目前',
-    inProgress: '開發中的專案',
+    aboutMe: '關於我',
+    heroAnimationLabel: '流程圖：需求 → 前端架構（元件、狀態、路由、API）→ 可維護的 Web 應用程式',
     experience: '工作經歷',
   },
   project: {
@@ -233,8 +234,9 @@ const en = {
     featuredEyebrow: 'Selected Work',
     skillsEyebrow: 'Skills',
     aboutEyebrow: 'About',
-    now: 'Now',
-    inProgress: 'In progress',
+    aboutMe: 'About Me',
+    heroAnimationLabel:
+      'Flow diagram: requirement → frontend architecture (components, state, routing, API) → maintainable web application',
     experience: 'Experience',
   },
   project: {

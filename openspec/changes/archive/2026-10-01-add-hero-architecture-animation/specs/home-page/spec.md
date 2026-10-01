@@ -1,10 +1,6 @@
-# home-page Specification
+# Spec Delta
 
-## Purpose
-
-首頁是面試官的第一印象：在一個畫面內說明「我是誰、擅長什麼」，並引導至精選專案、技能分類與個人背景，讓訪客能快速決定要深入閱讀哪個 Case Study。
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Hero section
 首頁 SHALL 以 Hero 區塊開始，包含：頁面唯一的 `<h1>`（職稱：中文「前端工程師」／英文「Frontend Engineer」，可搭配姓名）、簡短自我介紹、技術重點（Vue、Angular、TypeScript、JavaScript、RxJS），以及兩個 CTA：「View Projects」（Primary，連到目前語系的 Projects 頁）與「About Me」（Secondary，連到目前語系的 About 頁）。本規格中的按鈕與區塊名稱以英文記載，實際顯示文字依語系翻譯。Hero 的文字內容 SHALL 來自集中管理的 profile 資料，而非寫死在頁面中。
@@ -35,34 +31,7 @@
 - **WHEN** 在 1440px 寬度開啟首頁
 - **THEN** Hero 文字與 CTA 在左、Hero Animation 在右，且頁面沒有水平捲軸
 
-### Requirement: Featured projects
-首頁 SHALL 顯示所有標記為 featured 的專案，數量上限為 3，順序依資料定義順序。每個專案以 Project Card 呈現（內容規則見 `project-catalog`），並提供前往 `/projects` 的「View all projects」連結。
-
-#### Scenario: Three featured cards
-- **WHEN** 資料中有 3 個 featured 專案
-- **THEN** 首頁 Featured Projects 區塊顯示 3 張 Project Card
-
-#### Scenario: Card links to case study
-- **WHEN** 訪客點擊某張 Featured Project Card 的 View Case Study
-- **THEN** 導向該專案的 `/projects/:slug`
-
-### Requirement: Categorized skills
-首頁 SHALL 以文字分類清單呈現技能（非 Logo Wall），至少包含以下分類與項目：Frontend（Vue、Angular、React、TypeScript、JavaScript）、State / Reactive（Pinia、RxJS）、Realtime / Media（WebSocket、WebRTC、MSE）、Tooling（Vite、Webpack、ESLint、Prettier）、DevOps（Docker、GitHub Actions、Cloudflare）。每個分類 SHALL 有標題，項目 SHALL 以列表語意（`<ul>`/`<li>`）呈現。技能資料 SHALL 集中管理。
-
-#### Scenario: Skills grouped by category
-- **WHEN** 訪客捲動到 Skills 區塊
-- **THEN** 看到 5 個具標題的分類，每個分類下列出對應技能
-
-### Requirement: About preview
-首頁 SHALL 包含一段簡短的工作背景介紹、依時間由新到舊排列的工作經歷（期間、公司、職稱），以及連到 `/about` 的「View About」CTA。工作經歷 SHALL 來自 profile 資料。
-
-#### Scenario: Navigate to About
-- **WHEN** 訪客點擊 View About
-- **THEN** 導向 `/about`
-
-#### Scenario: Experience timeline
-- **WHEN** 訪客捲動到 About 預覽
-- **THEN** 以有序清單看到每一段工作經歷的期間、公司與職稱
+## ADDED Requirements
 
 ### Requirement: Hero animation
 Hero SHALL 包含一個裝飾性的 Hero Animation，以約 6 秒的無限循環依序呈現 Requirement（Product / AI Spec）→ Requirement Analysis → Frontend Architecture（Component、State、Router、API）→ Web Product（Maintainable Web Application）。動畫 SHALL 只使用網站既有的設計 token，SHALL 只以 transform 與 opacity 製作動態，且每個循環 SHALL 以全部透明開始與結束，接縫不出現跳格。動畫 SHALL NOT 包含公司名稱、客戶名稱、真實 API、真實需求或業務資料，也 SHALL NOT 以技術 Logo 呈現。
