@@ -62,7 +62,7 @@ export const profile: Profile = {
     },
     en: {
       name: 'Wei-Ting Lai',
-      role: 'Frontend Engineer',
+      role: 'Frontend Developer',
       intro:
         'Frontend developer since 2016, working mainly with Vue and Angular on enterprise platforms, data-visualization dashboards and video-surveillance systems. Coming from a business background, I start from real user needs and care about usability and long-term maintainability.',
       summary:
@@ -83,7 +83,7 @@ export const profile: Profile = {
       experience: [
         {
           company: '億集創見應用科技',
-          title: 'Frontend Engineer',
+          title: 'Frontend Developer',
           period: '2025/06 – Present',
           highlights: [
             'File Management System v2: uploading and managing images, videos and CAD files, with member access permissions (Vue)',
@@ -92,7 +92,7 @@ export const profile: Profile = {
         },
         {
           company: 'Digiwin (鼎新數智)',
-          title: 'Frontend Engineer',
+          title: 'Frontend Developer',
           period: '2020/02 – 2025/04',
           highlights: [
             'Large-screen dashboard builder: users arrange charts and custom content in an editor and display them on different devices (Angular, ECharts)',

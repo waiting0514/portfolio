@@ -1,4 +1,4 @@
-# Frontend Engineer Portfolio
+# Frontend Developer Portfolio
 
 [![CI / Deploy to GitHub Pages](https://github.com/waiting0514/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/waiting0514/portfolio/actions/workflows/deploy.yml)
 

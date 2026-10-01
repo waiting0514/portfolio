@@ -31,7 +31,7 @@ describe('HomeView', () => {
   it('shows the English hero and keeps links in English', async () => {
     const { wrapper } = await mountAtPath(HomeView, '/en')
 
-    expect(wrapper.get('h1').text()).toContain('Frontend Engineer')
+    expect(wrapper.get('h1').text()).toContain('Frontend Developer')
     expect(wrapper.find('a[href="/en/projects"]').exists()).toBe(true)
     expect(wrapper.find('a[href="/en/about"]').exists()).toBe(true)
   })

@@ -7,7 +7,7 @@
 ## Requirements
 
 ### Requirement: Hero section
-首頁 SHALL 以 Hero 區塊開始，包含：頁面唯一的 `<h1>`（職稱：中文「前端工程師」／英文「Frontend Engineer」，可搭配姓名）、簡短自我介紹、技術重點（Vue、Angular、TypeScript、JavaScript、RxJS），以及兩個 CTA：「View Projects」（Primary，連到目前語系的 Projects 頁）與「About Me」（Secondary，連到目前語系的 About 頁）。本規格中的按鈕與區塊名稱以英文記載，實際顯示文字依語系翻譯。Hero 的文字內容 SHALL 來自集中管理的 profile 資料，而非寫死在頁面中。
+首頁 SHALL 以 Hero 區塊開始，包含：頁面唯一的 `<h1>`（職稱：中文「前端工程師」／英文「Frontend Developer」，可搭配姓名）、簡短自我介紹、技術重點（Vue、Angular、TypeScript、JavaScript、RxJS），以及兩個 CTA：「View Projects」（Primary，連到目前語系的 Projects 頁）與「About Me」（Secondary，連到目前語系的 About 頁）。本規格中的按鈕與區塊名稱以英文記載，實際顯示文字依語系翻譯。Hero 的文字內容 SHALL 來自集中管理的 profile 資料，而非寫死在頁面中。
 
 寬度 ≥1024px 時 Hero SHALL 為左右版面：左側為上述文字與 CTA，右側為 Hero Animation；較窄時 SHALL 改為上下排列，文字在前。
 
@@ -17,7 +17,7 @@
 
 #### Scenario: English hero
 - **WHEN** 訪客開啟 `<base>/en/`
-- **THEN** `<h1>` 包含「Frontend Engineer」
+- **THEN** `<h1>` 包含「Frontend Developer」
 
 #### Scenario: View Projects CTA
 - **WHEN** 訪客點擊 View Projects

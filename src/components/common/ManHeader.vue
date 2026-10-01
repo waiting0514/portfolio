@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * The running header of a manual page: "PROJECTS(1) · Frontend Engineer Manual · 2026".
+ * The running header of a manual page: "PROJECTS(1) · Frontend Developer Manual · 2026".
  * Purely decorative, so it is hidden from assistive technology: the page heading below
  * carries the meaning. The centre text is dropped on narrow screens.
  */
@@ -10,7 +10,7 @@ withDefaults(
     page: string
     center?: string
   }>(),
-  { center: 'Frontend Engineer Manual' },
+  { center: 'Frontend Developer Manual' },
 )
 
 // The build year, not the visit year: prerendered HTML and the hydrated app must match.

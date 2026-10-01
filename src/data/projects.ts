@@ -223,7 +223,7 @@ export const projects: readonly Project[] = [
             ],
           },
           role: {
-            title: 'Frontend Engineer',
+            title: 'Frontend Developer',
             responsibilities: [
               'My role went beyond UI implementation: I turned incomplete requirements into an implementable frontend system, from understanding and analysing the requirements to page structure, components, state, mock data and UI, structured so it can connect to the future backend API directly.',
             ],
@@ -489,7 +489,7 @@ export const projects: readonly Project[] = [
             'This case study focuses on two mechanisms: large batch uploads and the CAD viewer.',
           ],
           role: {
-            title: 'Frontend Engineer',
+            title: 'Frontend Developer',
             responsibilities: [
               'System maintenance and new features: frontend pages, interactive UI and data tables',
               'Large batch uploads: chunking, concurrency scheduling, retries and resuming, direct S3 uploads and progress across pages',
@@ -688,7 +688,7 @@ export const projects: readonly Project[] = [
             'Live monitoring started with a single camera and the requirement grew to 12; history playback has to play 4 recordings at once and support scrubbing along a timeline.',
           ],
           role: {
-            title: 'Frontend Engineer',
+            title: 'Frontend Developer',
             responsibilities: [
               'System maintenance and new features: frontend pages, interactive UI and data tables',
               'Rewrote the WebRTC architecture designed by a backend colleague as a Vue implementation and optimized the code',

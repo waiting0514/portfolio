@@ -18,7 +18,7 @@ const project = projects[0]!
 describe('describePage', () => {
   it('titles the home page with name and role', () => {
     const page = describePage({ page: 'home' }, 'en')
-    expect(page.title).toBe(`${profile.content.en.name} | Frontend Engineer`)
+    expect(page.title).toBe(`${profile.content.en.name} | Frontend Developer`)
     expect(page.path).toBe('/en')
     expect(page.description).toBe(profile.content.en.intro)
   })
