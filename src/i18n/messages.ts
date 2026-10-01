@@ -31,7 +31,6 @@ export interface Messages {
     aboutTitle: string
     viewAbout: string
     featuredEyebrow: string
-    skillsEyebrow: string
     aboutEyebrow: string
     aboutMe: string
     /** Accessible name for the decorative hero animation. */
@@ -135,7 +134,6 @@ const zhTW = {
     aboutTitle: '關於我',
     viewAbout: '了解更多',
     featuredEyebrow: 'Selected Work',
-    skillsEyebrow: 'Skills',
     aboutEyebrow: 'About',
     aboutMe: '關於我',
     heroAnimationLabel: '流程圖：需求 → 前端架構（元件、狀態、路由、API）→ 可維護的 Web 應用程式',
@@ -232,7 +230,6 @@ const en = {
     aboutTitle: 'About',
     viewAbout: 'View About',
     featuredEyebrow: 'Selected Work',
-    skillsEyebrow: 'Skills',
     aboutEyebrow: 'About',
     aboutMe: 'About Me',
     heroAnimationLabel:

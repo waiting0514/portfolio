@@ -22,6 +22,12 @@ describe('skillCategories', () => {
     ])
   })
 
+  it('leaves out skills that are no longer highlighted', () => {
+    const skills = skillCategories.flatMap((category) => category.items)
+    expect(skills).not.toContain('React')
+    expect(skills).not.toContain('Cloudflare')
+  })
+
   it('does not repeat a skill', () => {
     const skills = skillCategories.flatMap((category) => category.items)
     expect(new Set(skills).size).toBe(skills.length)

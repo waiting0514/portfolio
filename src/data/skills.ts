@@ -4,7 +4,7 @@ import type { SkillCategory } from '@/types/profile'
 export const skillCategories: readonly SkillCategory[] = [
   {
     name: { 'zh-TW': '前端', en: 'Frontend' },
-    items: ['Vue', 'Angular', 'React', 'TypeScript', 'JavaScript'],
+    items: ['Vue', 'Angular', 'TypeScript', 'JavaScript'],
   },
   {
     name: { 'zh-TW': '狀態管理與響應式', en: 'State / Reactive' },
@@ -20,6 +20,6 @@ export const skillCategories: readonly SkillCategory[] = [
   },
   {
     name: { 'zh-TW': 'DevOps', en: 'DevOps' },
-    items: ['Docker', 'GitHub Actions', 'Cloudflare'],
+    items: ['Docker', 'GitHub Actions'],
   },
 ]

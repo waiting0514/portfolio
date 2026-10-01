@@ -87,37 +87,21 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
     </BaseContainer>
   </section>
 
-  <section aria-labelledby="skills-title" class="section-spacing bg-navy text-on-navy">
-    <BaseContainer class="grid gap-10 lg:grid-cols-12 lg:gap-8">
-      <div class="lg:col-span-4">
-        <p class="eyebrow text-on-navy-accent">{{ messages.home.skillsEyebrow }}</p>
-        <h2
-          id="skills-title"
-          class="mt-3 text-3xl leading-tight font-bold tracking-tight md:text-[2.75rem]"
-        >
+  <section aria-labelledby="skills-title" class="border-y border-line bg-surface py-12 md:py-16">
+    <BaseContainer>
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <h2 id="skills-title" class="text-xl font-bold tracking-tight md:text-2xl">
           {{ messages.home.skillsTitle }}
         </h2>
-        <p class="mt-4 text-[1.0625rem] text-on-navy-muted">
-          {{ messages.home.skillsDescription }}
-        </p>
+        <p class="text-sm text-ink-muted">{{ messages.home.skillsDescription }}</p>
       </div>
-      <div class="border-t border-on-navy-muted/40 lg:col-span-8">
-        <div
-          v-for="category in skillCategories"
-          :key="category.name.en"
-          class="grid gap-2 border-b border-navy-line py-5 sm:grid-cols-8 sm:gap-8 sm:py-6"
-        >
-          <h3 class="font-bold sm:col-span-3">{{ category.name[locale] }}</h3>
+      <div class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div v-for="category in skillCategories" :key="category.name.en">
+          <h3 class="eyebrow text-xs text-ink-muted">{{ category.name[locale] }}</h3>
           <ul
-            class="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[0.9375rem] text-on-navy-muted sm:col-span-5"
+            class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[0.9375rem] text-ink-soft lg:grid lg:gap-1"
           >
-            <li
-              v-for="item in category.items"
-              :key="item"
-              class="after:ml-3 after:text-navy-line after:content-['/'] last:after:content-none"
-            >
-              {{ item }}
-            </li>
+            <li v-for="item in category.items" :key="item">{{ item }}</li>
           </ul>
         </div>
       </div>
