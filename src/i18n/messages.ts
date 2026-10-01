@@ -35,6 +35,9 @@ export interface Messages {
     aboutMe: string
     /** Accessible name for the decorative hero animation. */
     heroAnimationLabel: string
+    /** Toggle for the looping hero animation (WCAG 2.2.2). */
+    pauseAnimation: string
+    playAnimation: string
     experience: string
   }
   project: {
@@ -137,6 +140,8 @@ const zhTW = {
     aboutEyebrow: 'About',
     aboutMe: '關於我',
     heroAnimationLabel: '流程圖：需求 → 前端架構（元件、狀態、路由、API）→ 可維護的 Web 應用程式',
+    pauseAnimation: '暫停動畫',
+    playAnimation: '播放動畫',
     experience: '工作經歷',
   },
   project: {
@@ -234,6 +239,8 @@ const en = {
     aboutMe: 'About Me',
     heroAnimationLabel:
       'Flow diagram: requirement → frontend architecture (components, state, routing, API) → maintainable web application',
+    pauseAnimation: 'Pause animation',
+    playAnimation: 'Play animation',
     experience: 'Experience',
   },
   project: {
