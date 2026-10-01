@@ -99,6 +99,11 @@ export interface Project {
   /** URL segment shared by both locales: lowercase letters, digits and hyphens. */
   slug: string
   cover: ImageAsset
+  /**
+   * Social preview image (1200×630, path relative to `public/`). Without it the cover is used,
+   * or the default preview image when the cover is an SVG.
+   */
+  ogImage?: string
   architectureDiagram?: ImageAsset
   /** Technology names are not translated. */
   technologies: readonly string[]

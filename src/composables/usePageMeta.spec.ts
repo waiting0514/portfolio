@@ -39,6 +39,8 @@ describe('usePageMeta', () => {
     expect(meta('meta[property="og:locale"]')).toBe('en_US')
     expect(meta('meta[property="og:url"]')).toMatch(/\/en\/about\/$/)
     expect(meta('meta[name="twitter:card"]')).toBe('summary_large_image')
+    expect(meta('meta[name="twitter:title"]')).toBe(document.title)
+    expect(meta('meta[property="og:type"]')).toBe('website')
     expect(document.head.querySelectorAll('link[rel="alternate"]')).toHaveLength(3)
     expect(document.head.querySelector('link[rel="canonical"]')).not.toBeNull()
   })

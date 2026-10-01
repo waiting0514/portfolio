@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { buildPageHead, describePage } from '../src/utils/seo.ts'
-import { outputFileName, renderPageHtml, validateSlugs } from './static-routes.ts'
+import { projects } from '../src/data/projects.ts'
+import { buildPageHead, describePage, getStaticPages } from '../src/utils/seo.ts'
+import { renderPageHtml, renderRobots, renderSitemap, validateSlugs } from './static-routes.ts'
 
 const SITE = 'https://user.github.io/portfolio/'
 
@@ -39,17 +40,6 @@ describe('validateSlugs', () => {
   })
 })
 
-describe('outputFileName', () => {
-  it.each([
-    ['/', 'index.html'],
-    ['/en', 'en/index.html'],
-    ['/projects', 'projects/index.html'],
-    ['/en/projects/some-slug', 'en/projects/some-slug/index.html'],
-  ])('%s → %s', (path, fileName) => {
-    expect(outputFileName(path)).toBe(fileName)
-  })
-})
-
 describe('renderPageHtml', () => {
   const head = buildPageHead(describePage({ page: 'about' }, 'en'), SITE)
   const html = renderPageHtml(TEMPLATE, head)
@@ -63,6 +53,7 @@ describe('renderPageHtml', () => {
     expect(count(html, /name="description"/g)).toBe(1)
     expect(count(html, /property="og:title"/g)).toBe(1)
     expect(count(html, /name="twitter:card"/g)).toBe(1)
+    expect(count(html, /name="twitter:title"/g)).toBe(1)
     expect(html).not.toContain('Default description')
     expect(html).toContain(`<title>${head.title}</title>`)
   })
@@ -70,7 +61,7 @@ describe('renderPageHtml', () => {
   it('writes canonical, Open Graph and hreflang alternates with absolute URLs', () => {
     expect(html).toContain(`<link rel="canonical" href="${SITE}en/about/" />`)
     expect(html).toContain(`<meta property="og:url" content="${SITE}en/about/" />`)
-    expect(html).toContain(`<meta property="og:image" content="${SITE}og-default.png" />`)
+    expect(html).toContain(`<meta property="og:image" content="${SITE}og/default-og.png" />`)
     expect(html).toContain(`<link rel="alternate" hreflang="zh-Hant-TW" href="${SITE}about/" />`)
     expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="${SITE}about/" />`)
   })
@@ -96,5 +87,55 @@ describe('renderPageHtml', () => {
     expect(notFound).not.toContain('rel="canonical"')
     expect(notFound).not.toContain('rel="alternate"')
     expect(notFound).not.toContain('og:url')
+  })
+})
+
+describe('Twitter and og:type', () => {
+  it('mirrors the Open Graph values in the Twitter tags', () => {
+    const head = buildPageHead(describePage({ page: 'about' }, 'en'), SITE)
+    const html = renderPageHtml(TEMPLATE, head)
+
+    expect(html).toContain('<meta property="og:type" content="website" />')
+    expect(html).toContain('<meta name="twitter:card" content="summary_large_image" />')
+    expect(html).toContain(`<meta name="twitter:image" content="${head.image}" />`)
+    expect(html).toContain(`<meta name="twitter:description" content="${head.description}" />`)
+  })
+
+  it('marks case studies as articles', () => {
+    const slug = projects[0]!.slug
+    const html = renderPageHtml(
+      TEMPLATE,
+      buildPageHead(describePage({ page: 'project', slug }, 'zh-TW'), SITE),
+    )
+    expect(html).toContain('<meta property="og:type" content="article" />')
+  })
+})
+
+describe('renderSitemap', () => {
+  const heads = getStaticPages().map((page) => buildPageHead(page, SITE))
+  const notFound = buildPageHead(describePage({ page: 'not-found' }, 'zh-TW'), SITE)
+  const sitemap = renderSitemap([...heads, notFound])
+
+  it('lists every indexable page once, at its canonical URL', () => {
+    expect(count(sitemap, /<url>/g)).toBe(heads.length)
+    for (const head of heads) expect(sitemap).toContain(`<loc>${head.url}</loc>`)
+    expect(sitemap).toContain(`<loc>${SITE}projects/${projects[0]!.slug}/</loc>`)
+    expect(sitemap).not.toContain('404')
+  })
+
+  it('links the language alternates of each page', () => {
+    expect(sitemap).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"')
+    expect(sitemap).toContain(
+      `<xhtml:link rel="alternate" hreflang="en" href="${SITE}en/about/" />`,
+    )
+  })
+})
+
+describe('renderRobots', () => {
+  it('allows crawling and points to the absolute sitemap URL', () => {
+    const robots = renderRobots('https://user.github.io/portfolio')
+    expect(robots).toContain('Sitemap: https://user.github.io/portfolio/sitemap.xml')
+    expect(robots).toContain('Allow: /')
+    expect(robots).not.toContain('Disallow')
   })
 })

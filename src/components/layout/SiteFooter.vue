@@ -4,7 +4,8 @@ import { useLocale } from '@/composables/useLocale'
 import { profile } from '@/data/profile'
 
 const { locale, messages } = useLocale()
-const year = new Date().getFullYear()
+// The build year, not the visit year: prerendered HTML and the hydrated app must match.
+const year = __BUILD_YEAR__
 </script>
 
 <template>

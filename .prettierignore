@@ -6,3 +6,4 @@ openspec
 .agents
 .claude
 .gemini
+dist-ssr

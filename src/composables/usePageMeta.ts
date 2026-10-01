@@ -1,5 +1,5 @@
 import { watchEffect } from 'vue'
-import { buildPageHead, type PageDescription, type PageHead } from '@/utils/seo'
+import { buildPageHead, headTags, type PageDescription, type PageHead } from '@/utils/seo'
 
 /**
  * Sets `<meta name|property="key" content>`, creating the tag when it does not exist yet.
@@ -34,15 +34,7 @@ export function applyPageHead(head: PageHead) {
   document.title = head.title
   document.documentElement.lang = head.htmlLang
 
-  setMeta('name', 'description', head.description)
-  setMeta('name', 'robots', head.indexable ? 'index, follow' : 'noindex')
-  setMeta('property', 'og:type', 'website')
-  setMeta('property', 'og:title', head.title)
-  setMeta('property', 'og:description', head.description)
-  setMeta('property', 'og:url', head.url)
-  setMeta('property', 'og:image', head.image)
-  setMeta('property', 'og:locale', head.ogLocale)
-  setMeta('name', 'twitter:card', 'summary_large_image')
+  for (const { attribute, key, content } of headTags(head)) setMeta(attribute, key, content)
 
   setLinks('canonical', head.url ? [{ href: head.url }] : [])
   setLinks('alternate', head.alternates)
@@ -53,6 +45,10 @@ export function applyPageHead(head: PageHead) {
  * reactive state such as the locale or the case study slug.
  */
 export function usePageMeta(describe: () => PageDescription) {
+  // Prerendered HTML already carries the page head (written by the static-routes plugin), and
+  // there is no document during server rendering.
+  if (import.meta.env.SSR) return
+
   watchEffect(() => {
     const siteUrl = `${window.location.origin}${import.meta.env.BASE_URL}`
     applyPageHead(buildPageHead(describe(), siteUrl))

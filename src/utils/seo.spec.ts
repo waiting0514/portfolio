@@ -7,6 +7,7 @@ import {
   DEFAULT_OG_IMAGE,
   describePage,
   getStaticPages,
+  headTags,
   pageUrl,
   socialImage,
 } from './seo'
@@ -112,5 +113,36 @@ describe('getStaticPages', () => {
       ]),
     )
     expect(getStaticPages().every((page) => page.indexable)).toBe(true)
+  })
+})
+
+describe('og:type', () => {
+  it('is article for case studies and website for every other page', () => {
+    expect(describePage({ page: 'project', slug: project.slug }, 'en').type).toBe('article')
+    for (const key of [{ page: 'home' }, { page: 'projects' }, { page: 'about' }] as const) {
+      expect(describePage(key, 'en').type).toBe('website')
+    }
+  })
+})
+
+describe('headTags', () => {
+  it('derives the Twitter tags from the Open Graph values', () => {
+    const head = buildPageHead(describePage({ page: 'project', slug: project.slug }, 'en'), SITE)
+    const tags = Object.fromEntries(headTags(head).map((tag) => [tag.key, tag.content]))
+
+    expect(tags['og:type']).toBe('article')
+    expect(tags['twitter:card']).toBe('summary_large_image')
+    expect(tags['twitter:title']).toBe(tags['og:title'])
+    expect(tags['twitter:description']).toBe(tags['og:description'])
+    expect(tags['twitter:image']).toBe(tags['og:image'])
+    expect(tags['og:image']).toMatch(new RegExp(`^${SITE}`))
+  })
+
+  it('lists each tag once and drops og:url on non-indexable pages', () => {
+    const head = buildPageHead(describePage({ page: 'not-found' }, 'en'), SITE)
+    const keys = headTags(head).map((tag) => tag.key)
+
+    expect(new Set(keys).size).toBe(keys.length)
+    expect(headTags(head).find((tag) => tag.key === 'og:url')?.content).toBeNull()
   })
 })

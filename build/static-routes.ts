@@ -1,14 +1,23 @@
 /**
- * Vite plugin: writes one HTML file per known route, plus a `404.html` SPA fallback.
+ * Vite plugin: writes one HTML file per known route, a `404.html` SPA fallback, `sitemap.xml`
+ * and `robots.txt`.
  *
  * GitHub Pages has no server-side rewrites. Emitting `projects/<slug>/index.html` (and so on)
  * means every known URL answers 200 with page-specific metadata that crawlers and social
- * previews can read without running JavaScript. Unknown URLs get `404.html`, which boots the
- * SPA so the router can render the site's own Not Found page.
+ * previews can read without running JavaScript; `build/prerender.ts` then fills in the page
+ * content. Unknown URLs get `404.html`, which boots the SPA so the router can render the
+ * site's own Not Found page.
  */
 import type { Plugin } from 'vite'
 import { projects, SLUG_PATTERN } from '../src/data/projects.ts'
-import { buildPageHead, describePage, getStaticPages, type PageHead } from '../src/utils/seo.ts'
+import {
+  buildPageHead,
+  describePage,
+  getStaticPages,
+  headTags,
+  type PageHead,
+} from '../src/utils/seo.ts'
+import { APP_CONTAINER, outputFileName } from './html.ts'
 
 /** Returns a problem per invalid or duplicated slug; empty when every slug is fine. */
 export function validateSlugs(slugs: readonly string[]): string[] {
@@ -22,12 +31,6 @@ export function validateSlugs(slugs: readonly string[]): string[] {
   return problems
 }
 
-/** `/` → `index.html`, `/en/projects/x` → `en/projects/x/index.html`. */
-export function outputFileName(path: string): string {
-  const relative = path.replace(/^\/+|\/+$/g, '')
-  return relative ? `${relative}/index.html` : 'index.html'
-}
-
 function escapeHtml(value: string): string {
   return value
     .replaceAll('&', '&amp;')
@@ -39,7 +42,7 @@ function escapeHtml(value: string): string {
 /** Tags this plugin owns; they are removed from the template before page tags are added. */
 const MANAGED_TAGS = [
   /<title>[\s\S]*?<\/title>\s*/g,
-  /<meta\b[^>]*\b(?:name|property)="(?:description|robots|twitter:card|og:[\w:]+)"[^>]*>\s*/g,
+  /<meta\b[^>]*\b(?:name|property)="(?:description|robots|twitter:[\w:]+|og:[\w:]+)"[^>]*>\s*/g,
   /<link\b[^>]*\brel="(?:canonical|alternate)"[^>]*>\s*/g,
 ]
 
@@ -49,15 +52,9 @@ export function renderHeadTags(head: PageHead): string {
 
   return [
     `<title>${escapeHtml(head.title)}</title>`,
-    meta('name', 'description', head.description),
-    meta('name', 'robots', head.indexable ? 'index, follow' : 'noindex'),
-    meta('property', 'og:type', 'website'),
-    meta('property', 'og:title', head.title),
-    meta('property', 'og:description', head.description),
-    ...(head.url ? [meta('property', 'og:url', head.url)] : []),
-    meta('property', 'og:image', head.image),
-    meta('property', 'og:locale', head.ogLocale),
-    meta('name', 'twitter:card', 'summary_large_image'),
+    ...headTags(head).flatMap(({ attribute, key, content }) =>
+      content === null ? [] : [meta(attribute, key, content)],
+    ),
     ...(head.url ? [`<link rel="canonical" href="${escapeHtml(head.url)}" />`] : []),
     ...head.alternates.map(
       ({ hreflang, href }) =>
@@ -74,6 +71,43 @@ export function renderPageHtml(template: string, head: PageHead): string {
     .replace('</head>', `  ${renderHeadTags(head)}\n  </head>`)
 }
 
+/** One `<url>` per indexable page, at its canonical URL, with its language alternates. */
+export function renderSitemap(heads: readonly PageHead[]): string {
+  const urls = heads
+    .filter((head) => head.indexable && head.url)
+    .map((head) =>
+      [
+        '  <url>',
+        `    <loc>${escapeHtml(head.url!)}</loc>`,
+        ...head.alternates.map(
+          ({ hreflang, href }) =>
+            `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${escapeHtml(href)}" />`,
+        ),
+        '  </url>',
+      ].join('\n'),
+    )
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ...urls,
+    '</urlset>',
+    '',
+  ].join('\n')
+}
+
+/**
+ * Crawlers only read `/robots.txt` at the host root, so on a project site this file is
+ * informational; the sitemap still has to be submitted in the search engines' webmaster tools.
+ */
+export function renderRobots(siteUrl: string): string {
+  const root = siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`
+  return ['User-agent: *', 'Allow: /', '', `Sitemap: ${root}sitemap.xml`, ''].join('\n')
+}
+
+/** Shown only by `404.html`, the one page that is not prerendered. */
+const NOSCRIPT = '<noscript>This page needs JavaScript. 本頁需要啟用 JavaScript。</noscript>'
+
 interface StaticRoutesOptions {
   /** Absolute site URL including the base path, e.g. `https://user.github.io/portfolio/`. */
   siteUrl?: string
@@ -84,7 +118,8 @@ export function staticRoutes(options: StaticRoutesOptions = {}): Plugin {
 
   return {
     name: 'portfolio:static-routes',
-    apply: 'build',
+    // The SSR build of `src/entry-server.ts` has no index.html; it only feeds the prerender step.
+    apply: (_config, { command, isSsrBuild }) => command === 'build' && !isSsrBuild,
 
     configResolved(config) {
       // Local builds have no public URL; `vite preview` serves on port 4173 by default.
@@ -106,18 +141,26 @@ export function staticRoutes(options: StaticRoutesOptions = {}): Plugin {
         }
         const template = entry.source
 
-        for (const page of getStaticPages()) {
+        const pages = getStaticPages()
+        const heads = pages.map((page) => buildPageHead(page, siteUrl))
+        pages.forEach((page, index) => {
           const fileName = outputFileName(page.path)
-          const source = renderPageHtml(template, buildPageHead(page, siteUrl))
+          const source = renderPageHtml(template, heads[index]!)
           if (fileName === 'index.html') entry.source = source
           else this.emitFile({ type: 'asset', fileName, source })
-        }
+        })
+
+        this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: renderSitemap(heads) })
+        this.emitFile({ type: 'asset', fileName: 'robots.txt', source: renderRobots(siteUrl) })
 
         const notFound = buildPageHead(describePage({ page: 'not-found' }, 'zh-TW'), siteUrl)
         this.emitFile({
           type: 'asset',
           fileName: '404.html',
-          source: renderPageHtml(template, notFound),
+          source: renderPageHtml(template, notFound).replace(
+            APP_CONTAINER,
+            `${APP_CONTAINER}\n    ${NOSCRIPT}`,
+          ),
         })
       },
     },

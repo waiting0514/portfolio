@@ -13,6 +13,7 @@ export default defineConfigWithVueTs(
 
   globalIgnores([
     '**/dist/**',
+    '**/dist-ssr/**',
     '**/coverage/**',
     'openspec/**',
     '.agents/**',

@@ -16,8 +16,11 @@ import {
 } from '../i18n/locales.ts'
 import { MESSAGES } from '../i18n/messages.ts'
 
-/** Social preview image. SVG covers are not accepted by most social networks. */
-export const DEFAULT_OG_IMAGE = 'og-default.png'
+/** Social preview image (1200×630). SVG covers are not accepted by most social networks. */
+export const DEFAULT_OG_IMAGE = 'og/default-og.png'
+
+/** `og:type`: case studies are articles, every other page is a website. */
+export type OgType = 'website' | 'article'
 
 export type PageKey =
   | { page: 'home' }
@@ -35,6 +38,7 @@ export interface PageDescription {
   description: string
   /** Path relative to `public/`. */
   image: string
+  type: OgType
   /** Not-found pages are excluded from indexing and have no language alternates. */
   indexable: boolean
 }
@@ -53,8 +57,16 @@ export interface PageHead {
   /** Canonical URL; `null` for pages that must not be indexed. */
   url: string | null
   image: string
+  type: OgType
   alternates: HeadAlternate[]
   indexable: boolean
+}
+
+/** One `<meta>` tag; a `null` content means the tag must not exist on this page. */
+export interface HeadMetaTag {
+  attribute: 'name' | 'property'
+  key: string
+  content: string | null
 }
 
 function formatTitle(pageTitle: string, locale: Locale): string {
@@ -69,7 +81,7 @@ export function socialImage(src: string): string {
 export function describePage(key: PageKey, locale: Locale): PageDescription {
   const messages = MESSAGES[locale]
   const person = profile.content[locale]
-  const base = { locale, image: DEFAULT_OG_IMAGE, indexable: true }
+  const base = { locale, image: DEFAULT_OG_IMAGE, type: 'website' as OgType, indexable: true }
 
   switch (key.page) {
     case 'home':
@@ -102,7 +114,8 @@ export function describePage(key: PageKey, locale: Locale): PageDescription {
         path: withLocalePrefix(`/projects/${project.slug}`, locale),
         title: formatTitle(content.title, locale),
         description: content.summary,
-        image: socialImage(project.cover.src),
+        image: project.ogImage ?? socialImage(project.cover.src),
+        type: 'article',
       }
     }
     case 'not-found':
@@ -151,9 +164,31 @@ export function buildPageHead(page: PageDescription, siteUrl: string): PageHead 
     ogLocale: LOCALE_CONFIG[page.locale].ogLocale,
     url: page.indexable ? pageUrl(siteUrl, page.path) : null,
     image: assetAbsoluteUrl(siteUrl, page.image),
+    type: page.type,
     alternates,
     indexable: page.indexable,
   }
+}
+
+/**
+ * Every `<meta>` tag a page owns, in output order. Build-time HTML and runtime updates both use
+ * this list, and the Twitter tags reuse the Open Graph values instead of keeping their own.
+ */
+export function headTags(head: PageHead): HeadMetaTag[] {
+  return [
+    { attribute: 'name', key: 'description', content: head.description },
+    { attribute: 'name', key: 'robots', content: head.indexable ? 'index, follow' : 'noindex' },
+    { attribute: 'property', key: 'og:type', content: head.type },
+    { attribute: 'property', key: 'og:title', content: head.title },
+    { attribute: 'property', key: 'og:description', content: head.description },
+    { attribute: 'property', key: 'og:url', content: head.url },
+    { attribute: 'property', key: 'og:image', content: head.image },
+    { attribute: 'property', key: 'og:locale', content: head.ogLocale },
+    { attribute: 'name', key: 'twitter:card', content: 'summary_large_image' },
+    { attribute: 'name', key: 'twitter:title', content: head.title },
+    { attribute: 'name', key: 'twitter:description', content: head.description },
+    { attribute: 'name', key: 'twitter:image', content: head.image },
+  ]
 }
 
 /** Every route that gets its own static HTML file at build time, in every locale. */
