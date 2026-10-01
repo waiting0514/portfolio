@@ -6,6 +6,7 @@ import { useLocale } from '@/composables/useLocale'
 /**
  * A link styled as a button. Every call to action on this site navigates, so it always
  * renders an anchor: `to` for in-app routes (already locale-prefixed), `href` for external URLs.
+ * External web pages open in a new tab; `mailto:` links hand off to the mail app in place.
  */
 const props = withDefaults(
   defineProps<{
@@ -17,6 +18,8 @@ const props = withDefaults(
 )
 
 const { messages } = useLocale()
+
+const opensNewTab = computed(() => !props.href?.startsWith('mailto:'))
 
 const variantClass = computed(() =>
   props.variant === 'primary'
@@ -37,12 +40,12 @@ const variantClass = computed(() =>
   <a
     v-else
     :href="href"
-    target="_blank"
-    rel="noopener noreferrer"
+    :target="opensNewTab ? '_blank' : undefined"
+    :rel="opensNewTab ? 'noopener noreferrer' : undefined"
     class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-5 font-mono text-ui font-semibold transition-state active:translate-px"
     :class="variantClass"
   >
     <slot />
-    <span class="sr-only">&nbsp;({{ messages.common.opensInNewTab }})</span>
+    <span v-if="opensNewTab" class="sr-only">&nbsp;({{ messages.common.opensInNewTab }})</span>
   </a>
 </template>

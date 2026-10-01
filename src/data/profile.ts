@@ -7,6 +7,7 @@ import type { Profile } from '@/types/profile'
  */
 export const profile: Profile = {
   githubUrl: 'https://github.com/waiting0514',
+  email: 'waiting0514@gmail.com',
   focusTechnologies: ['Vue', 'Angular', 'TypeScript', 'JavaScript', 'RxJS'],
   content: {
     'zh-TW': {

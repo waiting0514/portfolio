@@ -30,6 +30,19 @@ describe('BaseButton', () => {
     expect(link.classes()).toContain('border-line-strong')
   })
 
+  it('opens a mailto link in place, without the new-tab hint', async () => {
+    const { wrapper } = await mountAtPath(BaseButton, '/en', {
+      props: { href: 'mailto:someone@example.com', variant: 'secondary' },
+      slots: { default: 'Email' },
+    })
+
+    const link = wrapper.get('a')
+    expect(link.attributes('href')).toBe('mailto:someone@example.com')
+    expect(link.attributes('target')).toBeUndefined()
+    expect(link.attributes('rel')).toBeUndefined()
+    expect(link.text()).toBe('Email')
+  })
+
   it('never renders a <button>, because every call to action navigates', async () => {
     const { wrapper } = await mountAtPath(BaseButton, '/', { props: { to: '/about' } })
     expect(wrapper.find('button').exists()).toBe(false)

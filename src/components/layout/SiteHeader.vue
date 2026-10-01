@@ -108,18 +108,6 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
               {{ item.label }}
             </RouterLink>
           </li>
-          <li>
-            <a
-              :href="profile.githubUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="nav-link flex min-h-11 items-center gap-1 rounded-inset px-2 link-muted transition-state"
-            >
-              {{ messages.nav.github }}
-              <span aria-hidden="true" class="text-label">↗</span>
-              <span class="sr-only">({{ messages.common.opensInNewTab }})</span>
-            </a>
-          </li>
           <li
             class="mt-2 border-t border-dashed border-line-strong pt-2 md:mt-0 md:ml-2 md:border-t-0 md:border-l md:pt-0 md:pl-3"
           >

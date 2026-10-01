@@ -34,12 +34,10 @@ describe('SiteHeader navigation links', () => {
     expect(current.attributes('href')).toBe('/en/projects')
   })
 
-  it('opens GitHub in a new tab safely', async () => {
+  it('keeps the navigation to site pages; GitHub lives in the footer and contact section', async () => {
     const { wrapper } = await mountHeader('/')
-    const github = wrapper.get('a[target="_blank"]')
 
-    expect(github.attributes('rel')).toBe('noopener noreferrer')
-    expect(github.text()).toContain('另開新分頁')
+    expect(wrapper.find('a[target="_blank"]').exists()).toBe(false)
   })
 })
 
