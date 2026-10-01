@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import BaseButton from '@/components/common/BaseButton.vue'
 import BaseContainer from '@/components/common/BaseContainer.vue'
+import ManHeader from '@/components/common/ManHeader.vue'
 import { useLocale } from '@/composables/useLocale'
 import { usePageMeta } from '@/composables/usePageMeta'
 import { describePage } from '@/utils/seo'
@@ -15,17 +16,17 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
 
 <template>
   <article aria-labelledby="about-title">
-    <header class="hero-grid border-b border-line">
-      <BaseContainer class="py-14 md:py-20">
-        <p class="eyebrow text-accent">{{ messages.home.aboutEyebrow }}</p>
-        <h1
-          id="about-title"
-          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-display"
-        >
+    <header class="hero-grid border-b border-line-strong">
+      <BaseContainer class="pt-6 pb-14 md:pt-8 md:pb-20">
+        <ManHeader page="about" />
+        <p class="mt-10 eyebrow text-accent md:mt-14">
+          <span class="marker-hash">{{ messages.home.aboutEyebrow }}</span>
+        </p>
+        <h1 id="about-title" class="mt-4 text-4xl leading-tight font-bold md:text-display">
           {{ messages.pages.aboutTitle }}
         </h1>
-        <p class="mt-5 text-lg text-ink-soft">
-          <span class="font-bold text-ink">{{ content.name }}</span>
+        <p class="mt-5 font-mono text-ui text-ink-soft">
+          <span class="font-semibold text-ink">{{ content.name }}</span>
           <span aria-hidden="true" class="mx-2 text-line-strong">/</span>{{ content.role }}
         </p>
         <div class="prose-content mt-8 max-w-3xl">
@@ -39,19 +40,19 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
       <section aria-labelledby="experience-title" class="lg:grid lg:grid-cols-12 lg:gap-8">
         <h2
           id="experience-title"
-          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-heading-lg"
+          class="text-3xl leading-tight font-semibold lg:col-span-4 md:text-heading-lg"
         >
           {{ messages.about.experienceTitle }}
         </h2>
-        <ol class="mt-8 border-l border-line lg:col-span-8 lg:mt-0">
+        <ol class="mt-8 border-l border-dashed border-line-strong lg:col-span-8 lg:mt-0">
           <li
             v-for="entry in content.experience"
             :key="`${entry.company}-${entry.period}`"
-            class="relative pb-12 pl-8 last:pb-0 before:absolute before:top-2 before:-left-[5px] before:size-[9px] before:rounded-full before:border-2 before:border-accent before:bg-canvas"
+            class="relative pb-12 pl-8 last:pb-0 before:absolute before:top-2 before:-left-[5px] before:size-[9px] before:border-2 before:border-accent before:bg-canvas"
           >
-            <p class="font-mono text-sm font-medium text-accent">{{ entry.period }}</p>
-            <h3 class="mt-2 text-xl font-bold">{{ entry.company }}</h3>
-            <p class="mt-1 text-ink-muted">{{ entry.title }}</p>
+            <p class="font-mono text-label font-medium text-syntax-number">{{ entry.period }}</p>
+            <h3 class="mt-2 text-xl font-semibold">{{ entry.company }}</h3>
+            <p class="mt-1 font-mono text-label text-ink-muted">{{ entry.title }}</p>
             <div class="prose-content mt-4">
               <ul>
                 <li v-for="highlight in entry.highlights" :key="highlight">{{ highlight }}</li>
@@ -64,15 +65,15 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
       <section aria-labelledby="strengths-title" class="lg:grid lg:grid-cols-12 lg:gap-8">
         <h2
           id="strengths-title"
-          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-heading-lg"
+          class="text-3xl leading-tight font-semibold lg:col-span-4 md:text-heading-lg"
         >
           {{ messages.about.strengthsTitle }}
         </h2>
-        <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:col-span-8 lg:mt-0">
+        <ul class="mt-8 grid gap-4 [counter-reset:strength] md:grid-cols-2 lg:col-span-8 lg:mt-0">
           <li
             v-for="strength in content.strengths"
             :key="strength"
-            class="rounded-card border border-line bg-surface p-6 leading-relaxed text-ink-soft"
+            class="rounded-card border border-line-strong bg-surface p-6 leading-relaxed text-ink-soft [counter-increment:strength] before:mb-3 before:block before:font-mono before:text-label before:text-accent before:content-['0'_counter(strength)]"
           >
             {{ strength }}
           </li>
@@ -82,10 +83,13 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
 
     <section aria-labelledby="contact-title" class="section-spacing surface-navy">
       <BaseContainer>
-        <h2
-          id="contact-title"
-          class="text-3xl leading-tight font-bold tracking-tight md:text-heading-lg"
-        >
+        <p aria-hidden="true" class="mb-6 font-mono text-label text-on-navy-muted">
+          <span class="text-on-navy-string">~/portfolio</span>
+          <span class="text-on-navy-accent"> $ </span>./contact.sh<span
+            class="cursor-block text-on-navy-accent"
+          ></span>
+        </p>
+        <h2 id="contact-title" class="text-3xl leading-tight font-semibold md:text-heading-lg">
           {{ messages.about.contactTitle }}
         </h2>
         <p class="mt-4 max-w-prose text-lead text-on-navy-muted">

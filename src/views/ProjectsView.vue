@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseContainer from '@/components/common/BaseContainer.vue'
+import ManHeader from '@/components/common/ManHeader.vue'
 import ProjectGrid from '@/components/project/ProjectGrid.vue'
 import { useLocale } from '@/composables/useLocale'
 import { usePageMeta } from '@/composables/usePageMeta'
@@ -13,13 +14,13 @@ usePageMeta(() => describePage({ page: 'projects' }, locale.value))
 
 <template>
   <section aria-labelledby="projects-title">
-    <header class="hero-grid border-b border-line">
-      <BaseContainer class="py-14 md:py-20">
-        <p class="eyebrow text-accent">{{ messages.pages.projectsEyebrow }}</p>
-        <h1
-          id="projects-title"
-          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-display"
-        >
+    <header class="hero-grid border-b border-line-strong">
+      <BaseContainer class="pt-6 pb-14 md:pt-8 md:pb-20">
+        <ManHeader page="projects" />
+        <p class="mt-10 eyebrow text-accent md:mt-14">
+          <span class="marker-hash">{{ messages.pages.projectsEyebrow }}</span>
+        </p>
+        <h1 id="projects-title" class="mt-4 text-4xl leading-tight font-bold md:text-display">
           {{ messages.pages.projectsTitle }}
         </h1>
         <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">

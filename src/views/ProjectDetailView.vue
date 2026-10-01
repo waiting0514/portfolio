@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import BaseContainer from '@/components/common/BaseContainer.vue'
 import FlowDiagram from '@/components/common/FlowDiagram.vue'
+import ManHeader from '@/components/common/ManHeader.vue'
 import NotFoundContent from '@/components/common/NotFoundContent.vue'
 import TechTagList from '@/components/common/TechTagList.vue'
 import CaseStudyCard from '@/components/project/CaseStudyCard.vue'
@@ -97,21 +98,26 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
   <NotFoundContent v-if="!project || !content || !caseStudy" />
 
   <article v-else aria-labelledby="case-study-title">
-    <header class="hero-grid border-b border-line">
-      <BaseContainer class="pt-8 pb-14 md:pt-12 md:pb-20">
+    <header class="hero-grid border-b border-line-strong">
+      <BaseContainer class="pt-6 pb-14 md:pt-8 md:pb-20">
+        <ManHeader :page="project.slug" center="Case Study" />
         <RouterLink
           :to="localePath('/projects')"
-          class="inline-flex min-h-11 items-center gap-1.5 link-muted text-ui font-medium transition-state"
+          class="mt-4 inline-flex min-h-11 items-center gap-1.5 link-muted font-mono text-label font-medium transition-state"
         >
-          <span aria-hidden="true">←</span> {{ messages.caseStudy.allProjects }}
+          <span aria-hidden="true">cd ..</span>
+          <span aria-hidden="true" class="text-line-strong">/</span>
+          {{ messages.caseStudy.allProjects }}
         </RouterLink>
         <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <p class="eyebrow text-accent">{{ messages.caseStudy.eyebrow }}</p>
+          <p class="eyebrow text-accent">
+            <span class="marker-hash">{{ messages.caseStudy.eyebrow }}</span>
+          </p>
           <ProjectMeta :labels="project.labels" :status="project.status" />
         </div>
         <h1
           id="case-study-title"
-          class="mt-4 max-w-5xl text-4xl leading-headline font-bold tracking-tight text-balance md:text-display"
+          class="mt-4 max-w-5xl text-4xl leading-headline font-bold text-balance md:text-display"
         >
           {{ content.title }}
         </h1>
@@ -119,14 +125,16 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
           {{ content.subtitle }}
         </p>
         <dl
-          class="mt-10 grid grid-cols-2 border-t border-t-ink md:flex md:border-b md:border-b-line"
+          class="mt-10 grid grid-cols-2 rounded-card border border-line-strong bg-surface md:flex"
         >
           <div
             v-for="fact in facts"
             :key="fact.label"
-            class="border-b border-line py-4 pr-4 md:min-w-0 md:flex-1 md:border-b-0 md:border-l md:px-6 md:first:border-l-0 md:first:pl-0"
+            class="border-b border-line px-4 py-4 odd:border-r md:min-w-0 md:flex-1 md:border-r-0 md:border-b-0 md:border-l md:px-5 md:first:border-l-0"
           >
-            <dt class="eyebrow text-xs text-ink-muted">{{ fact.label }}</dt>
+            <dt class="font-mono text-micro tracking-wider text-syntax-keyword uppercase">
+              {{ fact.label }}
+            </dt>
             <dd class="mt-1.5 font-bold" :class="{ 'font-mono text-sm font-medium': fact.mono }">
               {{ fact.value }}
             </dd>
@@ -140,7 +148,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
           :height="project.cover.height"
           fetchpriority="high"
           decoding="async"
-          class="mt-10 aspect-video w-full rounded-card border border-line bg-surface object-cover"
+          class="mt-10 aspect-video w-full rounded-card border border-line-strong bg-surface object-cover"
         />
       </BaseContainer>
     </header>
@@ -169,7 +177,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
               <li
                 v-for="highlight in content.highlights"
                 :key="highlight"
-                class="rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-ink-soft"
+                class="rounded-inset border border-line-strong bg-surface px-3 py-1.5 text-sm text-ink-soft"
               >
                 {{ highlight }}
               </li>
@@ -231,7 +239,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
           </div>
           <div
             v-if="hasContent(caseStudy.problemExample)"
-            class="mt-8 rounded-card border border-line bg-surface p-6 md:p-8"
+            class="mt-8 rounded-card border border-line-strong bg-surface p-6 md:p-8"
           >
             <h3 v-if="caseStudy.problemExample.heading" class="text-lg font-bold">
               {{ caseStudy.problemExample.heading }}
@@ -282,7 +290,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             <li
               v-for="step in caseStudy.architecture.steps"
               :key="step"
-              class="relative min-h-8 pl-12 text-lead leading-relaxed text-ink-soft [counter-increment:step] before:absolute before:top-0 before:left-0 before:flex before:size-8 before:items-center before:justify-center before:rounded-full before:border before:border-ink before:bg-canvas before:font-mono before:text-label before:text-ink before:content-[counter(step)]"
+              class="relative min-h-8 pl-12 text-lead leading-relaxed text-ink-soft [counter-increment:step] before:absolute before:top-0 before:left-0 before:flex before:size-8 before:items-center before:justify-center before:rounded-inset before:border before:border-accent before:bg-accent-soft before:font-mono before:text-label before:text-accent before:content-[counter(step)]"
             >
               {{ step }}
             </li>
@@ -295,7 +303,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             :height="project.architectureDiagram.height"
             loading="lazy"
             decoding="async"
-            class="mt-8 h-auto w-full rounded-card border border-line bg-surface"
+            class="mt-8 h-auto w-full rounded-card border border-line-strong bg-surface"
           />
         </CaseStudySection>
 
@@ -385,7 +393,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             <li
               v-for="result in caseStudy.results"
               :key="result"
-              class="border-b border-line py-4 text-lead leading-relaxed text-ink-soft"
+              class="border-b border-dashed border-line-strong py-4 pl-7 text-lead leading-relaxed text-ink-soft relative before:absolute before:left-0 before:font-mono before:text-syntax-string before:content-['✓']"
             >
               {{ result }}
             </li>
@@ -405,8 +413,10 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
               :key="item.label"
               class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
-              <dt class="font-bold text-ink">{{ item.label }}</dt>
-              <dd class="text-ink-muted sm:text-right">{{ item.value }}</dd>
+              <dt class="font-mono text-ui font-semibold text-ink">{{ item.label }}</dt>
+              <dd class="font-mono text-label text-syntax-string sm:text-right">
+                {{ item.value }}
+              </dd>
             </div>
           </dl>
         </CaseStudySection>

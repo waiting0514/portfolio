@@ -18,11 +18,17 @@ withDefaults(
 
 <template>
   <div class="mb-10 max-w-prose md:mb-12">
-    <p v-if="eyebrow" class="eyebrow mb-3 text-accent">{{ eyebrow }}</p>
+    <p v-if="eyebrow" class="eyebrow mb-4 flex items-center gap-3 text-accent">
+      <span class="marker-hash">{{ eyebrow }}</span>
+      <span
+        aria-hidden="true"
+        class="h-px min-w-8 flex-1 border-t border-dashed border-line-strong"
+      ></span>
+    </p>
     <component
       :is="`h${level}`"
       :id="id"
-      class="font-bold tracking-tight"
+      class="font-semibold"
       :class="level === 2 ? 'text-3xl leading-tight md:text-heading-lg' : 'text-xl'"
     >
       {{ title }}

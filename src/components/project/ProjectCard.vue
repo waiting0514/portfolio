@@ -33,6 +33,23 @@ const indexLabel = computed(() =>
   <article
     class="group card-lift relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-focus-ring"
   >
+    <!-- Decorative window bar: the card reads as one file in the projects directory. -->
+    <div
+      aria-hidden="true"
+      class="flex h-10 items-center gap-3 border-b border-line bg-canvas px-4 font-mono text-label"
+    >
+      <span v-if="indexLabel" class="font-medium text-accent">{{ indexLabel }}</span>
+      <span class="min-w-0 truncate text-ink-muted"
+        >~/projects/<span class="text-ink">{{ project.slug }}</span></span
+      >
+      <span class="ml-auto flex gap-1">
+        <span class="size-2 rounded-full border border-line-strong"></span>
+        <span class="size-2 rounded-full border border-line-strong"></span>
+        <span
+          class="size-2 rounded-full bg-line-strong transition-state group-hover:bg-accent"
+        ></span>
+      </span>
+    </div>
     <img
       :src="assetUrl(project.cover.src)"
       :alt="content.coverAlt"
@@ -43,29 +60,17 @@ const indexLabel = computed(() =>
       class="aspect-video w-full border-b border-line bg-canvas object-cover"
     />
     <div class="flex flex-1 flex-col p-6 md:p-7">
-      <div class="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span
-          v-if="indexLabel"
-          aria-hidden="true"
-          class="font-mono text-xs font-medium tracking-wider text-accent"
-        >
-          {{ indexLabel }}
-        </span>
-        <ProjectMeta :labels="project.labels" :status="project.status" />
-      </div>
-      <component
-        :is="`h${headingLevel}`"
-        class="text-title leading-snug font-bold tracking-tight text-ink"
-      >
+      <ProjectMeta class="mb-3" :labels="project.labels" :status="project.status" />
+      <component :is="`h${headingLevel}`" class="text-title leading-snug font-semibold text-ink">
         {{ content.title }}
       </component>
       <p class="mt-3 text-ui leading-relaxed text-ink-muted">{{ content.summary }}</p>
       <TechTagList class="mt-5" :items="project.technologies" :label="messages.project.techStack" />
       <RouterLink
         :to="localePath(`/projects/${project.slug}`)"
-        class="mt-auto inline-flex items-center gap-1.5 pt-7 text-ui font-bold text-accent after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+        class="mt-auto inline-flex items-center gap-1.5 pt-7 font-mono text-ui font-semibold text-accent after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
       >
-        <span>
+        <span class="marker-prompt">
           {{ messages.project.viewCaseStudy
           }}<span class="sr-only">{{ messages.common.labelSeparator }}{{ content.title }}</span>
         </span>

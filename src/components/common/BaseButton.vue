@@ -20,7 +20,7 @@ const { messages } = useLocale()
 
 const variantClass = computed(() =>
   props.variant === 'primary'
-    ? 'bg-accent text-white hover:bg-accent-strong'
+    ? 'bg-accent text-white shadow-[3px_3px_0_var(--color-ink)] hover:bg-accent-strong active:shadow-[1px_1px_0_var(--color-ink)]'
     : 'border border-line-strong bg-surface text-ink hover:border-accent hover:text-accent',
 )
 </script>
@@ -29,7 +29,7 @@ const variantClass = computed(() =>
   <RouterLink
     v-if="to"
     :to="to"
-    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-ui font-bold transition-state active:translate-y-px"
+    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-5 font-mono text-ui font-semibold transition-state active:translate-px"
     :class="variantClass"
   >
     <slot />
@@ -39,7 +39,7 @@ const variantClass = computed(() =>
     :href="href"
     target="_blank"
     rel="noopener noreferrer"
-    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-ui font-bold transition-state active:translate-y-px"
+    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-5 font-mono text-ui font-semibold transition-state active:translate-px"
     :class="variantClass"
   >
     <slot />

@@ -41,9 +41,9 @@ const links = computed(() => {
         <RouterLink
           :to="link.to"
           :rel="link.key === 'previous' ? 'prev' : 'next'"
-          class="block rounded-control border border-line p-5 transition-state hover:border-line-strong hover:bg-surface"
+          class="block rounded-control border border-line-strong p-5 transition-state hover:border-accent hover:bg-surface"
         >
-          <span class="block text-sm text-ink-muted">
+          <span class="block font-mono text-label text-ink-muted">
             <span v-if="link.key === 'previous'" aria-hidden="true">← </span>{{ link.label
             }}<span v-if="link.key === 'next'" aria-hidden="true"> →</span>
           </span>

@@ -26,15 +26,17 @@ const indexLabel = computed(() =>
 <template>
   <section
     :aria-labelledby="id"
-    class="border-t border-line py-12 first:border-t-0 first:pt-0 md:py-14"
+    class="border-t border-dashed border-line-strong py-12 first:border-t-0 first:pt-0 md:py-14"
   >
-    <p v-if="indexLabel" aria-hidden="true" class="mb-3 font-mono text-sm font-medium text-accent">
-      {{ indexLabel }}
-    </p>
-    <h2
-      :id="id"
-      class="scroll-mt-16 text-heading-sm leading-tight font-bold tracking-tight md:text-heading"
+    <p
+      v-if="indexLabel"
+      aria-hidden="true"
+      class="mb-3 flex items-center gap-3 font-mono text-label font-medium text-accent"
     >
+      <span class="marker-hash">{{ indexLabel }}</span>
+      <span class="h-px max-w-24 flex-1 border-t border-dashed border-line-strong"></span>
+    </p>
+    <h2 :id="id" class="scroll-mt-16 text-heading-sm leading-tight font-semibold md:text-heading">
       {{ title }}
     </h2>
     <div class="mt-6" :class="[{ 'prose-content': prose }, bodyClass]">

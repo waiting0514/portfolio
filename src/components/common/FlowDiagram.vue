@@ -22,13 +22,17 @@ defineProps<{
       class="flex flex-col items-center gap-2 md:flex-row"
     >
       <span
-        class="w-full rounded-inset border border-line bg-surface px-3 py-2 text-center text-sm leading-snug text-ink md:w-auto"
+        class="w-full rounded-inset border border-line-strong bg-surface px-3 py-2 text-center font-mono text-label leading-snug text-ink md:w-auto"
       >
         {{ step }}
       </span>
-      <span v-if="index < steps.length - 1" aria-hidden="true" class="text-sm text-ink-muted">
+      <span
+        v-if="index < steps.length - 1"
+        aria-hidden="true"
+        class="font-mono text-sm text-accent"
+      >
         <span class="md:hidden">↓</span>
-        <span class="hidden md:inline">→</span>
+        <span class="hidden md:inline">─▶</span>
       </span>
     </li>
   </ol>
