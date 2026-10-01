@@ -9,6 +9,7 @@ import TechTagList from '@/components/common/TechTagList.vue'
 import CaseStudyCard from '@/components/project/CaseStudyCard.vue'
 import CaseStudySection from '@/components/project/CaseStudySection.vue'
 import CaseStudyToc from '@/components/project/CaseStudyToc.vue'
+import OperationFlow from '@/components/project/OperationFlow.vue'
 import ProjectMeta from '@/components/project/ProjectMeta.vue'
 import ProjectPager from '@/components/project/ProjectPager.vue'
 import { useActiveSection } from '@/composables/useActiveSection'
@@ -52,6 +53,11 @@ const sections = computed(() => {
     },
     { id: 'workflow', title: titles.workflow, show: hasContent(study.workflow) },
     { id: 'architecture', title: titles.architecture, show: hasContent(study.architecture) },
+    {
+      id: 'operation-flow',
+      title: titles.operationFlow,
+      show: hasContent(study.operationFlow),
+    },
     { id: 'solution', title: titles.solution, show: hasContent(study.solution) },
     {
       id: 'responsibilities',
@@ -304,6 +310,19 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             loading="lazy"
             decoding="async"
             class="mt-8 h-auto w-full rounded-card border border-line-strong bg-surface"
+          />
+        </CaseStudySection>
+
+        <CaseStudySection
+          v-if="hasContent(caseStudy.operationFlow)"
+          id="operation-flow"
+          :title="sectionTitles.operationFlow"
+          :index="sectionIndex.get('operation-flow')"
+          :prose="false"
+        >
+          <OperationFlow
+            :phases="caseStudy.operationFlow.phases"
+            :label="sectionTitles.operationFlow"
           />
         </CaseStudySection>
 

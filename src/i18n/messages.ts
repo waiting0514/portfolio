@@ -75,6 +75,7 @@ export interface Messages {
       problem: string
       workflow: string
       architecture: string
+      operationFlow: string
       solution: string
       responsibilities: string
       challenges: string
@@ -174,6 +175,7 @@ const zhTW = {
       problem: '問題',
       workflow: '需求到前端的工作流程',
       architecture: '架構與流程',
+      operationFlow: '系統操作流程',
       solution: '解決方案',
       responsibilities: '主要職責',
       challenges: '技術挑戰',
@@ -273,6 +275,7 @@ const en = {
       problem: 'Problem',
       workflow: 'Requirement to Frontend Workflow',
       architecture: 'Architecture / Flow',
+      operationFlow: 'Operation Flow',
       solution: 'Solution',
       responsibilities: 'Key Responsibilities',
       challenges: 'Technical Challenges',

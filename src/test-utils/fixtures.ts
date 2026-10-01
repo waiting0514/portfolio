@@ -68,6 +68,12 @@ export const fullProject: Project = {
           states: ['Draft', 'Published', 'Failed'],
         },
         workflow: ['Draft', 'Analysis', 'Implementation'],
+        operationFlow: {
+          phases: [
+            { name: `Setup (${locale})`, steps: ['Sign in', 'Configure'] },
+            { name: `Use (${locale})`, steps: ['Create', 'Review', 'Publish'] },
+          ],
+        },
         responsibilities: [
           { title: `Responsibility A (${locale})`, description: `Description A (${locale})` },
           { title: `Responsibility B (${locale})`, description: `Description B (${locale})` },

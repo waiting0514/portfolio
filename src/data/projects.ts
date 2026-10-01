@@ -108,6 +108,31 @@ export const projects: readonly Project[] = [
             '前端邏輯',
             '後端 API 整合（未來）',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: '前置設定',
+                steps: ['企業 SSO 登入', '綁定七個社群帳號', '團隊與五種角色權限'],
+              },
+              {
+                name: '內容產製',
+                steps: [
+                  '建立活動（檔期）',
+                  '媒體庫素材',
+                  '建立發文',
+                  '各平台客製與規則檢核',
+                  '發布或排程',
+                  '結果與重試',
+                ],
+              },
+              {
+                name: '客服回覆',
+                steps: ['集中收件匣', 'AI 判讀', '建議回覆草稿', '升級與指派', '標籤管理'],
+              },
+              { name: '導流轉換', steps: ['邀請碼與 QR', '轉換漏斗', '會員', '會員 360'] },
+              { name: '成效稽核', steps: ['主控台', '經營指標', '決策稽核'] },
+            ],
+          },
           architecture: {
             steps: [
               '表現層：layouts 負責導覽、側邊選單、組織（租戶）切換與全域異常提示；views 依業務模組劃分（收件匣、發布與排程、社群帳號、成效分析、行銷活動、主控台）；components 分為通用元件（圖表、平台圖示、面板）與領域元件',
@@ -275,6 +300,47 @@ export const projects: readonly Project[] = [
             'Frontend logic',
             'Backend API integration (future)',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: 'Setup',
+                steps: [
+                  'Enterprise SSO sign-in',
+                  'Connect 7 social accounts',
+                  'Team and 5 role permissions',
+                ],
+              },
+              {
+                name: 'Content Production',
+                steps: [
+                  'Create campaign',
+                  'Media library',
+                  'Compose post',
+                  'Per-platform tweaks and rule checks',
+                  'Publish or schedule',
+                  'Results and retry',
+                ],
+              },
+              {
+                name: 'Customer Replies',
+                steps: [
+                  'Unified inbox',
+                  'AI triage',
+                  'Suggested reply draft',
+                  'Escalate and assign',
+                  'Tag management',
+                ],
+              },
+              {
+                name: 'Conversion',
+                steps: ['Invite code and QR', 'Conversion funnel', 'Members', 'Member 360 view'],
+              },
+              {
+                name: 'Performance and Audit',
+                steps: ['Console', 'Business metrics', 'Decision audit'],
+              },
+            ],
+          },
           architecture: {
             steps: [
               'Presentation layer: layouts provide navigation, the side menu, organization (tenant) switching and global error banners; views are organized by business module (inbox, publishing and scheduling, social accounts, analytics, campaigns, dashboard); components are split into shared components (charts, platform icons, panels) and domain components',
@@ -405,6 +471,37 @@ export const projects: readonly Project[] = [
             '檔案原本先經過後端空間再上傳至 AWS，大檔案讓後端空間撐不住。',
             'CAD 預覽使用的套件是全域單例，destroy() 也不會真正釋放 WebGL context。每次預覽都重建 viewer 的直覺做法，在列表上 hover 十幾次後就會碰到瀏覽器的 WebGL context 上限而無法顯示。',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: '前置設定',
+                steps: [
+                  '登入與模式判定',
+                  '資料夾顯示方式',
+                  '建立資料夾結構',
+                  'Excel 批次建置',
+                  '儲存資料夾範本',
+                ],
+              },
+              {
+                name: '權限授權',
+                steps: ['資料夾權限矩陣', '單一使用者權限', '批次授權', '列印權限明細'],
+              },
+              {
+                name: '文件作業',
+                steps: [
+                  '瀏覽與搜尋',
+                  '上傳（分片與傳輸管理）',
+                  '線上預覽（含 CAD）',
+                  '版本紀錄與更新',
+                  '上架／下架',
+                  '下載與分享連結',
+                ],
+              },
+              { name: '刪除與復原', steps: ['刪除檔案', '垃圾桶復原或永久刪除'] },
+              { name: '監控與稽核', steps: ['概覽統計', '活動紀錄'] },
+            ],
+          },
           architecture: {
             steps: [
               '畫面層只做前置檢查（檔數上限、剩餘容量），把上傳交給 store',
@@ -501,6 +598,45 @@ export const projects: readonly Project[] = [
             'Files first went through backend storage before being uploaded to AWS, and large files overwhelmed that storage.',
             'The CAD viewer library is a global singleton, and its destroy() does not actually release the WebGL context. Rebuilding the viewer for every preview hit the browser’s WebGL context limit after a dozen or so hovers in the file list.',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: 'Setup',
+                steps: [
+                  'Sign-in and mode detection',
+                  'Folder display mode',
+                  'Build folder structure',
+                  'Bulk build from Excel',
+                  'Save folder template',
+                ],
+              },
+              {
+                name: 'Permissions',
+                steps: [
+                  'Folder permission matrix',
+                  'Per-user permissions',
+                  'Bulk authorization',
+                  'Print permission report',
+                ],
+              },
+              {
+                name: 'Documents',
+                steps: [
+                  'Browse and search',
+                  'Upload (chunks and transfer manager)',
+                  'Online preview (incl. CAD)',
+                  'Version history and updates',
+                  'Publish / unpublish',
+                  'Download and share link',
+                ],
+              },
+              {
+                name: 'Delete and Restore',
+                steps: ['Delete files', 'Restore or purge from trash'],
+              },
+              { name: 'Monitoring and Audit', steps: ['Overview statistics', 'Activity log'] },
+            ],
+          },
           architecture: {
             steps: [
               'The page only runs pre-checks (file count limit, remaining quota) and hands the upload to a store',
@@ -608,6 +744,28 @@ export const projects: readonly Project[] = [
             '歷史回放是問題最多的部分：同時播放 4 支影片常常卡頓、報錯；錄影中間有空檔時會卡住或跳過；原本要支援 8 倍速，但本地瀏覽器負荷不了。',
             '多支攝影機的歷史影像要能對齊同一個時間點一起播放。',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: '相機設置',
+                steps: ['新增與編輯攝影機', '儲存設定', '設定感興趣區域（ROI）'],
+              },
+              {
+                name: '即時監看',
+                steps: [
+                  '載入攝影機（4x3）',
+                  '確認串流連線',
+                  '失敗自動重試或手動重連',
+                  '放大單一畫面',
+                ],
+              },
+              { name: '個別監控', steps: ['移動偵測觸發', '自動顯示該路影像', '提示音開關'] },
+              {
+                name: '歷史回放',
+                steps: ['選擇攝影機與日期', '拖曳與縮放時間軸', '點選片段跳轉', '多路同步播放'],
+              },
+            ],
+          },
           architecture: {
             steps: [
               '前端取得攝影機清單後，透過 WebSocket 為每一路送出初始化訊息；前端只送攝影機 id，由後端自行拉取 RTSP 串流',
@@ -701,6 +859,36 @@ export const projects: readonly Project[] = [
             'History playback caused the most problems: playing 4 recordings at once often stuttered or threw errors, gaps in the recordings made playback get stuck or skip, and the original requirement of 8x speed was more than the local browser could handle.',
             'Recordings from several cameras have to line up and play from the same point in time.',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: 'Camera Setup',
+                steps: ['Add or edit camera', 'Save settings', 'Set region of interest (ROI)'],
+              },
+              {
+                name: 'Live View',
+                steps: [
+                  'Load cameras (4x3)',
+                  'Confirm stream connection',
+                  'Auto-retry or manual reconnect',
+                  'Enlarge one view',
+                ],
+              },
+              {
+                name: 'Motion Monitoring',
+                steps: ['Motion detected', 'Feed appears automatically', 'Alert sound toggle'],
+              },
+              {
+                name: 'Playback',
+                steps: [
+                  'Pick camera and date',
+                  'Drag and zoom timeline',
+                  'Click a segment to jump',
+                  'Synchronized multi-camera playback',
+                ],
+              },
+            ],
+          },
           architecture: {
             steps: [
               'After loading the camera list, the frontend sends an init message per camera over WebSocket; it only sends a camera id and the backend pulls the RTSP stream itself',
@@ -804,6 +992,33 @@ export const projects: readonly Project[] = [
             'AI 功能每次呼叫都會產生外部費用，需要依專案控制用量與預算。',
             '後台有多種角色，權限需要一致地套用在選單、路由與 API。',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: '前台：訪客瀏覽',
+                steps: ['首頁與語言切換', '分類與產品', '最新消息與知識庫', '送出聯絡表單'],
+              },
+              { name: '前台：會員', steps: ['註冊會員', '會員登入'] },
+              { name: '後台：登入', steps: ['登入後台並取得 token', '後台總覽'] },
+              {
+                name: '後台：產品管理',
+                steps: [
+                  '產品列表與批次操作',
+                  '新增或編輯產品',
+                  'AI 一鍵翻譯',
+                  '上傳圖片並設定主圖',
+                  'AI 辨識建立產品',
+                  '分類樹',
+                ],
+              },
+              { name: '後台：內容管理', steps: ['輪播圖', '最新消息', '知識庫文章'] },
+              { name: '後台：AI 工具', steps: ['AI 文案助手', '用量監控'] },
+              {
+                name: '後台：營運與設定',
+                steps: ['詢價訂單與狀態', '使用者管理', '系統設定（AI、郵件、驗證碼、維護模式）'],
+              },
+            ],
+          },
           architecture: {
             steps: [
               '前台：Laravel Blade 由伺服器輸出頁面，搭配 Alpine.js 與 Tailwind CSS；每條路由同時提供預設語系與加上語系前綴的版本',
@@ -903,6 +1118,42 @@ export const projects: readonly Project[] = [
             'Every AI call costs money with an external provider, so usage and budget have to be controlled per project.',
             'The admin has several roles, and permissions must apply consistently to menus, routes and the API.',
           ],
+          operationFlow: {
+            phases: [
+              {
+                name: 'Storefront: Browsing',
+                steps: [
+                  'Home and language switch',
+                  'Categories and products',
+                  'News and knowledge base',
+                  'Submit contact form',
+                ],
+              },
+              { name: 'Storefront: Members', steps: ['Register', 'Member sign-in'] },
+              { name: 'Admin: Sign-in', steps: ['Sign in to the admin (token)', 'Dashboard'] },
+              {
+                name: 'Admin: Products',
+                steps: [
+                  'Product list and bulk actions',
+                  'Create or edit product',
+                  'One-click AI translation',
+                  'Upload images, set main image',
+                  'Create product from AI image recognition',
+                  'Category tree',
+                ],
+              },
+              { name: 'Admin: Content', steps: ['Banners', 'News', 'Knowledge-base articles'] },
+              { name: 'Admin: AI Tools', steps: ['AI copy assistant', 'Usage monitor'] },
+              {
+                name: 'Admin: Operations and Settings',
+                steps: [
+                  'Inquiry orders and status',
+                  'User management',
+                  'System settings (AI, mail, CAPTCHA, maintenance mode)',
+                ],
+              },
+            ],
+          },
           architecture: {
             steps: [
               'Public site: Laravel Blade renders pages on the server, with Alpine.js and Tailwind CSS; every route exists both without a prefix (default language) and with a language prefix',

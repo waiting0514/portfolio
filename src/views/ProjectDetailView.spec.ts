@@ -38,6 +38,7 @@ describe('ProjectDetailView', () => {
       'Problem',
       'Requirement to Frontend Workflow',
       'Architecture / Flow',
+      'Operation Flow',
       'Solution',
       'Key Responsibilities',
       'Technical Challenges',
@@ -190,6 +191,23 @@ describe('ProjectDetailView', () => {
       'Step two (en)',
     ])
     expect(section.get('img').attributes('alt')).toBe('Diagram (en)')
+  })
+
+  it('shows the operation flow as numbered phases with ordered steps', async () => {
+    const { wrapper } = await mountDetail('full-project')
+    const section = wrapper.get('section[aria-labelledby="operation-flow"]')
+
+    expect(section.get('h2').text()).toBe('Operation Flow')
+    expect(section.findAll('h3').map((heading) => heading.text())).toEqual([
+      'Setup (en)',
+      'Use (en)',
+    ])
+    expect(
+      section.findAll('ol ol').map((steps) => steps.findAll('li').map((s) => s.text())),
+    ).toEqual([
+      ['Sign in', 'Configure'],
+      ['Create', 'Review', 'Publish'],
+    ])
   })
 
   it('uses Traditional Chinese content and labels without the /en prefix', async () => {

@@ -65,6 +65,13 @@ export interface CaseStudy {
     /** Alt text for `Project.architectureDiagram`, when a diagram exists. */
     diagramAlt?: string
   }
+  /**
+   * How the system is operated, as ordered phases of ordered steps (e.g. "Setup → Documents").
+   * Rendered as a simple flow chart; steps are short names, not sentences.
+   */
+  operationFlow?: {
+    phases: { name: string; steps: string[] }[]
+  }
   /** Paragraphs. */
   solution?: string[]
   responsibilities?: TitledItem[]
