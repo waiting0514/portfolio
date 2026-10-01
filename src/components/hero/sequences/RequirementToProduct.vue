@@ -24,13 +24,13 @@ const nodes = [
 <template>
   <div class="seq flex flex-col items-center" aria-hidden="true">
     <div
-      class="seq-req relative w-full overflow-hidden rounded-xl border border-line bg-surface px-5 py-4"
+      class="seq-req relative w-full overflow-hidden rounded-card border border-line bg-surface px-5 py-4"
     >
       <span
         class="seq-scan pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-transparent via-accent-soft to-transparent"
       ></span>
       <div class="relative">
-        <p class="eyebrow text-[0.6875rem] text-ink-muted">Requirement</p>
+        <p class="eyebrow text-micro text-ink-muted">Requirement</p>
         <p class="mt-1 font-bold">Product / AI Spec</p>
         <ul class="mt-3 grid gap-1.5">
           <li
@@ -50,19 +50,19 @@ const nodes = [
         class="seq-line-analysis relative w-px origin-top bg-line-strong after:absolute after:-bottom-px after:left-1/2 after:size-1.5 after:-translate-x-1/2 after:rotate-45 after:border-r after:border-b after:border-line-strong"
       ></span>
       <span
-        class="seq-label absolute top-1/2 left-1/2 ml-3 -translate-y-1/2 font-mono text-[0.6875rem] tracking-wide whitespace-nowrap text-accent uppercase"
+        class="seq-label absolute top-1/2 left-1/2 ml-3 -translate-y-1/2 font-mono text-micro tracking-wide whitespace-nowrap text-accent uppercase"
       >
         Requirement Analysis
       </span>
     </div>
 
-    <div class="seq-arch w-full rounded-xl border border-accent/40 bg-surface px-5 py-4">
-      <p class="eyebrow text-center text-[0.6875rem] text-accent">Frontend Architecture</p>
+    <div class="seq-arch w-full rounded-card border border-accent/40 bg-surface px-5 py-4">
+      <p class="eyebrow text-center text-micro text-accent">Frontend Architecture</p>
       <ul class="mt-3 flex flex-wrap justify-center gap-2">
         <li
           v-for="(node, index) in nodes"
           :key="node.name"
-          class="seq-node rounded-md border border-line bg-canvas px-2.5 py-1 font-mono text-xs text-ink-soft transition-colors duration-150 hover:border-accent hover:text-accent"
+          class="seq-node rounded-inset border border-line bg-canvas px-2.5 py-1 font-mono text-xs text-ink-soft transition-state hover:border-accent hover:text-accent"
           :class="{ 'hidden sm:block': node.optional }"
           :style="{ '--seq-delay': `${index * 120}ms`, '--seq-shift': node.shift }"
         >
@@ -77,14 +77,14 @@ const nodes = [
       ></span>
     </div>
 
-    <div class="seq-app w-full overflow-hidden rounded-xl border border-line bg-surface">
+    <div class="seq-app w-full overflow-hidden rounded-card border border-line bg-surface">
       <div class="flex items-center gap-1.5 border-b border-line px-4 py-2.5">
         <span class="size-2 rounded-full bg-line-strong"></span>
         <span class="size-2 rounded-full bg-line-strong"></span>
         <span class="size-2 rounded-full bg-line-strong"></span>
-        <span class="eyebrow ml-2 text-[0.6875rem] text-ink-muted">Web Product</span>
+        <span class="eyebrow ml-2 text-micro text-ink-muted">Web Product</span>
         <span
-          class="seq-done ml-auto inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent-soft px-2 py-0.5 text-[0.6875rem] font-semibold text-accent"
+          class="seq-done ml-auto inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent-soft px-2 py-0.5 text-micro font-semibold text-accent"
         >
           ✓ Ready
         </span>
@@ -93,11 +93,11 @@ const nodes = [
         <span class="seq-tile font-mono text-xs text-ink-muted">Dashboard</span>
         <div class="grid grid-cols-2 gap-2.5">
           <span
-            class="seq-tile h-9 rounded-md border border-line bg-canvas"
+            class="seq-tile h-9 rounded-inset border border-line bg-canvas"
             style="--seq-delay: 120ms"
           ></span>
           <span
-            class="seq-tile h-9 rounded-md border border-line bg-canvas"
+            class="seq-tile h-9 rounded-inset border border-line bg-canvas"
             style="--seq-delay: 240ms"
           ></span>
         </div>

@@ -57,7 +57,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
     <BaseContainer class="flex flex-wrap items-center justify-between gap-x-6">
       <RouterLink
         :to="localePath('/')"
-        class="flex min-h-16 items-center text-[1.0625rem] font-bold tracking-tight text-ink"
+        class="flex min-h-16 items-center text-lead font-bold tracking-tight text-ink"
       >
         {{ profile.content[locale].name }}
         <span class="sr-only">— {{ messages.nav.home }}</span>
@@ -66,7 +66,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
       <button
         ref="menuButton"
         type="button"
-        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line bg-surface px-3 text-sm font-medium text-ink hover:border-line-strong md:hidden"
+        class="inline-flex min-h-11 items-center gap-2 rounded-control border border-line bg-surface px-3 text-sm font-medium text-ink transition-state hover:border-line-strong md:hidden"
         :aria-expanded="isMenuOpen"
         :aria-controls="MENU_ID"
         @click="isMenuOpen = !isMenuOpen"
@@ -97,11 +97,11 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
             <RouterLink
               :to="item.to"
               :aria-current="item.active ? 'page' : undefined"
-              class="flex min-h-11 items-center rounded-md px-3 text-[0.9375rem] transition-colors"
+              class="flex min-h-11 items-center rounded-inset px-3 text-ui transition-state"
               :class="
                 item.active
                   ? 'font-semibold text-ink underline decoration-accent decoration-2 underline-offset-[10px]'
-                  : 'font-medium text-ink-muted hover:text-ink'
+                  : 'link-muted font-medium'
               "
             >
               {{ item.label }}
@@ -112,7 +112,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
               :href="profile.githubUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex min-h-11 items-center rounded-md px-3 text-[0.9375rem] font-medium text-ink-muted transition-colors hover:text-ink"
+              class="flex min-h-11 items-center rounded-inset px-3 link-muted text-ui font-medium transition-state"
             >
               {{ messages.nav.github }}
               <span class="sr-only">({{ messages.common.opensInNewTab }})</span>
@@ -125,7 +125,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
               :to="alternatePath(otherLocale)"
               :lang="otherLocaleConfig.htmlLang"
               :hreflang="otherLocaleConfig.htmlLang"
-              class="flex min-h-11 items-center rounded-md px-3 font-mono text-[0.8125rem] font-medium tracking-wide text-ink-muted transition-colors hover:text-accent"
+              class="flex min-h-11 items-center rounded-inset px-3 font-mono text-label font-medium tracking-wide link-muted transition-state"
             >
               <span class="sr-only">{{ messages.nav.switchLanguage }}: </span>
               {{ otherLocaleConfig.nativeName }}

@@ -1,50 +1,129 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens: blue-and-white technical style.
- * The default Tailwind palette is cleared so components can only use these semantic colors.
+ * Design tokens: blue-and-white technical style, in three layers.
+ *
+ *   1. Primitive  — raw palette on :root (--blue-600, --slate-950 ...).
+ *                   Not exposed as utilities, so components can't reach for them directly.
+ *   2. Semantic   — @theme names by purpose (canvas, ink, accent ...). These are the only
+ *                   color utilities that exist, because the default Tailwind palette is cleared.
+ *   3. Component  — tokens owned by one pattern (shadow-card-hover), built from layer 2.
+ *
  * Contrast (WCAG):
- *   ink-muted  #4b5b72 on canvas #f6f9fd = 6.54:1, on surface #ffffff = 6.91:1
- *   ink-soft   #33445c on canvas #f6f9fd = 9.37:1
- *   accent     #1653e6 on canvas = 5.83:1, on surface = 6.15:1, on accent-soft = 5.43:1
- *   white text on accent = 6.15:1, on accent-strong #0f3fb3 = 8.82:1
- *   on-navy-muted #a9bcd9 on navy = 9.03:1, on-navy-accent #8fb4ff on navy = 8.42:1
+ *   ink-muted  slate-600 on canvas = 6.54:1, on surface = 6.91:1
+ *   ink-soft   slate-700 on canvas = 9.37:1
+ *   accent     blue-600 on canvas = 5.83:1, on surface = 6.15:1, on accent-soft = 5.43:1
+ *   white text on accent = 6.15:1, on accent-strong blue-700 = 8.82:1
+ *   on-navy-muted slate-300 on navy = 9.03:1, on-navy-accent blue-300 on navy = 8.42:1
  *     (accent itself is only 2.83:1 on navy, so the navy band uses on-navy-accent)
- *   warn #8a3b0a on warn-soft #fdf2e4 = 7.01:1
+ *   warn amber-800 on warn-soft amber-50 = 7.01:1
  */
-@theme {
-  --color-*: initial;
-  --color-white: #ffffff;
-  --color-canvas: #f6f9fd;
-  --color-surface: #ffffff;
-  --color-grid: #e4ecf7;
-  --color-ink: #0b1a30;
-  --color-ink-soft: #33445c;
-  --color-ink-muted: #4b5b72;
-  --color-line: #dce5f1;
-  --color-line-strong: #b9c7da;
-  --color-accent: #1653e6;
-  --color-accent-strong: #0f3fb3;
-  --color-accent-soft: #eaf1ff;
-  --color-navy: #0b1a30;
-  --color-navy-line: #22344f;
-  --color-on-navy: #ffffff;
-  --color-on-navy-muted: #a9bcd9;
-  --color-on-navy-accent: #8fb4ff;
-  --color-warn: #8a3b0a;
-  --color-warn-dot: #b45309;
-  --color-warn-soft: #fdf2e4;
+:root {
+  --white: #ffffff;
 
+  --blue-50: #eaf1ff;
+  --blue-300: #8fb4ff;
+  --blue-600: #1653e6;
+  --blue-700: #0f3fb3;
+
+  --slate-25: #f6f9fd;
+  --slate-50: #e4ecf7;
+  --slate-100: #dce5f1;
+  --slate-200: #b9c7da;
+  --slate-300: #a9bcd9;
+  --slate-600: #4b5b72;
+  --slate-700: #33445c;
+  --slate-800: #22344f;
+  --slate-950: #0b1a30;
+
+  --amber-50: #fdf2e4;
+  --amber-600: #b45309;
+  --amber-800: #8a3b0a;
+}
+
+@theme {
+  /* Color: semantic */
+  --color-*: initial;
+  --color-white: var(--white);
+  --color-canvas: var(--slate-25);
+  --color-surface: var(--white);
+  --color-grid: var(--slate-50);
+  --color-ink: var(--slate-950);
+  --color-ink-soft: var(--slate-700);
+  --color-ink-muted: var(--slate-600);
+  --color-line: var(--slate-100);
+  --color-line-strong: var(--slate-200);
+  --color-accent: var(--blue-600);
+  --color-accent-strong: var(--blue-700);
+  --color-accent-soft: var(--blue-50);
+  --color-navy: var(--slate-950);
+  --color-navy-line: var(--slate-800);
+  --color-on-navy: var(--white);
+  --color-on-navy-muted: var(--slate-300);
+  --color-on-navy-accent: var(--blue-300);
+  --color-warn: var(--amber-800);
+  --color-warn-dot: var(--amber-600);
+  --color-warn-soft: var(--amber-50);
+
+  /* Typography */
   --font-sans:
     'Noto Sans TC', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang TC',
     'Microsoft JhengHei', sans-serif;
   --font-mono:
     'IBM Plex Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', Menlo, Consolas, monospace;
 
+  /*
+   * Type scale alongside Tailwind's xs–9xl, for the sizes the design actually uses
+   * (px at a 16px root): micro 11, label 13, ui 15, lead 17, title 21,
+   * heading-sm 28, heading 34, heading-lg 44, display 60, display-lg 72.
+   */
+  --text-micro: 0.6875rem;
+  --text-label: 0.8125rem;
+  --text-ui: 0.9375rem;
+  --text-lead: 1.0625rem;
+  --text-title: 1.3125rem;
+  --text-heading-sm: 1.75rem;
+  --text-heading: 2.125rem;
+  --text-heading-lg: 2.75rem;
+  --text-display: 3.75rem;
+  --text-display-lg: 4.5rem;
+
+  --leading-display: 1.05;
+  --leading-headline: 1.15;
+
+  /*
+   * Radius: the default scale is cleared, so corners come only from these roles.
+   * rounded-full (pills, dots) stays available as a built-in.
+   *   card    12px  cards, panels, media frames
+   *   control  8px  buttons, menu toggle, pager links
+   *   inset    6px  small pieces inside a card or bar: nav links, tags, diagram nodes
+   */
+  --radius-*: initial;
+  --radius-card: 0.75rem;
+  --radius-control: 0.5rem;
+  --radius-inset: 0.375rem;
+
+  /* Layout */
   --container-content: 75rem;
   --container-prose: 70ch;
 
+  /* Motion */
   --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-state: 150ms;
+  --duration-lift: 180ms;
+
+  /*
+   * Focus ring color. Sections with a dark background override it (see surface-navy),
+   * because accent is only 2.83:1 on navy and a focus indicator needs 3:1.
+   */
+  --color-focus-ring: var(--color-accent);
+
+  /*
+   * Component: card hover elevation (used by card-lift).
+   * Literal rgb() of slate-950 / blue-600 with alpha: color-mix() would compile to an
+   * opaque fallback for older browsers.
+   */
+  --shadow-card-hover: 0 1px 2px rgb(11 26 48 / 6%), 0 12px 32px -16px rgb(22 83 230 / 25%);
 }
 
 /* Vertical rhythm shared by every page section. */
@@ -59,7 +138,7 @@
 /* Small uppercase monospace label above a heading, e.g. "SELECTED WORK". */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: var(--text-label);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -74,19 +153,64 @@
   background-size: 40px 40px;
 }
 
+/*
+ * Interactive states. Rules shared by every link, button and clickable card:
+ *   - text links move toward more contrast on hover (link-muted, link-accent)
+ *   - outlined controls signal hover with accent border and text (secondary button)
+ *   - bordered surfaces darken their border to line-strong on hover
+ *   - focus uses the global :focus-visible ring (color-focus-ring)
+ *   - hover styles only apply on devices that can hover, like Tailwind's hover: variant
+ */
+
+/* One transition for every color / border / elevation state change. */
+@utility transition-state {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, box-shadow, transform;
+  transition-duration: var(--duration-state);
+  transition-timing-function: var(--ease-out-soft);
+}
+
+/* Prominent text link, e.g. "View all projects →". */
+@utility link-accent {
+  color: var(--color-accent);
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-accent-strong);
+    }
+  }
+}
+
+/* Secondary text link in navigation and meta rows. */
+@utility link-muted {
+  color: var(--color-ink-muted);
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-ink);
+    }
+  }
+}
+
+/* Dark band: navy background with on-navy text and a focus ring that stays visible. */
+@utility surface-navy {
+  background-color: var(--color-navy);
+  color: var(--color-on-navy);
+  --color-focus-ring: var(--color-on-navy-accent);
+}
+
 /* Hover elevation for cards; no movement when the user prefers reduced motion. */
 @utility card-lift {
-  transition:
-    transform 180ms var(--ease-out-soft),
-    box-shadow 180ms var(--ease-out-soft),
-    border-color 180ms var(--ease-out-soft);
+  transition-property: transform, box-shadow, border-color;
+  transition-duration: var(--duration-lift);
+  transition-timing-function: var(--ease-out-soft);
 
-  &:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-line-strong);
-    box-shadow:
-      0 1px 2px rgb(11 26 48 / 6%),
-      0 12px 32px -16px rgb(22 83 230 / 25%);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-line-strong);
+      box-shadow: var(--shadow-card-hover);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -99,7 +223,7 @@
 /* Long-form reading content (case studies, about page). */
 @utility prose-content {
   max-width: var(--container-prose);
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
   line-height: 1.85;
   color: var(--color-ink-soft);
 
@@ -144,7 +268,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
   }
 

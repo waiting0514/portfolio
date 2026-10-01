@@ -20,7 +20,7 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
         <p class="eyebrow text-accent">{{ messages.home.aboutEyebrow }}</p>
         <h1
           id="about-title"
-          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-[3.75rem]"
+          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-display"
         >
           {{ messages.pages.aboutTitle }}
         </h1>
@@ -39,7 +39,7 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
       <section aria-labelledby="experience-title" class="lg:grid lg:grid-cols-12 lg:gap-8">
         <h2
           id="experience-title"
-          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-[2.75rem]"
+          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-heading-lg"
         >
           {{ messages.about.experienceTitle }}
         </h2>
@@ -64,7 +64,7 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
       <section aria-labelledby="strengths-title" class="lg:grid lg:grid-cols-12 lg:gap-8">
         <h2
           id="strengths-title"
-          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-[2.75rem]"
+          class="text-3xl leading-tight font-bold tracking-tight lg:col-span-4 md:text-heading-lg"
         >
           {{ messages.about.strengthsTitle }}
         </h2>
@@ -72,7 +72,7 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
           <li
             v-for="strength in content.strengths"
             :key="strength"
-            class="rounded-xl border border-line bg-surface p-6 leading-relaxed text-ink-soft"
+            class="rounded-card border border-line bg-surface p-6 leading-relaxed text-ink-soft"
           >
             {{ strength }}
           </li>
@@ -80,15 +80,15 @@ usePageMeta(() => describePage({ page: 'about' }, locale.value))
       </section>
     </BaseContainer>
 
-    <section aria-labelledby="contact-title" class="section-spacing bg-navy text-on-navy">
+    <section aria-labelledby="contact-title" class="section-spacing surface-navy">
       <BaseContainer>
         <h2
           id="contact-title"
-          class="text-3xl leading-tight font-bold tracking-tight md:text-[2.75rem]"
+          class="text-3xl leading-tight font-bold tracking-tight md:text-heading-lg"
         >
           {{ messages.about.contactTitle }}
         </h2>
-        <p class="mt-4 max-w-prose text-[1.0625rem] text-on-navy-muted">
+        <p class="mt-4 max-w-prose text-lead text-on-navy-muted">
           {{ messages.about.contactDescription }}
         </p>
         <div class="mt-8 flex flex-wrap gap-3">

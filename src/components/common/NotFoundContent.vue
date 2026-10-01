@@ -11,7 +11,7 @@ const { messages, localePath } = useLocale()
   <section class="hero-grid border-b border-line">
     <BaseContainer class="py-20 md:py-32">
       <p class="eyebrow text-accent">Error 404</p>
-      <h1 class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-[3.75rem]">
+      <h1 class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-display">
         {{ messages.notFound.title }}
       </h1>
       <p class="mt-5 max-w-prose text-lg text-ink-soft">{{ messages.notFound.description }}</p>

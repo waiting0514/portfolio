@@ -101,7 +101,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
       <BaseContainer class="pt-8 pb-14 md:pt-12 md:pb-20">
         <RouterLink
           :to="localePath('/projects')"
-          class="inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-medium text-ink-muted hover:text-ink"
+          class="inline-flex min-h-11 items-center gap-1.5 link-muted text-ui font-medium transition-state"
         >
           <span aria-hidden="true">←</span> {{ messages.caseStudy.allProjects }}
         </RouterLink>
@@ -111,7 +111,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
         </div>
         <h1
           id="case-study-title"
-          class="mt-4 max-w-5xl text-4xl leading-[1.15] font-bold tracking-tight text-balance md:text-[3.75rem]"
+          class="mt-4 max-w-5xl text-4xl leading-headline font-bold tracking-tight text-balance md:text-display"
         >
           {{ content.title }}
         </h1>
@@ -140,7 +140,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
           :height="project.cover.height"
           fetchpriority="high"
           decoding="async"
-          class="mt-10 aspect-video w-full rounded-xl border border-line bg-surface object-cover"
+          class="mt-10 aspect-video w-full rounded-card border border-line bg-surface object-cover"
         />
       </BaseContainer>
     </header>
@@ -231,7 +231,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
           </div>
           <div
             v-if="hasContent(caseStudy.problemExample)"
-            class="mt-8 rounded-xl border border-line bg-surface p-6 md:p-8"
+            class="mt-8 rounded-card border border-line bg-surface p-6 md:p-8"
           >
             <h3 v-if="caseStudy.problemExample.heading" class="text-lg font-bold">
               {{ caseStudy.problemExample.heading }}
@@ -282,7 +282,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             <li
               v-for="step in caseStudy.architecture.steps"
               :key="step"
-              class="relative min-h-8 pl-12 text-[1.0625rem] leading-relaxed text-ink-soft [counter-increment:step] before:absolute before:top-0 before:left-0 before:flex before:size-8 before:items-center before:justify-center before:rounded-full before:border before:border-ink before:bg-canvas before:font-mono before:text-[0.8125rem] before:text-ink before:content-[counter(step)]"
+              class="relative min-h-8 pl-12 text-lead leading-relaxed text-ink-soft [counter-increment:step] before:absolute before:top-0 before:left-0 before:flex before:size-8 before:items-center before:justify-center before:rounded-full before:border before:border-ink before:bg-canvas before:font-mono before:text-label before:text-ink before:content-[counter(step)]"
             >
               {{ step }}
             </li>
@@ -295,7 +295,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             :height="project.architectureDiagram.height"
             loading="lazy"
             decoding="async"
-            class="mt-8 h-auto w-full rounded-xl border border-line bg-surface"
+            class="mt-8 h-auto w-full rounded-card border border-line bg-surface"
           />
         </CaseStudySection>
 
@@ -339,7 +339,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
               <span class="mt-2 block">{{ item.challenge }}</span>
             </template>
             <p
-              class="mt-4 border-t border-dashed border-line pt-4 text-[0.9375rem] leading-relaxed text-ink-soft"
+              class="mt-4 border-t border-dashed border-line pt-4 text-ui leading-relaxed text-ink-soft"
             >
               <strong class="text-ink"
                 >{{ messages.caseStudy.solution }}{{ messages.common.labelSeparator }}</strong
@@ -385,7 +385,7 @@ usePageMeta(() => describePage({ page: 'project', slug: props.slug }, locale.val
             <li
               v-for="result in caseStudy.results"
               :key="result"
-              class="border-b border-line py-4 text-[1.0625rem] leading-relaxed text-ink-soft"
+              class="border-b border-line py-4 text-lead leading-relaxed text-ink-soft"
             >
               {{ result }}
             </li>

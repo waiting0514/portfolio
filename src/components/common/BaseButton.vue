@@ -29,7 +29,7 @@ const variantClass = computed(() =>
   <RouterLink
     v-if="to"
     :to="to"
-    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 text-[0.9375rem] font-bold transition-[color,background-color,border-color,transform] duration-150 active:translate-y-px"
+    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-ui font-bold transition-state active:translate-y-px"
     :class="variantClass"
   >
     <slot />
@@ -39,7 +39,7 @@ const variantClass = computed(() =>
     :href="href"
     target="_blank"
     rel="noopener noreferrer"
-    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 text-[0.9375rem] font-bold transition-[color,background-color,border-color,transform] duration-150 active:translate-y-px"
+    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-ui font-bold transition-state active:translate-y-px"
     :class="variantClass"
   >
     <slot />

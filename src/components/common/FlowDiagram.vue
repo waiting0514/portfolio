@@ -22,7 +22,7 @@ defineProps<{
       class="flex flex-col items-center gap-2 md:flex-row"
     >
       <span
-        class="w-full rounded-md border border-line bg-surface px-3 py-2 text-center text-sm leading-snug text-ink md:w-auto"
+        class="w-full rounded-inset border border-line bg-surface px-3 py-2 text-center text-sm leading-snug text-ink md:w-auto"
       >
         {{ step }}
       </span>

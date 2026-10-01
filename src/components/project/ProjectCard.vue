@@ -31,7 +31,7 @@ const indexLabel = computed(() =>
     card is clickable everywhere but is a single tab stop with a descriptive accessible name.
   -->
   <article
-    class="group card-lift relative flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent"
+    class="group card-lift relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-focus-ring"
   >
     <img
       :src="assetUrl(project.cover.src)"
@@ -55,23 +55,21 @@ const indexLabel = computed(() =>
       </div>
       <component
         :is="`h${headingLevel}`"
-        class="text-[1.3125rem] leading-snug font-bold tracking-tight text-ink"
+        class="text-title leading-snug font-bold tracking-tight text-ink"
       >
         {{ content.title }}
       </component>
-      <p class="mt-3 text-[0.9375rem] leading-relaxed text-ink-muted">{{ content.summary }}</p>
+      <p class="mt-3 text-ui leading-relaxed text-ink-muted">{{ content.summary }}</p>
       <TechTagList class="mt-5" :items="project.technologies" :label="messages.project.techStack" />
       <RouterLink
         :to="localePath(`/projects/${project.slug}`)"
-        class="mt-auto inline-flex items-center gap-1.5 pt-7 text-[0.9375rem] font-bold text-accent after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+        class="mt-auto inline-flex items-center gap-1.5 pt-7 text-ui font-bold text-accent after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
       >
         <span>
           {{ messages.project.viewCaseStudy
           }}<span class="sr-only">{{ messages.common.labelSeparator }}{{ content.title }}</span>
         </span>
-        <span
-          aria-hidden="true"
-          class="transition-transform duration-150 motion-safe:group-hover:translate-x-0.5"
+        <span aria-hidden="true" class="transition-state motion-safe:group-hover:translate-x-0.5"
           >→</span
         >
       </RouterLink>

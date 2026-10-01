@@ -30,7 +30,7 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
         <p class="eyebrow text-accent">{{ content.name }}</p>
         <h1
           id="hero-title"
-          class="mt-4 text-5xl leading-[1.05] font-black tracking-tight md:text-7xl lg:text-[4.5rem]"
+          class="mt-4 text-5xl leading-display font-black tracking-tight md:text-display-lg"
         >
           {{ content.role }}
         </h1>
@@ -73,12 +73,10 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
         />
         <RouterLink
           :to="localePath('/projects')"
-          class="group inline-flex min-h-11 items-center gap-1.5 font-bold text-accent hover:text-accent-strong"
+          class="group inline-flex min-h-11 items-center gap-1.5 link-accent font-bold transition-state"
         >
           {{ messages.home.viewAllProjects }}
-          <span
-            aria-hidden="true"
-            class="transition-transform duration-150 motion-safe:group-hover:translate-x-0.5"
+          <span aria-hidden="true" class="transition-state motion-safe:group-hover:translate-x-0.5"
             >→</span
           >
         </RouterLink>
@@ -98,9 +96,7 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
       <div class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
         <div v-for="category in skillCategories" :key="category.name.en">
           <h3 class="eyebrow text-xs text-ink-muted">{{ category.name[locale] }}</h3>
-          <ul
-            class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[0.9375rem] text-ink-soft lg:grid lg:gap-1"
-          >
+          <ul class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-ui text-ink-soft lg:grid lg:gap-1">
             <li v-for="item in category.items" :key="item">{{ item }}</li>
           </ul>
         </div>
@@ -133,12 +129,10 @@ usePageMeta(() => describePage({ page: 'home' }, locale.value))
         </ol>
         <RouterLink
           :to="localePath('/about')"
-          class="group mt-8 inline-flex min-h-11 items-center gap-1.5 font-bold text-accent hover:text-accent-strong"
+          class="group mt-8 inline-flex min-h-11 items-center gap-1.5 link-accent font-bold transition-state"
         >
           {{ messages.home.viewAbout }}
-          <span
-            aria-hidden="true"
-            class="transition-transform duration-150 motion-safe:group-hover:translate-x-0.5"
+          <span aria-hidden="true" class="transition-state motion-safe:group-hover:translate-x-0.5"
             >→</span
           >
         </RouterLink>

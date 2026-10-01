@@ -18,7 +18,7 @@ usePageMeta(() => describePage({ page: 'projects' }, locale.value))
         <p class="eyebrow text-accent">{{ messages.pages.projectsEyebrow }}</p>
         <h1
           id="projects-title"
-          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-[3.75rem]"
+          class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-display"
         >
           {{ messages.pages.projectsTitle }}
         </h1>

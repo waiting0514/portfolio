@@ -33,7 +33,7 @@ const indexLabel = computed(() =>
     </p>
     <h2
       :id="id"
-      class="scroll-mt-16 text-[1.75rem] leading-tight font-bold tracking-tight md:text-[2.125rem]"
+      class="scroll-mt-16 text-heading-sm leading-tight font-bold tracking-tight md:text-heading"
     >
       {{ title }}
     </h2>

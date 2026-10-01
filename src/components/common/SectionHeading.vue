@@ -23,10 +23,10 @@ withDefaults(
       :is="`h${level}`"
       :id="id"
       class="font-bold tracking-tight"
-      :class="level === 2 ? 'text-3xl leading-tight md:text-[2.75rem]' : 'text-xl'"
+      :class="level === 2 ? 'text-3xl leading-tight md:text-heading-lg' : 'text-xl'"
     >
       {{ title }}
     </component>
-    <p v-if="description" class="mt-4 text-[1.0625rem] opacity-80">{{ description }}</p>
+    <p v-if="description" class="mt-4 text-lead opacity-80">{{ description }}</p>
   </div>
 </template>

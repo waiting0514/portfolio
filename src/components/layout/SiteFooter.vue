@@ -18,7 +18,7 @@ const year = __BUILD_YEAR__
         :href="profile.githubUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex min-h-11 items-center font-medium text-ink hover:text-accent md:min-h-0"
+        class="inline-flex min-h-11 items-center link-accent font-medium transition-state md:min-h-6"
       >
         {{ messages.nav.github }}
         <span class="sr-only">({{ messages.common.opensInNewTab }})</span>

@@ -18,11 +18,11 @@ const { messages } = useLocale()
         <a
           :href="`#${item.id}`"
           :aria-current="item.id === activeId ? 'true' : undefined"
-          class="flex min-h-10 items-center border-l-2 py-1 pl-4 text-[0.9375rem] transition-colors"
+          class="flex min-h-10 items-center border-l-2 py-1 pl-4 text-ui transition-state"
           :class="
             item.id === activeId
               ? 'border-accent font-bold text-ink'
-              : 'border-line text-ink-muted hover:border-line-strong hover:text-ink'
+              : 'link-muted border-line hover:border-line-strong'
           "
         >
           {{ item.title }}
