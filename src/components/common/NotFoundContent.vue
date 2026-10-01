@@ -8,17 +8,19 @@ const { messages, localePath } = useLocale()
 </script>
 
 <template>
-  <BaseContainer as="section" class="section-spacing">
-    <p class="font-mono text-sm text-ink-muted">404</p>
-    <h1 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
-      {{ messages.notFound.title }}
-    </h1>
-    <p class="mt-4 max-w-prose text-ink-muted">{{ messages.notFound.description }}</p>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <BaseButton :to="localePath('/')">{{ messages.notFound.backHome }}</BaseButton>
-      <BaseButton :to="localePath('/projects')" variant="secondary">
-        {{ messages.notFound.browseProjects }}
-      </BaseButton>
-    </div>
-  </BaseContainer>
+  <section class="hero-grid border-b border-line">
+    <BaseContainer class="py-20 md:py-32">
+      <p class="eyebrow text-accent">Error 404</p>
+      <h1 class="mt-4 text-4xl leading-tight font-bold tracking-tight md:text-[3.75rem]">
+        {{ messages.notFound.title }}
+      </h1>
+      <p class="mt-5 max-w-prose text-lg text-ink-soft">{{ messages.notFound.description }}</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <BaseButton :to="localePath('/')">{{ messages.notFound.backHome }}</BaseButton>
+        <BaseButton :to="localePath('/projects')" variant="secondary">
+          {{ messages.notFound.browseProjects }}
+        </BaseButton>
+      </div>
+    </BaseContainer>
+  </section>
 </template>

@@ -1,48 +1,107 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens.
+ * Design tokens: blue-and-white technical style.
  * The default Tailwind palette is cleared so components can only use these semantic colors.
  * Contrast (WCAG):
- *   ink-muted #475569 on canvas #ffffff = 7.58:1, on surface #f8fafc = 7.24:1
- *   accent    #1d4ed8 on canvas #ffffff = 6.70:1, on surface #f8fafc = 6.40:1
- *   white text on accent #1d4ed8 = 6.70:1, on accent-strong #1e40af = 8.72:1
+ *   ink-muted  #4b5b72 on canvas #f6f9fd = 6.54:1, on surface #ffffff = 6.91:1
+ *   ink-soft   #33445c on canvas #f6f9fd = 9.37:1
+ *   accent     #1653e6 on canvas = 5.83:1, on surface = 6.15:1, on accent-soft = 5.43:1
+ *   white text on accent = 6.15:1, on accent-strong #0f3fb3 = 8.82:1
+ *   on-navy-muted #a9bcd9 on navy = 9.03:1, on-navy-accent #8fb4ff on navy = 8.42:1
+ *     (accent itself is only 2.83:1 on navy, so the navy band uses on-navy-accent)
+ *   warn #8a3b0a on warn-soft #fdf2e4 = 7.01:1
  */
 @theme {
   --color-*: initial;
   --color-white: #ffffff;
-  --color-canvas: #ffffff;
-  --color-surface: #f8fafc;
-  --color-ink: #0f172a;
-  --color-ink-muted: #475569;
-  --color-line: #e2e8f0;
-  --color-accent: #1d4ed8;
-  --color-accent-strong: #1e40af;
-  --color-accent-soft: #eff6ff;
+  --color-canvas: #f6f9fd;
+  --color-surface: #ffffff;
+  --color-grid: #e4ecf7;
+  --color-ink: #0b1a30;
+  --color-ink-soft: #33445c;
+  --color-ink-muted: #4b5b72;
+  --color-line: #dce5f1;
+  --color-line-strong: #b9c7da;
+  --color-accent: #1653e6;
+  --color-accent-strong: #0f3fb3;
+  --color-accent-soft: #eaf1ff;
+  --color-navy: #0b1a30;
+  --color-navy-line: #22344f;
+  --color-on-navy: #ffffff;
+  --color-on-navy-muted: #a9bcd9;
+  --color-on-navy-accent: #8fb4ff;
+  --color-warn: #8a3b0a;
+  --color-warn-dot: #b45309;
+  --color-warn-soft: #fdf2e4;
 
   --font-sans:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Noto Sans TC',
+    'Noto Sans TC', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang TC',
     'Microsoft JhengHei', sans-serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, 'Cascadia Code', Menlo, Consolas, 'Liberation Mono', monospace;
+    'IBM Plex Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', Menlo, Consolas, monospace;
 
-  --container-content: 72rem;
+  --container-content: 75rem;
   --container-prose: 70ch;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 /* Vertical rhythm shared by every page section. */
 @utility section-spacing {
-  padding-block: 4rem;
+  padding-block: 3.5rem;
 
   @variant md {
-    padding-block: 6rem;
+    padding-block: 7rem;
+  }
+}
+
+/* Small uppercase monospace label above a heading, e.g. "SELECTED WORK". */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Faint 40px grid behind hero areas. */
+@utility hero-grid {
+  background-color: var(--color-canvas);
+  background-image:
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Hover elevation for cards; no movement when the user prefers reduced motion. */
+@utility card-lift {
+  transition:
+    transform 180ms var(--ease-out-soft),
+    box-shadow 180ms var(--ease-out-soft),
+    border-color 180ms var(--ease-out-soft);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-line-strong);
+    box-shadow:
+      0 1px 2px rgb(11 26 48 / 6%),
+      0 12px 32px -16px rgb(22 83 230 / 25%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
   }
 }
 
 /* Long-form reading content (case studies, about page). */
 @utility prose-content {
   max-width: var(--container-prose);
-  line-height: 1.75;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--color-ink-soft);
 
   & > * + * {
     margin-top: 1rem;
@@ -74,6 +133,14 @@
     font-family: var(--font-sans);
     line-height: 1.7;
     text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   :focus-visible {

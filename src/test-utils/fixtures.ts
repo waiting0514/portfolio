@@ -4,6 +4,7 @@ import type { CaseStudy, Project, ProjectContent } from '@/types/project'
 function localizedContent(
   title: string,
   build: (locale: Locale) => CaseStudy,
+  facts?: (locale: Locale) => ProjectContent['facts'],
 ): Record<Locale, ProjectContent> {
   const make = (locale: Locale): ProjectContent => ({
     title: `${title} (${locale})`,
@@ -12,6 +13,7 @@ function localizedContent(
     coverAlt: `Cover of ${title} (${locale})`,
     highlights: [`Highlight (${locale})`],
     caseStudy: build(locale),
+    ...(facts && { facts: facts(locale) }),
   })
   return { 'zh-TW': make('zh-TW'), en: make('en') }
 }
@@ -48,36 +50,40 @@ export const fullProject: Project = {
   featured: true,
   status: 'in-development',
   labels: ['Real-world Project', 'Frontend Development'],
-  content: localizedContent('Full', (locale) => {
-    const classic = classicSections(locale)
-    return {
-      ...classic,
-      background: {
-        paragraphs: [`Background (${locale})`],
-        flow: ['Input A', 'Input B'],
-      },
-      role: { ...classic.role!, flow: ['Analyse', 'Design', 'Build'] },
-      problemExample: {
-        heading: `Example (${locale})`,
-        requirement: `Requirement (${locale})`,
-        flow: ['Create', 'Schedule', 'Publish'],
-        states: ['Draft', 'Published', 'Failed'],
-      },
-      workflow: ['Draft', 'Analysis', 'Implementation'],
-      responsibilities: [
-        { title: `Responsibility A (${locale})`, description: `Description A (${locale})` },
-        { title: `Responsibility B (${locale})`, description: `Description B (${locale})` },
-      ],
-      aiAssisted: {
-        paragraphs: [`AI paragraph (${locale})`],
-        humanTasks: [`Human task (${locale})`],
-      },
-      currentStatus: [
-        { label: 'Frontend', value: `In progress (${locale})` },
-        { label: 'Backend', value: `Pending (${locale})` },
-      ],
-    }
-  }),
+  content: localizedContent(
+    'Full',
+    (locale) => {
+      const classic = classicSections(locale)
+      return {
+        ...classic,
+        background: {
+          paragraphs: [`Background (${locale})`],
+          flow: ['Input A', 'Input B'],
+        },
+        role: { ...classic.role!, flow: ['Analyse', 'Design', 'Build'] },
+        problemExample: {
+          heading: `Example (${locale})`,
+          requirement: `Requirement (${locale})`,
+          flow: ['Create', 'Schedule', 'Publish'],
+          states: ['Draft', 'Published', 'Failed'],
+        },
+        workflow: ['Draft', 'Analysis', 'Implementation'],
+        responsibilities: [
+          { title: `Responsibility A (${locale})`, description: `Description A (${locale})` },
+          { title: `Responsibility B (${locale})`, description: `Description B (${locale})` },
+        ],
+        aiAssisted: {
+          paragraphs: [`AI paragraph (${locale})`],
+          humanTasks: [`Human task (${locale})`],
+        },
+        currentStatus: [
+          { label: 'Frontend', value: `In progress (${locale})` },
+          { label: 'Backend', value: `Pending (${locale})` },
+        ],
+      }
+    },
+    (locale) => ({ company: `Company (${locale})`, period: `Since 2025 (${locale})` }),
+  ),
 }
 
 /** A finished project with only the original sections, no labels and no status. */

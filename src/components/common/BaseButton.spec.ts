@@ -27,7 +27,7 @@ describe('BaseButton', () => {
     expect(link.attributes('rel')).toBe('noopener noreferrer')
     // The hint is separated from the label, so it is announced as "GitHub (opens in a new tab)".
     expect(link.text()).toMatch(/^GitHub\s+\(opens in a new tab\)$/)
-    expect(link.classes()).toContain('border-line')
+    expect(link.classes()).toContain('border-line-strong')
   })
 
   it('never renders a <button>, because every call to action navigates', async () => {

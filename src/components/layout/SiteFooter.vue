@@ -8,7 +8,7 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="border-t border-line bg-surface">
+  <footer class="border-t border-line bg-canvas">
     <BaseContainer
       class="flex flex-col gap-4 py-8 text-sm text-ink-muted md:flex-row md:items-center md:justify-between"
     >

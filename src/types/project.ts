@@ -87,6 +87,11 @@ export interface ProjectContent {
   summary: string
   coverAlt: string
   highlights: string[]
+  /** Facts shown in the case study hero; unknown facts are left out. */
+  facts?: {
+    company?: string
+    period?: string
+  }
   caseStudy: CaseStudy
 }
 

@@ -57,7 +57,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
     <BaseContainer class="flex flex-wrap items-center justify-between gap-x-6">
       <RouterLink
         :to="localePath('/')"
-        class="flex min-h-16 items-center font-semibold tracking-tight text-ink"
+        class="flex min-h-16 items-center text-[1.0625rem] font-bold tracking-tight text-ink"
       >
         {{ profile.content[locale].name }}
         <span class="sr-only">— {{ messages.nav.home }}</span>
@@ -66,7 +66,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
       <button
         ref="menuButton"
         type="button"
-        class="inline-flex min-h-11 items-center gap-2 rounded-md border border-line px-3 text-sm font-medium text-ink hover:bg-surface md:hidden"
+        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line bg-surface px-3 text-sm font-medium text-ink hover:border-line-strong md:hidden"
         :aria-expanded="isMenuOpen"
         :aria-controls="MENU_ID"
         @click="isMenuOpen = !isMenuOpen"
@@ -92,16 +92,16 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
         class="w-full pb-4 md:block md:w-auto md:pb-0"
         :class="isMenuOpen ? 'block' : 'hidden'"
       >
-        <ul class="flex flex-col md:flex-row md:items-center md:gap-1">
+        <ul class="flex flex-col md:flex-row md:items-center md:gap-2">
           <li v-for="item in navItems" :key="item.to">
             <RouterLink
               :to="item.to"
               :aria-current="item.active ? 'page' : undefined"
-              class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition-colors"
+              class="flex min-h-11 items-center rounded-md px-3 text-[0.9375rem] transition-colors"
               :class="
                 item.active
-                  ? 'text-accent underline decoration-2 underline-offset-8'
-                  : 'text-ink-muted hover:text-ink'
+                  ? 'font-semibold text-ink underline decoration-accent decoration-2 underline-offset-[10px]'
+                  : 'font-medium text-ink-muted hover:text-ink'
               "
             >
               {{ item.label }}
@@ -112,7 +112,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
               :href="profile.githubUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+              class="flex min-h-11 items-center rounded-md px-3 text-[0.9375rem] font-medium text-ink-muted transition-colors hover:text-ink"
             >
               {{ messages.nav.github }}
               <span class="sr-only">({{ messages.common.opensInNewTab }})</span>
@@ -125,7 +125,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
               :to="alternatePath(otherLocale)"
               :lang="otherLocaleConfig.htmlLang"
               :hreflang="otherLocaleConfig.htmlLang"
-              class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+              class="flex min-h-11 items-center rounded-md px-3 font-mono text-[0.8125rem] font-medium tracking-wide text-ink-muted transition-colors hover:text-accent"
             >
               <span class="sr-only">{{ messages.nav.switchLanguage }}: </span>
               {{ otherLocaleConfig.nativeName }}

@@ -67,6 +67,37 @@ describe('ProjectDetailView', () => {
     expect(wrapper.find('ul[aria-label="Project type"]').exists()).toBe(false)
   })
 
+  it('shows the known project facts in the hero', async () => {
+    const { wrapper } = await mountDetail('full-project')
+    const facts = wrapper.get('header dl').findAll('dl > div')
+
+    expect(facts.map((fact) => [fact.get('dt').text(), fact.get('dd').text()])).toEqual([
+      ['Role', 'Role (en)'],
+      ['Company', 'Company (en)'],
+      ['Period', 'Since 2025 (en)'],
+      ['Stack', 'Vue · RxJS'],
+    ])
+  })
+
+  it('leaves out facts the project does not document', async () => {
+    const { wrapper } = await mountDetail('minimal-project')
+    const terms = wrapper.get('header dl').findAll('dt')
+
+    expect(terms.map((term) => term.text())).toEqual(['Stack'])
+  })
+
+  it('lists only the rendered sections in the table of contents', async () => {
+    const { wrapper } = await mountDetail('minimal-project')
+    const links = wrapper.get('nav[aria-label="On this page"]').findAll('a')
+
+    expect(links.map((link) => [link.text(), link.attributes('href')])).toEqual([
+      ['Overview', '#overview'],
+      ['Tech Stack', '#tech-stack'],
+    ])
+    expect(links[0]!.attributes('aria-current')).toBe('true')
+    expect(links[1]!.attributes('aria-current')).toBeUndefined()
+  })
+
   it('shows project labels and the development status in the hero', async () => {
     const { wrapper } = await mountDetail('full-project')
     const header = wrapper.get('header')

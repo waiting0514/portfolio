@@ -30,6 +30,12 @@ export interface Messages {
     skillsDescription: string
     aboutTitle: string
     viewAbout: string
+    featuredEyebrow: string
+    skillsEyebrow: string
+    aboutEyebrow: string
+    now: string
+    inProgress: string
+    experience: string
   }
   project: {
     viewCaseStudy: string
@@ -51,6 +57,14 @@ export interface Messages {
     requiredFlow: string
     requiredStates: string
     humanTasks: string
+    eyebrow: string
+    toc: string
+    facts: {
+      role: string
+      company: string
+      period: string
+      stack: string
+    }
     sections: {
       overview: string
       background: string
@@ -69,6 +83,8 @@ export interface Messages {
     }
   }
   pages: {
+    /** Small mono label above the page title; same in both locales. */
+    projectsEyebrow: string
     projectsTitle: string
     projectsDescription: string
     aboutTitle: string
@@ -117,6 +133,12 @@ const zhTW = {
     skillsDescription: '依領域整理的主要技術。',
     aboutTitle: '關於我',
     viewAbout: '了解更多',
+    featuredEyebrow: 'Selected Work',
+    skillsEyebrow: 'Skills',
+    aboutEyebrow: 'About',
+    now: '目前',
+    inProgress: '開發中的專案',
+    experience: '工作經歷',
   },
   project: {
     viewCaseStudy: '查看案例',
@@ -138,6 +160,9 @@ const zhTW = {
     requiredFlow: '實際需要定義的流程',
     requiredStates: '需要處理的狀態',
     humanTasks: '仍需由工程師判斷的工作',
+    eyebrow: 'Case Study',
+    toc: '本頁內容',
+    facts: { role: '角色', company: '公司', period: '期間', stack: '技術' },
     sections: {
       overview: '專案概述',
       background: '專案背景',
@@ -156,6 +181,7 @@ const zhTW = {
     },
   },
   pages: {
+    projectsEyebrow: 'All Work',
     projectsTitle: '作品',
     projectsDescription: '實際參與開發的專案。每個專案都整理了背景、我的角色、架構與技術挑戰。',
     aboutTitle: '關於我',
@@ -204,6 +230,12 @@ const en = {
     skillsDescription: 'Main technologies, grouped by area.',
     aboutTitle: 'About',
     viewAbout: 'View About',
+    featuredEyebrow: 'Selected Work',
+    skillsEyebrow: 'Skills',
+    aboutEyebrow: 'About',
+    now: 'Now',
+    inProgress: 'In progress',
+    experience: 'Experience',
   },
   project: {
     viewCaseStudy: 'View Case Study',
@@ -225,6 +257,9 @@ const en = {
     requiredFlow: 'Flow that actually had to be defined',
     requiredStates: 'States to handle',
     humanTasks: 'Work that still needs an engineer’s judgement',
+    eyebrow: 'Case Study',
+    toc: 'On this page',
+    facts: { role: 'Role', company: 'Company', period: 'Period', stack: 'Stack' },
     sections: {
       overview: 'Overview',
       background: 'Project Background',
@@ -243,6 +278,7 @@ const en = {
     },
   },
   pages: {
+    projectsEyebrow: 'All Work',
     projectsTitle: 'Projects',
     projectsDescription:
       'Projects I have worked on, each with its background, my role, the architecture and the technical challenges.',

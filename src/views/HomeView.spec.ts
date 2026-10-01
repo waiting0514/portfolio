@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { featuredProjects } from '@/data/projects'
+import { profile } from '@/data/profile'
+import { featuredProjects, projects } from '@/data/projects'
 import { skillCategories } from '@/data/skills'
 import { hasNoSkippedLevels, headingLevels } from '@/test-utils/headings'
 import { mountAtPath } from '@/test-utils/router'
@@ -50,6 +51,27 @@ describe('HomeView', () => {
     )
     expect(section.findAll('li')).toHaveLength(
       skillCategories.reduce((total, category) => total + category.items.length, 0),
+    )
+  })
+
+  it('shows the latest job and the in-development project in the Now panel', async () => {
+    const { wrapper } = await mountAtPath(HomeView, '/')
+    const panel = wrapper.get('section[aria-label="目前"]')
+    const latest = profile.content['zh-TW'].experience[0]!
+    const inProgress = projects.find((project) => project.status === 'in-development')!
+
+    expect(panel.text()).toContain(latest.company)
+    expect(panel.text()).toContain(latest.period)
+    expect(panel.find(`a[href="/projects/${inProgress.slug}"]`).exists()).toBe(true)
+    expect(panel.text()).toContain('開發中')
+  })
+
+  it('lists every job, newest first, in the About preview', async () => {
+    const { wrapper } = await mountAtPath(HomeView, '/en')
+    const jobs = wrapper.get('ol[aria-label="Experience"]').findAll('li')
+
+    expect(jobs.map((job) => job.text())).toEqual(
+      profile.content.en.experience.map((job) => expect.stringContaining(job.company)),
     )
   })
 })
