@@ -41,17 +41,10 @@ __screenshots__/
 # Playwright MCP screenshots / snapshots
 .playwright-mcp/
 
-# Personal source documents (not published)
-自傳.md
 # Internal project documents from work (contain confidential details; not published)
-file-management-flow.html
-design-notes.html
-監控系統-系統操作流程圖.html
-即時串流與歷史回放架構說明.html
-cms-系統操作流程.html
-cms-系統架構說明.html
-社群管理平台-系統操作流程展示.html
+internal/*
 
+# AI Agent related
 .agents/*
 .claude/*
 .gemini/*
