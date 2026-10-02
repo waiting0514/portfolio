@@ -14,7 +14,7 @@ import type { Project } from '@/types/project'
 export const projects: readonly Project[] = [
   {
     slug: 'social-media-platform',
-    cover: { src: 'images/projects/social-media-platform.svg', width: 1600, height: 900 },
+    cover: { src: 'images/projects/social-media-platform.jpg', width: 1190, height: 669 },
     technologies: [
       'Vue 3',
       'Vite',
@@ -33,7 +33,7 @@ export const projects: readonly Project[] = [
         subtitle: 'Social Media Management Platform',
         summary:
           '將 AI 輔助產生的初步需求轉換為可實作的前端架構、操作流程與 UI，負責需求分析、Component Design、State / Data Flow 與前端互動邏輯。',
-        coverAlt: '社群管理平台的封面 placeholder：實際畫面待確認可公開後補上',
+        coverAlt: '社群管理平台的總覽 Dashboard：社群互動趨勢、平台發佈數分佈、近期發布內容、導流漏斗與訊息處理狀態',
         highlights: [
           '需求分析與缺漏情境補齊',
           '使用者流程與狀態設計',
@@ -220,7 +220,7 @@ export const projects: readonly Project[] = [
         summary:
           'Turned AI-assisted draft requirements into an implementable frontend architecture, user flows and UI, owning requirement analysis, component design, state and data flow, and frontend interaction logic.',
         coverAlt:
-          'Placeholder cover for the social media management platform; screenshots will be added once approved',
+          'Dashboard of the social media management platform: engagement trend, posts per platform, recent posts, conversion funnel and message status',
         highlights: [
           'Requirement analysis and missing scenarios',
           'User flows and state design',

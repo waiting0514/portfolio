@@ -191,6 +191,6 @@ RWD 與無障礙以瀏覽器檢查：375 / 768 / 1024 / 1440 px、鍵盤操作�
 - [ ] `src/data/profile.ts`：姓名、自我介紹、工作背景、簡介、專長、工作經歷；如需要可加入 `email`
 - [ ] `src/data/projects.ts`：三個專案的 Case Study 內容（角色、問題、架構、解法、技術挑戰、成果、學到的事）
 - [ ] `src/data/projects.ts`：B2B Corporate Website 的實際技術（目前為 `TODO: Framework`）
-- [ ] `public/images/projects/`：以實際截圖（建議 PNG／WebP，1600×900）取代 SVG placeholder
+- [x] `public/images/projects/`：以實際截圖（建議 PNG／WebP，1600×900）取代 SVG placeholder
 - [ ] `public/og-default.png`：如需要，可換成含姓名的社群預覽圖（1200×630）
 - [ ] `index.html`：首次載入的預設 title 與 description
