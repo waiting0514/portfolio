@@ -441,7 +441,7 @@ export const projects: readonly Project[] = [
         summary:
           '檔案管理系統的上傳與 CAD 檢視：以分級分片、雙層併發排程與重試續傳支援單檔 5 GB 直傳 S3；CAD 檢視以單例 WebGL 與縮圖快取，讓列表 hover 預覽不再耗盡資源。',
         coverAlt: '檔案管理系統的文件管理頁面，開啟中的「上傳檔案」對話框',
-        facts: { company: '億集創見應用科技', period: '2025/06 起' },
+        facts: { company: '億集創見應用科技', period: '2025/06 – 2026/10' },
         highlights: [
           '單檔 5 GB・單次 100 檔',
           '依檔案大小分級分片（10／16／32 MB）',
@@ -568,7 +568,7 @@ export const projects: readonly Project[] = [
           'Uploads and CAD viewing for a file-management system: tiered chunking, a two-level concurrency scheduler and resumable retries support 5 GB files uploaded straight to S3; a singleton WebGL viewer with a thumbnail cache keeps hover previews from exhausting resources.',
         coverAlt:
           'The document management page of the file management system with the “Upload files” dialog open',
-        facts: { company: '億集創見應用科技', period: 'Since 2025/06' },
+        facts: { company: '億集創見應用科技', period: '2025/06 – 2026/10' },
         highlights: [
           '5 GB per file, 100 files per batch',
           'Chunk size tiered by file size (10 / 16 / 32 MB)',
@@ -714,7 +714,7 @@ export const projects: readonly Project[] = [
         summary:
           '監控系統的前端：以 WebSocket 信令建立 WebRTC 連線顯示 12 路即時影像；歷史回放以 MSE 自建播放引擎，處理錄影空檔、倍速緩衝與 4 路同步播放。',
         coverAlt: '監控系統的歷史回放頁面：四個播放器與時間軸，監控影像已模糊處理',
-        facts: { company: '億集創見應用科技', period: '2025/06 起' },
+        facts: { company: '億集創見應用科技', period: '2025/06 – 2026/10' },
         highlights: [
           '12 路 WebRTC 即時監看',
           'WebSocket 信令與自動重連',
@@ -829,7 +829,7 @@ export const projects: readonly Project[] = [
           'Frontend of a surveillance system: WebRTC connections negotiated over WebSocket show 12 live feeds, and a custom MSE playback engine handles recording gaps, speed-dependent buffering and synchronized playback of 4 cameras.',
         coverAlt:
           'The history playback page of the surveillance system: four players with timelines, camera footage blurred',
-        facts: { company: '億集創見應用科技', period: 'Since 2025/06' },
+        facts: { company: '億集創見應用科技', period: '2025/06 – 2026/10' },
         highlights: [
           '12 live feeds over WebRTC',
           'WebSocket signaling with auto-reconnect',
